@@ -17,6 +17,7 @@ class CreateUserQuizTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('quiz_id');
+            $table->integer('score');
             $table->timestamps();
         });
     }

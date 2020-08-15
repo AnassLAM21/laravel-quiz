@@ -46,7 +46,9 @@ class User extends Authenticatable
     //Passed 
     public function passQuizzes()
     {
-        return $this->belongsToMany('App\Quiz', 'user_quiz');
+        return $this->belongsToMany('App\Quiz', 'user_quiz')
+                    ->withTimestamps()
+                    ->withPivot('score');
     }
 
     //Created module
