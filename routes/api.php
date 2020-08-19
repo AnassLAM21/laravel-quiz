@@ -34,3 +34,16 @@ Route::prefix('user')->group(function () {
 
 
 });
+
+
+//Module API
+Route::get('modules', 'ModuleController@index');
+Route::get('modules/{module}', 'ModuleController@show');
+Route::post('modules', 'ModuleController@store');
+Route::put('modules/{module}', 'ModuleController@update');
+Route::delete('modules/{module}', 'ModuleController@destroy');
+
+
+//Quizzes API
+// Route::resource('modules.quizzes', 'QuizController')->except(['index', 'create', 'show']);
+Route::resource('modules.quizzes', 'QuizController')->except(['index', 'create', 'show']);
