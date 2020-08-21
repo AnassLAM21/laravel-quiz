@@ -23,4 +23,10 @@ class Question extends Model
     {
         return $this->belongsTo('App\Module');
     }
+
+    public function files()
+    {
+        return $this->morphMany('App\File', 'fillable');
+    }
+    
 }

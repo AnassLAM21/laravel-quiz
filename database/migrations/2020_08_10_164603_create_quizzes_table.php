@@ -23,7 +23,7 @@ class CreateQuizzesTable extends Migration
             $table->integer('votes_count')->nullable();
             $table->unsignedInteger('module_id')->nullable();
             $table->unsignedInteger('user_id')->nullable();
-
+            
             // $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
