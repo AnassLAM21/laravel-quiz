@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         
-        DB::table('answers')->delete();
+        DB::table('choices')->delete();
         DB::table('questions')->delete();
         DB::table('quizzes')->delete();
         DB::table('users')->delete();
@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
                 ->each(function($quiz){ 
                 $quiz->questions()->saveMany(factory(App\Question::class, 1)->make())
                     ->each(function($question){ 
-                        $question->answers()->saveMany(factory(App\Answer::class, 5)->make());
+                        $question->choices()->saveMany(factory(App\Choice::class, 5)->make());
                 });
              });
               });

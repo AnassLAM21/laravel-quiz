@@ -20,30 +20,30 @@ use Illuminate\Support\Facades\Auth;
 
 
 
-Route::prefix('user')->group(function () {
+// Route::prefix('user')->group(function () {
 
-    Route::post('login','api\v1\LoginController@login');
-    Route::post('register','api\v1\RegisterController@register');
+//     Route::post('login','api\v1\LoginController@login');
+//     Route::post('register','api\v1\RegisterController@register');
     
-    Route::middleware('auth:api')->group(function () {
-        Route::get('/all', 'api\v1\user\UserController@index');
-        Route::post('/logout','api\v1\LogoutController@logout');
+//     Route::middleware('auth:api')->group(function () {
+//         Route::get('/all', 'api\v1\user\UserController@index');
+//         Route::post('/logout','api\v1\LogoutController@logout');
     
-    });
+//     });
 
 
 
-});
+// });
 
 
 //Module API
-Route::get('modules', 'ModuleController@index');
-Route::get('modules/{module}', 'ModuleController@show');
-Route::post('modules', 'ModuleController@store');
-Route::put('modules/{module}', 'ModuleController@update');
-Route::delete('modules/{module}', 'ModuleController@destroy');
+// Route::get('modules', 'ModuleController@index');
+// Route::get('modules/{module}', 'ModuleController@show');
+// Route::post('modules', 'ModuleController@store');
+// Route::put('modules/{module}', 'ModuleController@update');
+// Route::delete('modules/{module}', 'ModuleController@destroy');
 
 
 //Quizzes API
 // Route::resource('modules.quizzes', 'QuizController')->except(['index', 'create', 'show']);
-Route::resource('modules.quizzes', 'QuizController')->except(['index', 'create', 'show']);
+Route::resource('modules.quizzes', 'QuizController');

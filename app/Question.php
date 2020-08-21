@@ -14,9 +14,9 @@ class Question extends Model
         return $this->belongsTo('App\Quiz');
     }
 
-    public function answers()
+    public function choices()
     {
-        return $this->hasMany('App\Answer');
+        return $this->hasMany('App\Choice');
     }
 
     public function module()
