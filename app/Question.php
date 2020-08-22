@@ -28,6 +28,5 @@ class Question extends Model
     {
         return $this->morphMany('App\File', 'fillable');
     }
-
-
+    
 }
