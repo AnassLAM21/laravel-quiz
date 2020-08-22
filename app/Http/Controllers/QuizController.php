@@ -50,7 +50,7 @@ class QuizController extends Controller
 
             'publish' => 'required|boolean',
             'published_at' => 'nullable|date',
-            'time' => 'nullable|date_format:H:i:s', //"time" : "02:17:00",
+            'time' => 'nullable|date_format:H:i:s', //"time" : "02:17:00" ,
             'views_count' => 'Integer',
             'votes_count' => 'Integer',
             
