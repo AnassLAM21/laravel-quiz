@@ -46,7 +46,4 @@ use Illuminate\Support\Facades\Auth;
 
 //Quizzes API
 // Route::resource('modules.quizzes', 'QuizController')->except(['index', 'create', 'show']);
-
 Route::resource('modules.quizzes', 'QuizController');
-
-//Modules + quizzes + questions + choices + files 
