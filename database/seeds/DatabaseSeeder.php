@@ -21,14 +21,14 @@ class DatabaseSeeder extends Seeder
         DB::table('modules')->delete();
         DB::table('user_quiz')->delete();
 
-        factory(App\User::class, 5)->create()->each(function($user) {
-            $user->modules()->saveMany(factory(App\Module::class, 2)->make())
+        factory(App\User::class, rand(1,5))->create()->each(function($user) {
+            $user->modules()->saveMany(factory(App\Module::class, rand(1,5))->make())
               ->each(function ($module) {
-                $module->quizzes()->saveMany(factory(App\Quiz::class, 1)->make())
+                $module->quizzes()->saveMany(factory(App\Quiz::class, rand(1,5))->make())
                 ->each(function($quiz){ 
-                $quiz->questions()->saveMany(factory(App\Question::class, 1)->make())
+                $quiz->questions()->saveMany(factory(App\Question::class, 5)->make())
                     ->each(function($question){ 
-                        $question->choices()->saveMany(factory(App\Choice::class, 5)->make());
+                        $question->choices()->saveMany(factory(App\Choice::class, rand(1,5))->make());
                 });
              });
               });

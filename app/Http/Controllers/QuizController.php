@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Module;
 use App\Quiz;
+use App\Http\Requests\StoreQuizRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class QuizController extends Controller
 {
-    public function index()
+    public function index(Module $module)
     {
-        $quizs = Quiz::all();
-
+        // $quizs = Quiz::all();
+        $quizs =  $module->quizzes()->get();
         return response()->json($quizs, 200);
     }
 
@@ -24,17 +25,10 @@ class QuizController extends Controller
         return response()->json($quiz, 200);
     }
 
-    public function store(Request $request,Module $module)
-    {
-        $validator = Validator::make($request->all(), [
+    public function store(StoreQuizRequest $request,Module $module)
+    {  
 
-            'publish' => 'required|boolean',
-            'published_at' => 'nullable|date',
-            'time' => 'nullable|date_format:H:i:s', //"time" :  "02:17:00", 
-            'views_count' => 'Integer',
-            'votes_count' => 'Integer',
-            
-        ]);
+        $validator = Validator::make($request->all());
          
         if ($validator->fails()) {
             return response()->json($validator->errors()->get('*'),500);
@@ -44,7 +38,7 @@ class QuizController extends Controller
         }
     }
 
-    public function update(Request $request,Module $module,Quiz $quiz)
+    public function update(StoreQuizRequest $request,Module $module,Quiz $quiz)
     {
         $validator = Validator::make($request->all(), [
 
@@ -52,7 +46,7 @@ class QuizController extends Controller
             'published_at' => 'nullable|date',
             'time' => 'nullable|date_format:H:i:s', //"time" : "02:17:00" ,
             'views_count' => 'Integer',
-            'votes_count' => 'Integer',   
+            'votes_count' => 'Integer',
             
         ]);
         

@@ -36,12 +36,12 @@ use Illuminate\Support\Facades\Auth;
 // });
 
 
-//Module API
-// Route::get('modules', 'ModuleController@index');
-// Route::get('modules/{module}', 'ModuleController@show');
-// Route::post('modules', 'ModuleController@store');
-// Route::put('modules/{module}', 'ModuleController@update');
-// Route::delete('modules/{module}', 'ModuleController@destroy');
+// Module API
+Route::get('modules', 'ModuleController@index');
+Route::get('modules/{module}', 'ModuleController@show');
+Route::post('modules', 'ModuleController@store');
+Route::put('modules/{module}', 'ModuleController@update');
+Route::delete('modules/{module}', 'ModuleController@destroy');
 
 
 //Quizzes API
