@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Quiz extends Model
 {
 
+    protected $fillable = ['publish','published_at','time','views_count','votes_count'];
+
     public function module()
     {
         return $this->belongsTo('App\Module');
