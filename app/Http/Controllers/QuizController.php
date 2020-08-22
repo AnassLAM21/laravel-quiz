@@ -27,30 +27,40 @@ class QuizController extends Controller
     public function store(Request $request,Module $module)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|unique:quizzes|max:255',
-            'body' => 'required',
+
+            'publish' => 'required|boolean',
+            'published_at' => 'nullable|date',
+            'time' => 'nullable|date_format:H:i:s', //"time" : "02:17:00",
+            'views_count' => 'Integer',
+            'votes_count' => 'Integer',
+            
         ]);
         
         if ($validator->fails()) {
             return response()->json($validator->errors()->get('*'),500);
         }else{
             $quiz = $module->quizzes()->create($request->all() + ['user_id' => Auth::id()]);
-            return response()->json(['message' => "Your quiz has been removed", 201]);
+            return response()->json(['message' => "Your quiz has been submitted successfully", 201]);
         }
     }
 
     public function update(Request $request,Module $module,Quiz $quiz)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|unique:quizzes|max:255',
-            'body' => 'required',
+
+            'publish' => 'required|boolean',
+            'published_at' => 'nullable|date',
+            'time' => 'nullable|date_format:H:i:s', //"time" : "02:17:00",
+            'views_count' => 'Integer',
+            'votes_count' => 'Integer',
+            
         ]);
         
         if ($validator->fails()) {
             return response()->json($validator->errors()->get('*'),500);
         }else{
             $quiz = $quiz->update($request->all() + ['user_id' => Auth::id()]);
-            return response()->json(['message' => "Your quiz has been removed", 200]);
+            return response()->json(['message' => "Your quiz has been updated", 200]);
         }
     }
 
