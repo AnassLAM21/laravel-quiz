@@ -45,7 +45,7 @@ class ModuleController extends Controller
             'title' => 'required|unique:modules|max:255',
             'body' => 'required',
         ]);
-        
+         
         if ($validator->fails()) {
             return response()->json($validator->errors()->get('*'),500);
         }else{

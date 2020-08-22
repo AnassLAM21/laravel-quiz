@@ -35,7 +35,7 @@ class QuizController extends Controller
             'votes_count' => 'Integer',
             
         ]);
-        
+         
         if ($validator->fails()) {
             return response()->json($validator->errors()->get('*'),500);
         }else{
