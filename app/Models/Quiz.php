@@ -1,28 +1,27 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Quiz extends Model
 {
-
     protected $fillable = ['publish','published_at','time','views_count','votes_count'];
 
     public function module()
     {
-        return $this->belongsTo('App\Module');
+        return $this->belongsTo(Module::class);
     }
 
     public function questions()
     {
-        return $this->hasMany('App\Question');
+        return $this->hasMany(Question::class);
     }
 
     //created By
     public function author()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     //passed By
@@ -32,5 +31,4 @@ class Quiz extends Model
                     ->withTimestamps()
                     ->withPivot('score');
     }
-
 }

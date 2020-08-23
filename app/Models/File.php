@@ -1,12 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class File extends Model
 {
-    
     protected $fillable = ['filename','extension','path'];
 
 
@@ -14,5 +13,4 @@ class File extends Model
     {
         return $this->morphTo();
     }
-
 }
