@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class QuizController extends Controller
+class QuizController extends Controller 
 {
     public function index()
     {
