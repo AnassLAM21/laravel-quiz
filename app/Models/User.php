@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -40,13 +40,13 @@ class User extends Authenticatable
     //Created
     public function createQuizzes()
     {
-        return $this->hasMany('App\Quiz');
+        return $this->hasMany(Quiz::class);
     }
 
     //Passed 
     public function passQuizzes()
     {
-        return $this->belongsToMany('App\Quiz', 'user_quiz')
+        return $this->belongsToMany(Quiz::class, 'user_quiz')
                     ->withTimestamps()
                     ->withPivot('score');
     }
@@ -54,13 +54,13 @@ class User extends Authenticatable
     //Created module
     public function modules()
     {
-        return $this->hasMany('App\Module');
+        return $this->hasMany(Module::class);
     }
 
 
     public function files()
     {
-        return $this->morphMany('App\File', 'fillable');
+        return $this->morphMany(File::class, 'fillable');
     }
 
 

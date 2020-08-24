@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ModuleResource;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -13,15 +14,15 @@ class ModuleController extends Controller
     public function index()
     {
         $modules = Module::all();
-
-        return response()->json($modules, 200);
+        return ModuleResource::collection($modules);
     }
 
     public function show(Module $module)
     {
         // $module = Module::find($id);
-
-        return response()->json($module, 200);
+        return response()->json([
+            'title'     => $module->title,
+            'body'      => $module->body], 200);
     }
 
     public function store(Request $request)
@@ -35,7 +36,8 @@ class ModuleController extends Controller
             return response()->json($validator->errors()->get('*'),500);
         }else{
             $module = Module::create($request->all() + ['user_id' => Auth::id()]);
-            return response()->json(['message' => 'Your module has been submitted successfully', 201]);
+            return response()->json(['message' => 'Your module has been submitted successfully', 
+            'module' => new ModuleResource($module)],201);
         }
     }
 
@@ -49,8 +51,8 @@ class ModuleController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors()->get('*'),500);
         }else{
-            $module = $module->update($request->all() + ['user_id' => Auth::id()]);
-            return response()->json(['message' => 'Your module has been updated', 200]);
+            return response()->json(['message' => 'Your module has been updated successfully', 
+            'module' => new ModuleResource($module)],200);
         }
     }
 

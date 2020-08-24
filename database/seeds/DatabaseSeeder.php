@@ -1,6 +1,13 @@
 <?php
 
-use App\User;
+
+
+use App\Models\Quiz;
+use App\Models\User;
+use App\Models\Choice;
+use App\Models\Module;
+
+use App\Models\Question;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -21,14 +28,14 @@ class DatabaseSeeder extends Seeder
         DB::table('modules')->delete();
         DB::table('user_quiz')->delete();
 
-        factory(App\User::class, rand(1,5))->create()->each(function($user) {
-            $user->modules()->saveMany(factory(App\Module::class, rand(1,5))->make())
+        factory(User::class, rand(1,5))->create()->each(function($user) {
+            $user->modules()->saveMany(factory(Module::class, rand(1,5))->make())
               ->each(function ($module) {
-                $module->quizzes()->saveMany(factory(App\Quiz::class, rand(1,5))->make())
+                $module->quizzes()->saveMany(factory(Quiz::class, rand(1,5))->make())
                 ->each(function($quiz){ 
-                $quiz->questions()->saveMany(factory(App\Question::class, 5)->make())
+                $quiz->questions()->saveMany(factory(Question::class, 5)->make())
                     ->each(function($question){ 
-                        $question->choices()->saveMany(factory(App\Choice::class, rand(1,5))->make());
+                        $question->choices()->saveMany(factory(Choice::class, rand(1,5))->make());
                 });
              });
               });

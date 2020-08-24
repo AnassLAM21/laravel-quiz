@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Validator;
 
 class QuizController extends Controller 
 {
-    public function index()
+    public function index(Module $module)
     {
-        $quizs = Quiz::all();
+        $quizzes = $module->quizzes()->get();
 
-        return response()->json($quizs, 200);
+        return response()->json($quizzes, 200);
     }
 
     public function show(Module $module,Quiz $quiz)
@@ -60,7 +60,7 @@ class QuizController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors()->get('*'),500);
         }else{
-            $quiz = $quiz->update($request->all() + ['user_id' => Auth::id()]);
+            $quiz->update($request->all() + ['user_id' => Auth::id()]);
             return response()->json(['message' => "Your quiz has been updated", 200]);
         }
     }

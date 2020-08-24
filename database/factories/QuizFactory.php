@@ -1,13 +1,14 @@
 <?php
 
-use App\Module;
-use App\Quiz;
+use App\Models\Module;
+use App\Models\Quiz;
+use App\Models\User;
 use Faker\Generator as Faker;
 
 $factory->define(Quiz::class, function (Faker $faker) {
 
-    $moduleIds = App\Module::pluck('id');
-    $moduleCount = App\Module::all()->count();
+    $moduleIds = Module::pluck('id');
+    $moduleCount = Module::all()->count();
 
     return [
 
@@ -17,6 +18,6 @@ $factory->define(Quiz::class, function (Faker $faker) {
         'views_count' => rand(0,1000),
         'votes_count' => rand(-1000,1000),
         'module_id' => $moduleCount > 0 ? $moduleIds->random() : null,
-        'user_id' => App\User::pluck('id')->random(),
+        'user_id' => User::pluck('id')->random(),
     ];
 });
