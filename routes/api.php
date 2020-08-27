@@ -37,19 +37,21 @@ use Illuminate\Support\Facades\Auth;
 
 
 // Module API
-Route::get('modules', 'ModuleController@index');
-Route::get('modules/{module}', 'ModuleController@show');
-Route::post('modules', 'ModuleController@store');
+// Route::get('modules', 'ModuleController@index');
+// Route::get('modules/{module}', 'ModuleController@show');
+// Route::post('modules', 'ModuleController@store');
 // Route::put('modules/{module}', 'ModuleController@update');
 // Route::delete('modules/{module}', 'ModuleController@destroy');
 
 
-//Quizzes API
+// Quizzes API
 // Route::resource('modules.quizzes', 'QuizController')->except(['index', 'create', 'show']);
 // Route::resource('modules.quizzes', 'QuizController');
 
-// Question API
+// // Question API
 // Route::resource('quizzes.question', 'QuestionController');
 
 // Choice API
 // Route::resource('question.choice', 'QuestionController');
+
+Route::post('files', 'FileController@upload');

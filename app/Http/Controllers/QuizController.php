@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\Module;
 use Illuminate\Http\Request;
+use App\Http\Resources\QuizResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,15 +14,18 @@ class QuizController extends Controller
     public function index(Module $module)
     {
         $quizzes = $module->quizzes()->get();
-
-        return response()->json($quizzes, 200);
+        return QuizResource::collection($quizzes);
     }
 
     public function show(Module $module,Quiz $quiz)
     {
-        // $Quiz = Quiz::find($id);
-
-        return response()->json($quiz, 200);
+        return response()->json([
+            'id' => $this->id,
+            'publish' => $this->publish,
+            'published_at' => $this->published_at,
+            'time' => $this->time,
+            'views_count' => $this->created_at,
+            'votes_count' => $this->updated_at], 200);
     }
 
     public function store(Request $request,Module $module)
@@ -41,7 +45,10 @@ class QuizController extends Controller
             return response()->json($validator->errors()->get('*'),500);
         }else{
             $quiz = $module->quizzes()->create($request->all() + ['user_id' => Auth::id()]);
-            return response()->json(['message' => "Your quiz has been submitted successfully", 201]);
+
+            return response()->json(['message' => 'Your quiz has been submitted successfully', 
+            'quiz' => new QuizResource($quiz)],201);
+
         }
     }
 
@@ -54,14 +61,15 @@ class QuizController extends Controller
             'time' => 'nullable|date_format:H:i:s', //"time" : "02:17:00" ,
             'views_count' => 'Integer',
             'votes_count' => 'Integer',
-            
         ]);
         
         if ($validator->fails()) {
             return response()->json($validator->errors()->get('*'),500);
         }else{
-            $quiz->update($request->all() + ['user_id' => Auth::id()]);
-            return response()->json(['message' => "Your quiz has been updated", 200]);
+             $quiz->update($request->all() + ['user_id' => Auth::id()]);
+
+            return response()->json(['message' => 'Your quiz has been updated successfully', 
+            'quiz' => new QuizResource($quiz)],200);
         }
     }
 

@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class File extends Model
 {
-    protected $fillable = ['filename','extension','path'];
+    //filename	extension	path	type
+
+    protected $fillable = ['name','extension','path','type'];
 
 
-    public function fillable()
-    {
-        return $this->morphTo();
-    }
+    // public function fillable()
+    // {
+    //     return $this->morphTo();
+    // }
 }

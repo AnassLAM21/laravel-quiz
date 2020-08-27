@@ -6,6 +6,7 @@ use App\Models\Choice;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ChoiceResource;
 use Illuminate\Support\Facades\Validator;
 
 class ChoiceController extends Controller
@@ -14,7 +15,7 @@ class ChoiceController extends Controller
     {
         $choices = $question->choices()->get();
 
-        return response()->json($choices, 200);
+        return ChoiceResource::collection($choices); 
     }
 
     public function show(Question $question,Choice $choice)
@@ -36,7 +37,8 @@ class ChoiceController extends Controller
             return response()->json($validator->errors()->get('*'),500);
         }else{
             $choice = $question->choices()->create($request->all());
-            return response()->json(['message' => "Your choice has been submitted successfully", 201]);
+            return response()->json(['message' => 'Your choice has been submitted successfully',
+            'choice' => new ChoiceResource($choice, 201)]);
         }
     }
 
@@ -53,7 +55,8 @@ class ChoiceController extends Controller
             return response()->json($validator->errors()->get('*'),500);
         }else{
             $choice->update($request->all());
-            return response()->json(['message' => "Your choice has been updated", 200]);
+            return response()->json(['message' => 'Your choice has been updated', 
+            'choice' => new ChoiceResource($choice, 201)]);
         }
     }
 

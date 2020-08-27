@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Question;
 use App\Models\Quiz;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\QuestionResource;
 use Illuminate\Support\Facades\Validator;
 
 class QuestionController extends Controller
@@ -13,13 +14,18 @@ class QuestionController extends Controller
     public function index(Quiz $quiz)
     {
         $questions = $quiz->questions()->get();
-
-        return response()->json($questions, 200);
+        return QuestionResource::collection($questions);
     }
 
     public function show(Quiz $quiz,Question $question)
     {
-        return response()->json($question, 200);
+        return response()->json([
+            'id' => $this->id,
+            'title' => $this->title,
+            'body' => $this->body,
+            'user_id' => $this->user_id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at], 200);
     }
 
     public function store(Request $request,Quiz $quiz)
@@ -36,7 +42,8 @@ class QuestionController extends Controller
             return response()->json($validator->errors()->get('*'),500);
         }else{
             $question = $quiz->questions()->create($request->all());
-            return response()->json(['message' => "Your question has been submitted successfully", 201]);
+            return response()->json(['message' => 'Your question has been submitted successfully',
+            'question' => new QuestionResource($question, 201)]);
         }
     }
 
@@ -53,7 +60,8 @@ class QuestionController extends Controller
             return response()->json($validator->errors()->get('*'),500);
         }else{
             $question->update($request->all());
-            return response()->json(['message' => "Your question has been updated", 200]);
+            return response()->json(['message' => 'Your question has been updated',
+            'question' => new QuestionResource($question, 201)]);
         }
     }
 
