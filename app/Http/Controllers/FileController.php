@@ -13,11 +13,11 @@ class FileController extends Controller
     {
         //name	extension	path	type	
         $this->validate($request, [
-            'file' => 'required|image|mimes:jpeg,png,jpg,bmp,gif,svg|max:2048',
+            'file' => 'required',
           ]);
           if ($request->hasFile('file')) {
-            $image = $request->file('file');
 
+            $image = $request->file('file');
             $file = new File();
 
             // $file->name = time().'.'.$image->getClientOriginalExtension();
@@ -26,15 +26,17 @@ class FileController extends Controller
             // $file->type = $request->type;
             // $file->path = $image->move($path,$file->name);
 
-            $file->name = $image->getClientOriginalName();
-            $path = $image->move('storage/images',time().'_'.$image->getClientOriginalName());
-            $$file->type = $image->getClientOriginalExtension();
-            $PATHName = pathinfo($path);
-            $file->path  = $PATHName['dirname'].'/'.$PATHName['basename'];
-            
-            $file->save();
+            $fileName = time().'_'.$image->getClientOriginalName();
+            $filePath = $image->storeAs('images', $fileName, 'public');
+            $file->extension = $image->getClientOriginalExtension();
+            $file->name = time().'_'.$request->file->getClientOriginalName();
+            $file->path = '/storage/' . $filePath;
+            $file->type = $request->type;
 
-            return response()->json(["message" => "resut"]);
+            $file->save();
+            
+            return response()->json(["message" => "The fil has been syccessfully uploaded "]);
+
           }
     }
 }
