@@ -25,7 +25,6 @@ class ChoiceController extends Controller
 
     public function store(Request $request,Question $question)
     {
-
         $validator = Validator::make($request->all(), [
 
             'body' => 'required|string',
