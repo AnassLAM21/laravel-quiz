@@ -52,6 +52,6 @@ Route::resource('modules.quizzes', 'QuizController')->except(['index', 'create',
 Route::resource('quizzes.question', 'QuestionController');
 
 // Choice API
-Route::resource('question.choice', 'QuestionController');
+Route::resource('question.choice', 'ChoiceController');
 
 Route::post('files', 'FileController@upload');

@@ -306,9 +306,12 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('admin/assets/libs/jquery/dist/jquery.min.js') }}"></script>
-    <!-- Bootstrap tether Core JavaScript -->
+    
+    
+    <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
+    
+    <!-- Bootstrap tether Core JavaScript -->    
     <script type="text/javascript" src="{{ URL::asset('admin/assets/libs/popper.js/dist/umd/popper.min.js') }}" ></script>
     <script type="text/javascript" src="{{ URL::asset('admin/assets/libs/bootstrap/dist/js/bootstrap.min.js') }}" ></script>
     <script type="text/javascript" src="{{ URL::asset('admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script>
@@ -320,7 +323,7 @@
     <!--Custom JavaScript -->
     <script type="text/javascript" src="{{ URL::asset('admin/dist/js/custom.min.js') }}"></script>
     <!--This page JavaScript -->
-    <!-- <script src="/dist/js/pages/dashboards/dashboard1.js"></script> -->
+    {{-- <script src="/dist/js/pages/dashboards/dashboard1.js"></script>  --}}
     <!-- Charts js Files -->
     <script type="text/javascript" src="{{ URL::asset('admin/assets/libs/flot/excanvas.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('admin/assets/libs/flot/jquery.flot.js') }}"></script>
@@ -331,5 +334,6 @@
     <script type="text/javascript" src="{{ URL::asset('admin/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('admin/dist/js/pages/chart/chart-page-init.js') }}"></script>
 
+    
 </body>
 </html>
