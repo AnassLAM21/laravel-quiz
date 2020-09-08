@@ -23,7 +23,7 @@
                                     
 
 
-            <div class="form-group row" :key="choice.id" v-for="(index,choice) in this.choices.length">
+            <div class="form-group row" :key="choice.id"   v-for="(choice,index) in this.choices">
                <label for="lname" class="col-sm-3 text-right control-label col-form-label">Choice {{ index }} </label>
                <div class="col-sm-7">
                   <input type="text" class="form-control" v-model="choice.body" name="choice"  placeholder="choice">
@@ -63,19 +63,26 @@ export default {
       quizId : 1,
       question : { body : 'body', id : null }, 
       choice : {
-         'body': '',
+         'body': 'xxxx',
          'is_right_choice':  false,
       },
-      choices : [
-         {
-            'body': 'choice body',
-            'is_right_choice':  false
-         }
-      ]
+      choices : [{ 
+         body : 'se',
+         id : null 
+         }]
     }
   },  
+  created(){
+     
+  },
   methods: {
     newChoice(){
+
+       for (let index = 0; index < this.choices.length; index++) {
+          const element = this.choices[index];
+          console.log(element.body);
+       }
+    
        this.choices.push(this.choice),
        this.choice.body = '',
        this.is_right_choice =  false,

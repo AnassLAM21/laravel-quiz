@@ -281,7 +281,7 @@
             <!-- ============================================================== -->
 
             <div class="container-fluid" id="app"> 
-                <example-component>  </example-component>
+                <new-question-component>  </new-question-component>
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->

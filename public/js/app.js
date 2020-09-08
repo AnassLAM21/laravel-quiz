@@ -1764,17 +1764,23 @@ __webpack_require__.r(__webpack_exports__);
         id: null
       },
       choice: {
-        'body': '',
+        'body': 'xxxx',
         'is_right_choice': false
       },
       choices: [{
-        'body': 'choice body',
-        'is_right_choice': false
+        body: 'se',
+        id: null
       }]
     };
   },
+  created: function created() {},
   methods: {
     newChoice: function newChoice() {
+      for (var index = 0; index < this.choices.length; index++) {
+        var element = this.choices[index];
+        console.log(element.body);
+      }
+
       this.choices.push(this.choice), this.choice.body = '', this.is_right_choice = false, console.log(this.choices.length);
     },
     createQuestion: function createQuestion() {
@@ -37475,7 +37481,7 @@ var render = function() {
             _vm._v(" "),
             _vm._m(0),
             _vm._v(" "),
-            _vm._l(this.choices.length, function(index, choice) {
+            _vm._l(this.choices, function(choice, index) {
               return _c(
                 "div",
                 { key: choice.id, staticClass: "form-group row" },
@@ -49835,7 +49841,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('new-question-component.vue', __webpack_require__(/*! ./components/NewQuestionComponent.vue */ "./resources/js/components/NewQuestionComponent.vue")["default"]);
+Vue.component('new-question-component', __webpack_require__(/*! ./components/NewQuestionComponent.vue */ "./resources/js/components/NewQuestionComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
