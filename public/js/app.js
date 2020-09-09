@@ -1768,20 +1768,28 @@ __webpack_require__.r(__webpack_exports__);
         'is_right_choice': false
       },
       choices: [{
-        body: 'se',
-        id: null
+        id: null,
+        body: '',
+        is_right_choice: false
       }]
     };
   },
   created: function created() {},
   methods: {
     newChoice: function newChoice() {
+      //  this.choices.push(this.choice),
+      //  this.choice.body = '',
+      //  this.is_right_choice =  false,
       for (var index = 0; index < this.choices.length; index++) {
         var element = this.choices[index];
         console.log(element.body);
+        console.log(element.is_right_choice);
       }
 
-      this.choices.push(this.choice), this.choice.body = '', this.is_right_choice = false, console.log(this.choices.length);
+      this.choices.push({
+        body: '',
+        is_right_choice: false
+      }), console.log(this.choices.length);
     },
     createQuestion: function createQuestion() {
       var _this = this;
@@ -1796,13 +1804,19 @@ __webpack_require__.r(__webpack_exports__);
         _this.question.id = data.question.id;
         console.log("the question has been created");
 
-        _this.createChoice();
+        for (var index = 0; index < _this.choices.length; index++) {
+          var choice = _this.choices[index];
+
+          if (choice.body != "") {
+            _this.createChoice(choice);
+          }
+        }
       });
     },
-    createChoice: function createChoice() {
+    createChoice: function createChoice(choice) {
       axios.post("/api/v1/question/".concat(this.question.id, "/choice"), {
-        body: this.choice.body,
-        is_right_choice: this.choice.is_right_choice
+        body: choice.body,
+        is_right_choice: choice.is_right_choice
       })["catch"](function (error) {
         console.log('Error');
       }).then(function (_ref2) {
@@ -37493,7 +37507,7 @@ var render = function() {
                         "col-sm-3 text-right control-label col-form-label",
                       attrs: { for: "lname" }
                     },
-                    [_vm._v("Choice " + _vm._s(index) + " ")]
+                    [_vm._v("Choice " + _vm._s(index + 1) + " ")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-7" }, [

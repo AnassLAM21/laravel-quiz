@@ -24,7 +24,7 @@
 
 
             <div class="form-group row" :key="choice.id"   v-for="(choice,index) in this.choices">
-               <label for="lname" class="col-sm-3 text-right control-label col-form-label">Choice {{ index }} </label>
+               <label for="lname" class="col-sm-3 text-right control-label col-form-label">Choice {{ index + 1 }} </label>
                <div class="col-sm-7">
                   <input type="text" class="form-control" v-model="choice.body" name="choice"  placeholder="choice">
                </div>
@@ -67,9 +67,10 @@ export default {
          'is_right_choice':  false,
       },
       choices : [{ 
-         body : 'se',
-         id : null 
-         }]
+         id : null ,
+         body : '',
+         is_right_choice :  false,
+      }]
     }
   },  
   created(){
@@ -78,16 +79,23 @@ export default {
   methods: {
     newChoice(){
 
-       for (let index = 0; index < this.choices.length; index++) {
-          const element = this.choices[index];
-          console.log(element.body);
-       }
-    
-       this.choices.push(this.choice),
-       this.choice.body = '',
-       this.is_right_choice =  false,
 
-       console.log(this.choices.length);
+    
+      //  this.choices.push(this.choice),
+      //  this.choice.body = '',
+      //  this.is_right_choice =  false,
+
+      for (let index = 0; index < this.choices.length; index++) {
+         const element = this.choices[index];
+         console.log(element.body);
+         console.log(element.is_right_choice);
+      }
+      
+      this.choices.push({
+         body : '',
+         is_right_choice :  false
+      }),
+      console.log(this.choices.length);
 
     },
     createQuestion () {
@@ -101,15 +109,21 @@ export default {
             .then(({data}) => {
                this.question.id = data.question.id;
                console.log("the question has been created");
-               this.createChoice();
+
+               for (let index = 0; index < this.choices.length; index++) {
+                  const choice = this.choices[index];
+                  if (choice.body != "") {
+                     this.createChoice(choice);
+                  }
+               }
             })
       },
 
-      createChoice () {
+      createChoice (choice) {
 
             axios.post(`/api/v1/question/${this.question.id}/choice`, {
-               body: this.choice.body,
-               is_right_choice: this.choice.is_right_choice,
+               body: choice.body,
+               is_right_choice: choice.is_right_choice,
             })
             .catch(error => {
                console.log('Error');
