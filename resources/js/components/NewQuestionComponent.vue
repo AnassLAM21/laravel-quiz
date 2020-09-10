@@ -30,9 +30,10 @@
                </div>
 
                 <div class="custom-control custom-checkbox col-sm-2">
-                    <input type="checkbox" class="custom-control-input" id="customControlAutosizing1">
+                    <input type="checkbox" class="custom-control-input"  id="customControlAutosizing1">
                     <label class="custom-control-label" for="customControlAutosizing1">Right</label>
                 </div>
+                
             </div>
 
 
