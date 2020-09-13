@@ -1749,24 +1749,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'question-new',
   data: function data() {
     return {
       quizId: 1,
       question: {
-        body: 'body',
+        body: '',
         id: null
-      },
-      choice: {
-        'body': 'xxxx',
-        'is_right_choice': false
       },
       choices: [{
         id: null,
@@ -1775,12 +1765,29 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
-  created: function created() {},
   methods: {
+    resetFrom: function resetFrom() {
+      this.question = {
+        id: null,
+        body: ''
+      }, this.choices = [{
+        id: null,
+        body: '',
+        is_right_choice: false
+      }];
+    },
+    deleteChoice: function deleteChoice(index) {
+      this.choices.splice(index, 1);
+    },
+    checkChoice: function checkChoice(checkedIndex) {
+      this.choices.forEach(function (choice, index) {
+        if (index == checkedIndex) {
+          choice.is_right_choice = !choice.is_right_choice;
+          console.log(index + "x x" + checkedIndex + "x x" + choice.is_right_choice);
+        } else choice.is_right_choice = false;
+      });
+    },
     newChoice: function newChoice() {
-      //  this.choices.push(this.choice),
-      //  this.choice.body = '',
-      //  this.is_right_choice =  false,
       for (var index = 0; index < this.choices.length; index++) {
         var element = this.choices[index];
         console.log(element.body);
@@ -1823,6 +1830,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (_ref2) {
         var data = _ref2.data;
         console.log("the choices has been created");
+        console.log(choice.body + ' ' + choice.is_right_choice);
       });
     }
   }
@@ -37505,13 +37513,13 @@ var render = function() {
                     "label",
                     {
                       staticClass:
-                        "col-sm-3 text-right control-label col-form-label",
+                        "col-3 col-sm-3 text-right control-label col-form-label",
                       attrs: { for: "lname" }
                     },
                     [_vm._v("Choice " + _vm._s(index + 1) + " ")]
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-7" }, [
+                  _c("div", { staticClass: "col-12 col-sm-5" }, [
                     _c("input", {
                       directives: [
                         {
@@ -37539,7 +37547,53 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _vm._m(1, true)
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-checkbox col-12 col-sm-2"
+                    },
+                    [
+                      _c("input", {
+                        staticClass: "custom-control-input",
+                        attrs: { type: "checkbox", id: "" + index + "" },
+                        domProps: { checked: choice.is_right_choice },
+                        on: {
+                          change: function($event) {
+                            return _vm.checkChoice(index)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "" + index + "" }
+                        },
+                        [_vm._v("Right")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "text-right col-12 col-sm-2" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-danger",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteChoice(index)
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "m-r-5 fas fa-trash-alt" }),
+                        _vm._v(" Delete ")
+                      ]
+                    )
+                  ])
                 ]
               )
             }),
@@ -37556,7 +37610,7 @@ var render = function() {
                     on: { click: _vm.newChoice }
                   },
                   [
-                    _c("i", { staticClass: "fas fa-plus-circle" }),
+                    _c("i", { staticClass: "m-r-5 fas fa-plus-circle" }),
                     _vm._v(" Add a choice")
                   ]
                 )
@@ -37566,7 +37620,25 @@ var render = function() {
           2
         ),
         _vm._v(" "),
-        _vm._m(2)
+        _c("div", { staticClass: "border-top" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { type: "button" },
+                on: { click: _vm.resetFrom }
+              },
+              [_vm._v("Reset")]
+            ),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _vm._m(3)
+          ])
+        ])
       ]
     )
   ])
@@ -37611,56 +37683,30 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "div",
-      { staticClass: "custom-control custom-checkbox col-sm-2" },
-      [
-        _c("input", {
-          staticClass: "custom-control-input",
-          attrs: { type: "checkbox", id: "customControlAutosizing1" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "custom-control-label",
-            attrs: { for: "customControlAutosizing1" }
-          },
-          [_vm._v("Right")]
-        )
-      ]
+      "button",
+      { staticClass: "btn btn-success", attrs: { type: "submit" } },
+      [_c("i", { staticClass: "m-r-5 fas fa-save" }), _vm._v("Save")]
     )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "border-top" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-success", attrs: { type: "submit" } },
-          [_vm._v("Save")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "button" } },
-          [_vm._v("Reset")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-info", attrs: { type: "button" } },
-          [_vm._v("Edit")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-danger", attrs: { type: "button" } },
-          [_vm._v("Cancel")]
-        )
-      ])
-    ])
+    return _c(
+      "button",
+      { staticClass: "btn btn-info", attrs: { type: "button" } },
+      [_c("i", { staticClass: "m-r-5 fas fa-edit" }), _vm._v("Edit")]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-danger", attrs: { type: "button" } },
+      [_c("i", { staticClass: "m-r-5 fas fa-window-close" }), _vm._v(" Cancel")]
+    )
   }
 ]
 render._withStripped = true
@@ -50014,8 +50060,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\laravel-quiz\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-quiz\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

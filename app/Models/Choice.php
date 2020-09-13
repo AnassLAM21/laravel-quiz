@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Choice extends Model
 {
-    protected $fillable = ['body'];
+    protected $fillable = ['body','is_right_choice'];
 
     public function question()
     {
