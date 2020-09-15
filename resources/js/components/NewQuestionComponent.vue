@@ -23,19 +23,14 @@
                </div>
             </div>
     
-            <div class="form-group row" :key="choice.id"  v-for="(choice,index) in this.choices">
-               <label for="lname" class="col-3 col-sm-3 text-right control-label col-form-label">Choice {{ index + 1 }} </label>
-               <div class="col-12 col-sm-5">
-                  <input type="text" class="form-control" v-model="choice.body" name="choice"  placeholder="choice">
-               </div>
-               <div class="custom-control custom-checkbox col-12 col-sm-2">
-                  <input type="checkbox" :checked="choice.is_right_choice"  @change="checkChoice(index)" class="custom-control-input" :id="'' + index +''">
-                  <label class="custom-control-label" :for="'' + index + ''">Right</label>
-               </div>
-               <div class="text-right col-12 col-sm-2">
-                  <button @click="deleteChoice(index)" type="button" class="btn btn-outline-danger"> <i class="m-r-5 fas fa-trash-alt"></i> Delete </button>
-               </div>
-            </div>
+           
+
+            <template v-for="(choice,index) in choices" >
+               <new-choice-component :index = "index" :body = "choice.body" :is_right_choice = "choice.is_right_choice"  ref="forms"/>
+               <hr>
+            </template>
+
+
             <div class="form-group row">
                <div class="col-sm-3"> </div>
                <div class="col-sm-9">
@@ -70,7 +65,7 @@
           question : { body : '', id : null }, 
           choices : [{ 
              id : null ,
-             body : '',
+             body : 'xxxxx',
              is_right_choice :  false,
           }]
         }

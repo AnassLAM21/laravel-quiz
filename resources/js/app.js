@@ -26,6 +26,7 @@ const Validator = SimpleVueValidation.Validator;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('new-question-component', require('./components/NewQuestionComponent.vue').default);
+Vue.component('new-choice-component', require('./components/NewChoiceComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
