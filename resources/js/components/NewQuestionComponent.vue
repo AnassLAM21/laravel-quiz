@@ -1,14 +1,16 @@
 <template>
    <div class="card">
-      <form class="form-horizontal"  @submit.prevent="createQuestion">
+      <form class="form-horizontal"  @submit.prevent="submit">
          <div class="card-body">
             <h4 class="card-title">New question</h4>
-            <div class="form-group row" :class="{error: validation.hasError('questionBody')}">
+            <div class="form-group row">
                <label for="fname" class="col-sm-3 text-right control-label col-form-label">Body</label>
                <div class="col-sm-9">
-                  <input type="text" v-model="questionBody" class="form-control" id="body" name="body" placeholder="body">
+                  <input type="text" :class="{'is-invalid': validation.hasError('questionBody')}" v-model="questionBody" class="form-control" id="body" name="body" placeholder="body">
+                  <div class="invalid-feedback" :class="{'d-block': validation.hasError('questionBody')}">Example invalid custom file feedback</div>
                </div>
-               <div class="invalid-feedback">Example invalid custom file feedback</div>
+               
+               <div class="valid-feedback"> Please provide a valid state. </div>
             </div>
             <div class="form-group row">
                <label for="fname" class="col-sm-3 text-right control-label col-form-label">File Upload</label>
@@ -20,7 +22,8 @@
                   </div>
                </div>
             </div>
-            <div class="form-group row" :key="choice.id"   v-for="(choice,index) in this.choices">
+    
+            <div class="form-group row" :key="choice.id"  v-for="(choice,index) in this.choices">
                <label for="lname" class="col-3 col-sm-3 text-right control-label col-form-label">Choice {{ index + 1 }} </label>
                <div class="col-12 col-sm-5">
                   <input type="text" class="form-control" v-model="choice.body" name="choice"  placeholder="choice">
@@ -76,17 +79,21 @@
       validators: {
           questionBody : function (value) {
              return Validator.value(value).required();
-          }
+         },
+         choices: function (value) {
+            return Validator.value(value).required();
+         }
      },
       methods: {
          resetFrom(){
-            this.question = { id : null,body : '' }, 
+            this.questionBody = String, 
             this.choices = [{
-                id : null ,
-                body : '',
-                is_right_choice :  false,
+                id : Number ,
+                body : String,
+                is_right_choice :  Boolean,
    
-            }];
+            }],
+            this.validation.reset();
          },
          deleteChoice(index){
             this.choices.splice(index,1);
@@ -130,8 +137,22 @@
           console.log(this.choices.length);
     
         },
-        excute(){
-           axios.post(`/api/v1/quizzes/${this.quizId}/question`, {
+
+        submit(){
+           return this.$validate()
+            .then(function(success) {
+               if (success) {
+                  this.createQuestion();
+               }
+            }.bind(this));
+        },
+        createQuestion () {
+           
+
+           
+
+        
+         axios.post(`/api/v1/quizzes/${this.quizId}/question`, {
                    title : 'title',
                    body: this.questionBody,
                 })
@@ -149,20 +170,9 @@
                       }
                    }
                 })
-          
-        },
-        createQuestion () {
-   
-        
-         this.$validate()
-          .then(function (success) {
-            if (success) {
-              this.excute();
-            }
-          });
             
             
-         } },
+         },
           
           createChoice (choice) {
     
@@ -181,5 +191,5 @@
           }
         
       }
-    
+}    
 </script>

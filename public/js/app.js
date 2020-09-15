@@ -1752,6 +1752,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 var Validator = simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a.Validator;
 Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
@@ -1775,18 +1778,18 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
   validators: {
     questionBody: function questionBody(value) {
       return Validator.value(value).required();
+    },
+    choices: function choices(value) {
+      return Validator.value(value).required();
     }
   },
   methods: {
     resetFrom: function resetFrom() {
-      this.question = {
-        id: null,
-        body: ''
-      }, this.choices = [{
-        id: null,
-        body: '',
-        is_right_choice: false
-      }];
+      this.questionBody = String, this.choices = [{
+        id: Number,
+        body: String,
+        is_right_choice: Boolean
+      }], this.validation.reset();
     },
     deleteChoice: function deleteChoice(index) {
       this.choices.splice(index, 1);
@@ -1815,7 +1818,14 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
         is_right_choice: false
       }), console.log(this.choices.length);
     },
-    excute: function excute() {
+    submit: function submit() {
+      return this.$validate().then(function (success) {
+        if (success) {
+          this.createQuestion();
+        }
+      }.bind(this));
+    },
+    createQuestion: function createQuestion() {
       var _this = this;
 
       axios.post("/api/v1/quizzes/".concat(this.quizId, "/question"), {
@@ -1837,25 +1847,18 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
         }
       });
     },
-    createQuestion: function createQuestion() {
-      this.$validate().then(function (success) {
-        if (success) {
-          this.excute();
-        }
+    createChoice: function createChoice(choice) {
+      axios.post("/api/v1/question/".concat(this.question.id, "/choice"), {
+        body: choice.body,
+        is_right_choice: choice.is_right_choice
+      })["catch"](function (error) {
+        console.log('Error');
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        console.log("the choices has been created");
+        console.log(choice.body + ' ' + choice.is_right_choice);
       });
     }
-  },
-  createChoice: function createChoice(choice) {
-    axios.post("/api/v1/question/".concat(this.question.id, "/choice"), {
-      body: choice.body,
-      is_right_choice: choice.is_right_choice
-    })["catch"](function (error) {
-      console.log('Error');
-    }).then(function (_ref2) {
-      var data = _ref2.data;
-      console.log("the choices has been created");
-      console.log(choice.body + ' ' + choice.is_right_choice);
-    });
   }
 });
 
@@ -39841,7 +39844,7 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.createQuestion($event)
+            return _vm.submit($event)
           }
         }
       },
@@ -39852,57 +39855,64 @@ var render = function() {
           [
             _c("h4", { staticClass: "card-title" }, [_vm._v("New question")]),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "form-group row",
-                class: { error: _vm.validation.hasError("questionBody") }
-              },
-              [
-                _c(
-                  "label",
-                  {
-                    staticClass:
-                      "col-sm-3 text-right control-label col-form-label",
-                    attrs: { for: "fname" }
-                  },
-                  [_vm._v("Body")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-9" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.questionBody,
-                        expression: "questionBody"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      id: "body",
-                      name: "body",
-                      placeholder: "body"
-                    },
-                    domProps: { value: _vm.questionBody },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.questionBody = $event.target.value
-                      }
+            _c("div", { staticClass: "form-group row" }, [
+              _c(
+                "label",
+                {
+                  staticClass:
+                    "col-sm-3 text-right control-label col-form-label",
+                  attrs: { for: "fname" }
+                },
+                [_vm._v("Body")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-9" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.questionBody,
+                      expression: "questionBody"
                     }
-                  })
-                ]),
+                  ],
+                  staticClass: "form-control",
+                  class: {
+                    "is-invalid": _vm.validation.hasError("questionBody")
+                  },
+                  attrs: {
+                    type: "text",
+                    id: "body",
+                    name: "body",
+                    placeholder: "body"
+                  },
+                  domProps: { value: _vm.questionBody },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.questionBody = $event.target.value
+                    }
+                  }
+                }),
                 _vm._v(" "),
-                _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v("Example invalid custom file feedback")
-                ])
-              ]
-            ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "invalid-feedback",
+                    class: {
+                      "d-block": _vm.validation.hasError("questionBody")
+                    }
+                  },
+                  [_vm._v("Example invalid custom file feedback")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "valid-feedback" }, [
+                _vm._v(" Please provide a valid state. ")
+              ])
+            ]),
             _vm._v(" "),
             _vm._m(0),
             _vm._v(" "),
