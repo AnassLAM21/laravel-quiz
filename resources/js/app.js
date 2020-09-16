@@ -14,6 +14,14 @@ import SimpleVueValidation from 'simple-vue-validator';
 Vue.use(SimpleVueValidation);
 const Validator = SimpleVueValidation.Validator;
 
+
+const bus = new Vue();
+Vue.prototype.$bus = bus;
+
+
+var eventHub = new Vue();
+Vue.eventHub = eventHub;
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

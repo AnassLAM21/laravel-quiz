@@ -1716,31 +1716,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 var Validator = simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a.Validator;
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'answer-new',
   props: ['index', 'body', 'is_right_choice'],
   data: function data() {
-    return {};
+    return {
+      choiceBody: this.body,
+      choiceIs_right_choice: this.is_right_choice
+    };
+  },
+  created: function created() {
+    this.childMethod();
   },
   validators: {
-    body: function body(value) {
+    choiceBody: function choiceBody(value) {
       return Validator.value(value).required();
     },
-    is_right_choice: function is_right_choice(value) {
+    choiceIs_right_choice: function choiceIs_right_choice(value) {
       return Validator.value(value).required()["boolean"]();
     }
   },
   methods: {
+    childMethod: function childMethod(message) {
+      if (this.choiceBody != "") {
+        this.messageFromChild();
+      }
+    },
+    messageFromChild: function messageFromChild() {
+      console.log(this.choiceBody + ' ' + this.choiceIs_right_choice);
+      this.$emit('messageFromChild', this.choiceBody, false);
+    },
     validate: function validate() {
       return this.$validate().then(function (success) {
         if (success) {
@@ -1754,6 +1764,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMP
     reset: function reset() {
       this.validation.reset();
     }
+  },
+  messageFromChild: function messageFromChild() {
+    this.$emit('messageFromChild', 'goood');
   }
 });
 
@@ -1836,7 +1849,7 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
       },
       choices: [{
         id: null,
-        body: 'xxxxx',
+        body: '',
         is_right_choice: false
       }]
     };
@@ -1850,6 +1863,17 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
     }
   },
   methods: {
+    callChild: function callChild() {
+      this.$refs.childRef.childMethod('Hi from parent');
+    },
+    childDataReceived: function childDataReceived(choiceBody, choiceIs_right_choice) {
+      console.log(choiceBody);
+      this.choices.push({
+        body: choiceBody,
+        is_right_choice: choiceIs_right_choice
+      });
+      console.log(this.choices.length);
+    },
     resetFrom: function resetFrom() {
       this.questionBody = String, this.choices = [{
         id: Number,
@@ -1868,21 +1892,18 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
           }
 
           choice.is_right_choice = !choice.is_right_choice;
-          console.log(index + "x x" + checkedIndex + "x x" + choice.is_right_choice);
         } else choice.is_right_choice = false;
       });
     },
     newChoice: function newChoice() {
       for (var index = 0; index < this.choices.length; index++) {
         var element = this.choices[index];
-        console.log(element.body);
-        console.log(element.is_right_choice);
       }
 
       this.choices.push({
         body: '',
         is_right_choice: false
-      }), console.log(this.choices.length);
+      });
     },
     submit: function submit() {
       return this.$validate().then(function (success) {
@@ -39918,20 +39939,20 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.body,
-            expression: "body"
+            value: _vm.choiceBody,
+            expression: "choiceBody"
           }
         ],
         staticClass: "form-control",
-        class: { "is-invalid": _vm.validation.hasError("body") },
+        class: { "is-invalid": _vm.validation.hasError("choiceBody") },
         attrs: { type: "text", name: "choice", placeholder: "choice" },
-        domProps: { value: _vm.body },
+        domProps: { value: _vm.choiceBody },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.body = $event.target.value
+            _vm.choiceBody = $event.target.value
           }
         }
       })
@@ -39944,7 +39965,7 @@ var render = function() {
         _c("input", {
           staticClass: "custom-control-input",
           attrs: { type: "checkbox", id: "" + _vm.index + "" },
-          domProps: { checked: _vm.is_right_choice },
+          domProps: { checked: _vm.choiceIs_right_choice },
           on: {
             change: function($event) {
               return _vm.checkChoice(_vm.index)
@@ -39971,7 +39992,7 @@ var render = function() {
           attrs: { type: "button" },
           on: {
             click: function($event) {
-              return _vm.deleteChoice(_vm.index)
+              return _vm.messageFromChild()
             }
           }
         },
@@ -40085,12 +40106,17 @@ var render = function() {
             _vm._l(_vm.choices, function(choice, index) {
               return [
                 _c("new-choice-component", {
+                  key: choice.id,
                   ref: "forms",
                   refInFor: true,
                   attrs: {
                     index: index,
                     body: choice.body,
                     is_right_choice: choice.is_right_choice
+                  },
+                  on: {
+                    click: _vm.callChild,
+                    messageFromChild: _vm.childDataReceived
                   }
                 }),
                 _vm._v(" "),
@@ -52399,6 +52425,10 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
 var Validator = simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a.Validator;
+var bus = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$bus = bus;
+var eventHub = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.eventHub = eventHub;
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -52485,15 +52515,14 @@ if (token) {
 /*!********************************************************!*\
   !*** ./resources/js/components/NewChoiceComponent.vue ***!
   \********************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NewChoiceComponent_vue_vue_type_template_id_bfa70b72___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NewChoiceComponent.vue?vue&type=template&id=bfa70b72& */ "./resources/js/components/NewChoiceComponent.vue?vue&type=template&id=bfa70b72&");
 /* harmony import */ var _NewChoiceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewChoiceComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/NewChoiceComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _NewChoiceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _NewChoiceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -52523,7 +52552,7 @@ component.options.__file = "resources/js/components/NewChoiceComponent.vue"
 /*!*********************************************************************************!*\
   !*** ./resources/js/components/NewChoiceComponent.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

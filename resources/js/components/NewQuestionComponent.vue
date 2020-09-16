@@ -26,7 +26,7 @@
            
 
             <template v-for="(choice,index) in choices" >
-               <new-choice-component :index = "index" :body = "choice.body" :is_right_choice = "choice.is_right_choice"  ref="forms"/>
+               <new-choice-component @click="callChild" @messageFromChild="childDataReceived" :key="choice.id" :index = "index" :body = "choice.body" :is_right_choice = "choice.is_right_choice"  ref="forms"/>
                <hr>
             </template>
 
@@ -65,7 +65,7 @@
           question : { body : '', id : null }, 
           choices : [{ 
              id : null ,
-             body : 'xxxxx',
+             body : '',
              is_right_choice :  false,
           }]
         }
@@ -79,7 +79,24 @@
             return Validator.value(value).required();
          }
      },
+    
       methods: {
+
+         callChild() {
+            this.$refs.childRef.childMethod('Hi from parent');
+         },
+
+         childDataReceived(choiceBody,choiceIs_right_choice){
+            console.log(choiceBody );
+
+            this.choices.push({
+             body : choiceBody,
+             is_right_choice :  choiceIs_right_choice
+          })
+
+            console.log(this.choices.length);
+
+         },
          resetFrom(){
             this.questionBody = String, 
             this.choices = [{
@@ -105,7 +122,6 @@
                       alert('hbes');
                    }
                   choice.is_right_choice = !choice.is_right_choice;
-                  console.log(index + "x x" + checkedIndex + "x x"+ choice.is_right_choice);
                 }
                else choice.is_right_choice = false; 
             });
@@ -118,22 +134,20 @@
          },
         newChoice(){
     
-    
           for (let index = 0; index < this.choices.length; index++) {
              const element = this.choices[index];
-             console.log(element.body);
-             console.log(element.is_right_choice);
           }
           
           this.choices.push({
              body : '',
              is_right_choice :  false
-          }),
-          console.log(this.choices.length);
+          })
     
         },
 
         submit(){
+
+
            return this.$validate()
             .then(function(success) {
                if (success) {
