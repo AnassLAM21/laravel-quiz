@@ -26,7 +26,7 @@
            
 
             <template v-for="(choice,index) in choices" >
-               <new-choice-component @click="callChild" @messageFromChild="childDataReceived" :key="choice.id" :index = "index" :body = "choice.body" :is_right_choice = "choice.is_right_choice"  ref="forms"/>
+               <new-choice-component @messageFromChild="childDataReceived" :key="choice.id" :index = "index" :body = "choice.body" :is_right_choice = "choice.is_right_choice"  ref="forms"/>
                <hr>
             </template>
 
@@ -40,8 +40,8 @@
          </div>
          <div class="border-top">
             <div class="card-body">
-               <button type="submit" class="btn btn-success"><i class="m-r-5 fas fa-save"></i>Save</button>
-               <button type="button" class="btn btn-primary">Reset</button>
+               <button type="submit" class="btn btn-success" @submit.prevent="submit()"><i class="m-r-5 fas fa-save"></i>Save</button>
+               <button type="button" class="btn btn-primary">X</button>
                <button type="button" class="btn btn-info"><i class="m-r-5 fas fa-edit"></i>Edit</button>
                <button type="button" class="btn btn-danger" @click="resetFrom"><i class="m-r-5 fas fa-window-close"></i> Cancel</button>
             </div>
@@ -82,19 +82,14 @@
     
       methods: {
 
-         callChild() {
-            this.$refs.childRef.childMethod('Hi from parent');
-         },
 
          childDataReceived(choiceBody,choiceIs_right_choice){
-            console.log(choiceBody );
 
-            this.choices.push({
-             body : choiceBody,
-             is_right_choice :  choiceIs_right_choice
-          })
+            this.choices.splice(this.choices.length-2,1);
+            this.choices.push({ body : choiceBody,is_right_choice : choiceIs_right_choice },{});
 
-            console.log(this.choices.length);
+
+            console.log(this.choices);
 
          },
          resetFrom(){
@@ -125,18 +120,9 @@
                 }
                else choice.is_right_choice = false; 
             });
-   
-   
-   
-           
             
-    
          },
         newChoice(){
-    
-          for (let index = 0; index < this.choices.length; index++) {
-             const element = this.choices[index];
-          }
           
           this.choices.push({
              body : '',
@@ -147,6 +133,7 @@
 
         submit(){
 
+           console.log(this.choices);
 
            return this.$validate()
             .then(function(success) {

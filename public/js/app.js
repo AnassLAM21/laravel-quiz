@@ -1727,11 +1727,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMP
   data: function data() {
     return {
       choiceBody: this.body,
-      choiceIs_right_choice: this.is_right_choice
+      choiceIs_right_choice: false // choiceIs_right_choice : this.is_right_choice,
+
     };
   },
-  created: function created() {
-    this.childMethod();
+  created: function created() {//this.childMethod();
   },
   validators: {
     choiceBody: function choiceBody(value) {
@@ -1742,14 +1742,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMP
     }
   },
   methods: {
-    childMethod: function childMethod(message) {
-      if (this.choiceBody != "") {
-        this.messageFromChild();
-      }
-    },
     messageFromChild: function messageFromChild() {
-      console.log(this.choiceBody + ' ' + this.choiceIs_right_choice);
-      this.$emit('messageFromChild', this.choiceBody, false);
+      console.log(this.choiceBody + ' X ' + this.choiceIs_right_choice);
+      this.$emit('messageFromChild', this.choiceBody, this.choiceIs_right_choice);
     },
     validate: function validate() {
       return this.$validate().then(function (success) {
@@ -1764,9 +1759,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMP
     reset: function reset() {
       this.validation.reset();
     }
-  },
-  messageFromChild: function messageFromChild() {
-    this.$emit('messageFromChild', 'goood');
   }
 });
 
@@ -1863,16 +1855,13 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
     }
   },
   methods: {
-    callChild: function callChild() {
-      this.$refs.childRef.childMethod('Hi from parent');
-    },
     childDataReceived: function childDataReceived(choiceBody, choiceIs_right_choice) {
-      console.log(choiceBody);
+      this.choices.splice(this.choices.length - 2, 1);
       this.choices.push({
         body: choiceBody,
         is_right_choice: choiceIs_right_choice
-      });
-      console.log(this.choices.length);
+      }, {});
+      console.log(this.choices);
     },
     resetFrom: function resetFrom() {
       this.questionBody = String, this.choices = [{
@@ -1896,16 +1885,13 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
       });
     },
     newChoice: function newChoice() {
-      for (var index = 0; index < this.choices.length; index++) {
-        var element = this.choices[index];
-      }
-
       this.choices.push({
         body: '',
         is_right_choice: false
       });
     },
     submit: function submit() {
+      console.log(this.choices);
       return this.$validate().then(function (success) {
         if (success) {
           this.createQuestion();
@@ -39948,6 +39934,15 @@ var render = function() {
         attrs: { type: "text", name: "choice", placeholder: "choice" },
         domProps: { value: _vm.choiceBody },
         on: {
+          keyup: function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.messageFromChild()
+          },
           input: function($event) {
             if ($event.target.composing) {
               return
@@ -40114,10 +40109,7 @@ var render = function() {
                     body: choice.body,
                     is_right_choice: choice.is_right_choice
                   },
-                  on: {
-                    click: _vm.callChild,
-                    messageFromChild: _vm.childDataReceived
-                  }
+                  on: { messageFromChild: _vm.childDataReceived }
                 }),
                 _vm._v(" "),
                 _c("hr")
@@ -40148,15 +40140,28 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "border-top" }, [
           _c("div", { staticClass: "card-body" }, [
-            _vm._m(1),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                attrs: { type: "submit" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.submit()
+                  }
+                }
+              },
+              [_c("i", { staticClass: "m-r-5 fas fa-save" }), _vm._v("Save")]
+            ),
             _vm._v(" "),
             _c(
               "button",
               { staticClass: "btn btn-primary", attrs: { type: "button" } },
-              [_vm._v("Reset")]
+              [_vm._v("X")]
             ),
             _vm._v(" "),
-            _vm._m(2),
+            _vm._m(1),
             _vm._v(" "),
             _c(
               "button",
@@ -40210,16 +40215,6 @@ var staticRenderFns = [
         ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-success", attrs: { type: "submit" } },
-      [_c("i", { staticClass: "m-r-5 fas fa-save" }), _vm._v("Save")]
-    )
   },
   function() {
     var _vm = this

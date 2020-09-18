@@ -1,8 +1,8 @@
 <template>
-   <div class="form-group row" >
+   <div  class="form-group row" >
       <label for="lname" class="col-3 col-sm-3 text-right control-label col-form-label">Choice {{ index + 1 }} </label>
       <div class="col-12 col-sm-5">
-         <input type="text" class="form-control" :class="{'is-invalid': validation.hasError('choiceBody')}" v-model="choiceBody" name="choice"  placeholder="choice">
+         <input type="text" @keyup.enter="messageFromChild()" class="form-control" :class="{'is-invalid': validation.hasError('choiceBody')}" v-model="choiceBody" name="choice"  placeholder="choice">
       </div>
       <div class="custom-control custom-checkbox col-12 col-sm-2">
          <input type="checkbox" :checked="choiceIs_right_choice"  @change="checkChoice(index)" class="custom-control-input" :id="'' + index +''">
@@ -30,11 +30,12 @@
          return { 
 
                 choiceBody : this.body,
-                choiceIs_right_choice : this.is_right_choice,
+                choiceIs_right_choice : false,
+                // choiceIs_right_choice : this.is_right_choice,
            };
        }, 
        created(){
-             this.childMethod();
+             //this.childMethod();
        },
        validators: {
          choiceBody: function(value) {
@@ -46,18 +47,10 @@
        },
        methods: {
 
-         childMethod(message) {
-            
-
-             if (this.choiceBody != "") {
-               this.messageFromChild();
-             }
-
-
-          },
-         messageFromChild() {
-           console.log(this.choiceBody + ' '+  this.choiceIs_right_choice);
-            this.$emit('messageFromChild', this.choiceBody,false);
+        
+         messageFromChild() {          
+           console.log(this.choiceBody + ' X '+  this.choiceIs_right_choice);
+            this.$emit('messageFromChild', this.choiceBody,this.choiceIs_right_choice);
           },
          validate: function() {
            return this.$validate()
@@ -72,9 +65,7 @@
          }
        },
 
-       messageFromChild(){
-         this.$emit('messageFromChild','goood');
-       },
+      
 
 
      }
