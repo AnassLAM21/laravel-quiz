@@ -1716,6 +1716,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 var Validator = simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a.Validator;
@@ -1723,16 +1726,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMP
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'answer-new',
-  props: ['index', 'body', 'is_right_choice'],
+  props: ['index', 'choice'],
   data: function data() {
     return {
-      choiceBody: this.body,
-      choiceIs_right_choice: false // choiceIs_right_choice : this.is_right_choice,
+      choiceBody: this.choice.body,
+      choiceIs_right_choice: false // choiceIs_right_choice : this.choice.is_right_choice,
 
     };
   },
-  created: function created() {//this.childMethod();
-  },
+  created: function created() {},
   validators: {
     choiceBody: function choiceBody(value) {
       return Validator.value(value).required();
@@ -1742,9 +1744,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMP
     }
   },
   methods: {
+    deleteChoices: function deleteChoices() {
+      console.log('origin' + this.index);
+      this.$emit('deleteChoice', this.index);
+    },
     messageFromChild: function messageFromChild() {
-      console.log(this.choiceBody + ' X ' + this.choiceIs_right_choice);
-      this.$emit('messageFromChild', this.choiceBody, this.choiceIs_right_choice);
+      this.$emit('messageFromChild', this.index, this.choiceBody, this.choiceIs_right_choice);
     },
     validate: function validate() {
       return this.$validate().then(function (success) {
@@ -1826,6 +1831,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 var Validator = simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a.Validator;
 Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
@@ -1855,13 +1866,11 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
     }
   },
   methods: {
-    childDataReceived: function childDataReceived(choiceBody, choiceIs_right_choice) {
-      this.choices.splice(this.choices.length - 2, 1);
-      this.choices.push({
+    childDataReceived: function childDataReceived(index, choiceBody, choiceIs_right_choice) {
+      this.choices[index] = {
         body: choiceBody,
         is_right_choice: choiceIs_right_choice
-      }, {});
-      console.log(this.choices);
+      };
     },
     resetFrom: function resetFrom() {
       this.questionBody = String, this.choices = [{
@@ -1870,8 +1879,8 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
         is_right_choice: Boolean
       }], this.validation.reset();
     },
-    deleteChoice: function deleteChoice(index) {
-      this.choices.splice(index, 1);
+    x: function x(deletedIndex) {
+      this.choices.splice(deletedIndex, 1);
     },
     checkChoice: function checkChoice(checkedIndex) {
       this.choices.forEach(function (choice, index) {
@@ -39935,12 +39944,6 @@ var render = function() {
         domProps: { value: _vm.choiceBody },
         on: {
           keyup: function($event) {
-            if (
-              !$event.type.indexOf("key") &&
-              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-            ) {
-              return null
-            }
             return _vm.messageFromChild()
           },
           input: function($event) {
@@ -39985,11 +39988,7 @@ var render = function() {
         {
           staticClass: "btn btn-outline-danger",
           attrs: { type: "button" },
-          on: {
-            click: function($event) {
-              return _vm.messageFromChild()
-            }
-          }
+          on: { click: _vm.deleteChoices }
         },
         [_c("i", { staticClass: "m-r-5 fas fa-trash-alt" }), _vm._v(" Delete ")]
       )
@@ -40099,21 +40098,14 @@ var render = function() {
             _vm._m(0),
             _vm._v(" "),
             _vm._l(_vm.choices, function(choice, index) {
-              return [
-                _c("new-choice-component", {
-                  key: choice.id,
-                  ref: "forms",
-                  refInFor: true,
-                  attrs: {
-                    index: index,
-                    body: choice.body,
-                    is_right_choice: choice.is_right_choice
-                  },
-                  on: { messageFromChild: _vm.childDataReceived }
-                }),
-                _vm._v(" "),
-                _c("hr")
-              ]
+              return _c("new-choice-component", {
+                key: choice.id,
+                attrs: { index: index, choice: choice },
+                on: {
+                  deleteChoice: _vm.x,
+                  messageFromChild: _vm.childDataReceived
+                }
+              })
             }),
             _vm._v(" "),
             _c("div", { staticClass: "form-group row" }, [

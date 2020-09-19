@@ -23,17 +23,23 @@
                </div>
             </div>
     
-           
-
-            <template v-for="(choice,index) in choices" >
-               <new-choice-component @messageFromChild="childDataReceived" :key="choice.id" :index = "index" :body = "choice.body" :is_right_choice = "choice.is_right_choice"  ref="forms"/>
+            <!-- <template v-for="(choice,index) in choices">
+               <new-choice-component @deleteChoice="x" @messageFromChild="childDataReceived" :key="choice.id" :index = "index" :choice="choice"/>
                <hr>
-            </template>
+            </template> -->
 
+
+            <!-- <new-choice-component v-for="(choice,index) in choices" :key="choice.id" :index = "index" :choice="choice" @deleteChoice="x" 
+            @messageFromChild="childDataReceived" @deleteChoice="x"></new-choice-component> -->
+
+
+           
+            <new-choice-component @deleteChoice="x" @messageFromChild="childDataReceived" v-for="(choice,index) in choices" :key="choice.id" :index = "index" :choice="choice"/>
+              
 
             <div class="form-group row">
                <div class="col-sm-3"> </div>
-               <div class="col-sm-9">
+               <div class="col-sm-9" >
                   <button type="button" @click="newChoice" class="w-100 p-1 btn btn-outline-primary"> <i class="m-r-5 fas fa-plus-circle"></i> Add a choice</button>
                </div>
             </div>
@@ -82,14 +88,9 @@
     
       methods: {
 
+         childDataReceived(index,choiceBody,choiceIs_right_choice){
 
-         childDataReceived(choiceBody,choiceIs_right_choice){
-
-            this.choices.splice(this.choices.length-2,1);
-            this.choices.push({ body : choiceBody,is_right_choice : choiceIs_right_choice },{});
-
-
-            console.log(this.choices);
+            this.choices[index] = {  body :  choiceBody , is_right_choice : choiceIs_right_choice };
 
          },
          resetFrom(){
@@ -102,8 +103,10 @@
             }],
             this.validation.reset();
          },
-         deleteChoice(index){
-            this.choices.splice(index,1);
+         x(deletedIndex){
+
+              this.choices.splice(deletedIndex, 1);
+
          },
     
          checkChoice(checkedIndex){
@@ -144,11 +147,7 @@
         },
         createQuestion () {
            
-
-           
-
-        
-         axios.post(`/api/v1/quizzes/${this.quizId}/question`, {
+           axios.post(`/api/v1/quizzes/${this.quizId}/question`, {
                    title : 'title',
                    body: this.questionBody,
                 })
