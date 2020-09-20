@@ -77,20 +77,7 @@
           questionBody : '',
    
           question : { body : '', id : null }, 
-          choices : [{
-                id : 1 ,
-                body : 'String',
-                is_right_choice :  true
-                },
-                {
-                id : 2 ,
-                body : 'String2',
-                is_right_choice :  true
-                },{
-                id : 3,
-                body : 'String6',
-                is_right_choice :  true
-                }],
+          choices : [],
         }
       },  
    
@@ -103,8 +90,9 @@
          }
      },
 
-     computed: {
-        
+
+      created() {
+         this.retrieveChoices();
       },
     
       methods: {
@@ -208,7 +196,25 @@
    
                    console.log(choice.body + ' '+ choice.is_right_choice);
                 })
+          },
+
+           retrieveChoices () {
+    
+                axios.get(`/api/v1/questions/${this.quizId}/choice/`)
+                .catch(error => {
+                   console.log('Error');
+                })
+                .then(({data}) => {
+                   console.log("the choices has been created");
+
+                   console.log(data.data);
+
+
+                   this.choices.push(...data.data);
+                })
           }
+
+
         
       }
 }    

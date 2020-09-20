@@ -1781,6 +1781,18 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMP
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var simple_vue_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! simple-vue-validator */ "./node_modules/simple-vue-validator/src/index.js");
 /* harmony import */ var simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -1860,19 +1872,7 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
         body: '',
         id: null
       },
-      choices: [{
-        id: 1,
-        body: 'String',
-        is_right_choice: true
-      }, {
-        id: 2,
-        body: 'String2',
-        is_right_choice: true
-      }, {
-        id: 3,
-        body: 'String6',
-        is_right_choice: true
-      }]
+      choices: []
     };
   },
   validators: {
@@ -1883,7 +1883,9 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
       return Validator.value(value).required();
     }
   },
-  computed: {},
+  created: function created() {
+    this.retrieveChoices();
+  },
   methods: {
     childDataReceived: function childDataReceived(index, choiceBody, choiceIs_right_choice) {
       console.log(index + ' ' + choiceBody + ' ' + choiceIs_right_choice);
@@ -1961,6 +1963,21 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
         var data = _ref2.data;
         console.log("the choices has been created");
         console.log(choice.body + ' ' + choice.is_right_choice);
+      });
+    },
+    retrieveChoices: function retrieveChoices() {
+      var _this2 = this;
+
+      axios.get("/api/v1/questions/".concat(this.quizId, "/choice/"))["catch"](function (error) {
+        console.log('Error');
+      }).then(function (_ref3) {
+        var _this2$choices;
+
+        var data = _ref3.data;
+        console.log("the choices has been created");
+        console.log(data.data);
+
+        (_this2$choices = _this2.choices).push.apply(_this2$choices, _toConsumableArray(data.data));
       });
     }
   }
