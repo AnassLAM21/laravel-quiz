@@ -2,7 +2,7 @@
    <div  class="form-group row" >
       <label for="lname" class="col-3 col-sm-3 text-right control-label col-form-label">Choice {{ index + 1 }} </label>
       <div class="col-12 col-sm-5">
-         <input type="text" @keyup="messageFromChild()" class="form-control" :class="{'is-invalid': validation.hasError('choiceBody')}" v-model="choiceBody" name="choice"  placeholder="choice">
+         <input type="text" @keyup.enter="messageFromChild()" class="form-control" :class="{'is-invalid': validation.hasError('choiceBody')}" v-model="choiceBody" name="choice"  placeholder="choice">
       </div>
       <div class="custom-control custom-checkbox col-12 col-sm-2">
          <input type="checkbox" :checked="choiceIs_right_choice"  @change="checkChoice(index)" class="custom-control-input" :id="'' + index +''">
@@ -31,7 +31,7 @@
        props: ['index','choice'],
        data: function () {
          return { 
-
+                choiceId : this.choice.id,
                 choiceBody : this.choice.body,
                 choiceIs_right_choice : false,
                 // choiceIs_right_choice : this.choice.is_right_choice,
@@ -54,7 +54,7 @@
         },
 
          messageFromChild() {          
-            this.$emit('messageFromChild',this.index, this.choiceBody,this.choiceIs_right_choice);
+            this.$emit('messageFromChild',this.index,this.choiceBody,this.choiceIs_right_choice);
           },
          validate: function() {
            return this.$validate()

@@ -38,6 +38,11 @@
             v-for='(choice,index) in choices' :key='choice.id' :index = 'index' 
             :choice="choice">
             </new-choice-component>
+
+
+            <!-- <todo-item v-for="todo in todosFiltered" :key="todo.id" :todo="todo" 
+            :checkAll="!anyRemaining" @removedTodo="removeTodo" 
+            @finishedEdit="finishedEdit"></todo-item> -->
               
 
             <div class="form-group row">
@@ -68,15 +73,24 @@
       data () {
         return {
           quizId : 1,
-   
+          choiceId : 71,
           questionBody : '',
    
           question : { body : '', id : null }, 
-          choices : [{ 
-             id : null ,
-             body : '',
-             is_right_choice :  false,
-          }]
+          choices : [{
+                id : 1 ,
+                body : 'String',
+                is_right_choice :  true
+                },
+                {
+                id : 2 ,
+                body : 'String2',
+                is_right_choice :  true
+                },{
+                id : 3,
+                body : 'String6',
+                is_right_choice :  true
+                }],
         }
       },  
    
@@ -88,12 +102,18 @@
             return Validator.value(value).required();
          }
      },
+
+     computed: {
+        
+      },
     
       methods: {
 
          childDataReceived(index,choiceBody,choiceIs_right_choice){
 
-            this.choices[index] = {  body :  choiceBody , is_right_choice : choiceIs_right_choice };
+            
+            console.log(index+' '+choiceBody+' '+choiceIs_right_choice);
+            this.choices[index] = { id : this.choiceId, body :  choiceBody , is_right_choice : choiceIs_right_choice };
 
          },
          resetFrom(){
@@ -102,7 +122,7 @@
                 id : Number ,
                 body : String,
                 is_right_choice :  Boolean,
-   
+
             }],
             this.validation.reset();
          },
@@ -132,8 +152,10 @@
           
           this.choices.push({
              body : '',
-             is_right_choice :  false
+             is_right_choice :  false,
           })
+
+          this.choiceId++;
     
         },
 

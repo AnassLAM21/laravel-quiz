@@ -36,6 +36,12 @@ Vue.eventHub = eventHub;
 Vue.component('new-question-component', require('./components/NewQuestionComponent.vue').default);
 Vue.component('new-choice-component', require('./components/NewChoiceComponent.vue').default);
 
+
+
+Vue.component('todo-item', require('./components/TodoItem.vue').default);
+Vue.component('todo-list', require('./components/TodoList.vue').default);
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
