@@ -31,10 +31,13 @@
 
             <!-- <new-choice-component v-for="(choice,index) in choices" :key="choice.id" :index = "index" :choice="choice" @deleteChoice="x" 
             @messageFromChild="childDataReceived" @deleteChoice="x"></new-choice-component> -->
+            
 
 
-           
-            <new-choice-component @deleteChoice="x" @messageFromChild="childDataReceived" v-for="(choice,index) in choices" :key="choice.id" :index = "index" :choice="choice"/>
+            <new-choice-component @deleteChoice='x' @messageFromChild='childDataReceived' 
+            v-for='(choice,index) in choices' :key='choice.id' :index = 'index' 
+            :choice="choice">
+            </new-choice-component>
               
 
             <div class="form-group row">

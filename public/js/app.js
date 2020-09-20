@@ -1837,6 +1837,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 var Validator = simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a.Validator;
 Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
