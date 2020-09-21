@@ -1865,15 +1865,34 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
   name: 'question-new',
   data: function data() {
     return {
-      quizId: 1,
-      choiceId: 71,
+      quizId: 3,
       questionBody: '',
+      choiceId: 10,
       question: {
         body: '',
         id: null
       },
-      choices: []
+      choices: [{
+        id: 1,
+        body: '',
+        is_right_choice: ''
+      }, {
+        id: 2,
+        body: '',
+        is_right_choice: ''
+      }, {
+        id: 3,
+        body: '',
+        is_right_choice: ''
+      }, {
+        id: 4,
+        body: '',
+        is_right_choice: ''
+      }]
     };
+  },
+  mounted: function mounted() {
+    this.retrieveChoices();
   },
   validators: {
     questionBody: function questionBody(value) {
@@ -1883,11 +1902,18 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
       return Validator.value(value).required();
     }
   },
-  created: function created() {
-    this.retrieveChoices();
+  created: function created() {},
+  computed: {
+    highestChoiceId: function highestChoiceId() {
+      if (this.choices.length == 0) return;
+      return this.choiceId = this.choices.reduce(function (a, b) {
+        return Number(a.choice) > Number(b.choice) ? a : b;
+      }).id;
+    }
   },
   methods: {
     childDataReceived: function childDataReceived(index, choiceBody, choiceIs_right_choice) {
+      console.log(this.highestChoiceId);
       console.log(index + ' ' + choiceBody + ' ' + choiceIs_right_choice);
       this.choices[index] = {
         id: this.choiceId,
@@ -1921,7 +1947,6 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
         body: '',
         is_right_choice: false
       });
-      this.choiceId++;
     },
     submit: function submit() {
       console.log(this.choices);
@@ -40208,12 +40233,6 @@ var render = function() {
         domProps: { value: _vm.choiceBody },
         on: {
           keyup: function($event) {
-            if (
-              !$event.type.indexOf("key") &&
-              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-            ) {
-              return null
-            }
             return _vm.messageFromChild()
           },
           input: function($event) {

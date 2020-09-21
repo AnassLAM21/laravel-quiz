@@ -72,15 +72,40 @@
       name: 'question-new',
       data () {
         return {
-          quizId : 1,
-          choiceId : 71,
+          quizId : 3,
           questionBody : '',
-   
+          choiceId : 10,
           question : { body : '', id : null }, 
-          choices : [],
+          choices : [{
+             id : 1,
+             body:'',
+             is_right_choice : ''
+          },
+          {
+             id : 2,
+             body:'',
+             is_right_choice : ''
+          },
+          {
+             id : 3,
+             body:'',
+             is_right_choice : ''
+          },
+          {
+             id : 4,
+             body:'',
+             is_right_choice : ''
+          }],
         }
       },  
-   
+
+      mounted: function (){
+            this.retrieveChoices();
+
+
+      },
+
+
       validators: {
           questionBody : function (value) {
              return Validator.value(value).required();
@@ -92,14 +117,24 @@
 
 
       created() {
-         this.retrieveChoices();
       },
+
+      computed:{
+
+         highestChoiceId(){
+            if (this.choices.length == 0) return;
+            return this.choiceId = this.choices.reduce((a,b) => Number(a.choice) > Number(b.choice) ? a : b).id;
     
+         }
+
+
+      },
       methods: {
 
          childDataReceived(index,choiceBody,choiceIs_right_choice){
 
             
+            console.log(this.highestChoiceId);
             console.log(index+' '+choiceBody+' '+choiceIs_right_choice);
             this.choices[index] = { id : this.choiceId, body :  choiceBody , is_right_choice : choiceIs_right_choice };
 
@@ -137,14 +172,10 @@
             
          },
         newChoice(){
-          
           this.choices.push({
              body : '',
              is_right_choice :  false,
           })
-
-          this.choiceId++;
-    
         },
 
         submit(){
@@ -209,7 +240,7 @@
 
                    console.log(data.data);
 
-
+                  
                    this.choices.push(...data.data);
                 })
           }

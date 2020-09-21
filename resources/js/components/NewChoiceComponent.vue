@@ -2,7 +2,7 @@
    <div  class="form-group row" >
       <label for="lname" class="col-3 col-sm-3 text-right control-label col-form-label">Choice {{ index + 1 }} </label>
       <div class="col-12 col-sm-5">
-         <input type="text" @keyup.enter="messageFromChild()" class="form-control" :class="{'is-invalid': validation.hasError('choiceBody')}" v-model="choiceBody" name="choice"  placeholder="choice">
+         <input type="text" @keyup="messageFromChild()" class="form-control" :class="{'is-invalid': validation.hasError('choiceBody')}" v-model="choiceBody" name="choice"  placeholder="choice">
       </div>
       <div class="custom-control custom-checkbox col-12 col-sm-2">
          <input type="checkbox" :checked="choiceIs_right_choice"  @change="checkChoice(index)" class="custom-control-input" :id="'' + index +''">
