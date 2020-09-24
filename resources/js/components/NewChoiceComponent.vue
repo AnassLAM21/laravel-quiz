@@ -54,7 +54,7 @@
         },
 
          messageFromChild() {          
-            this.$emit('messageFromChild',this.index,this.choiceBody,this.choiceIs_right_choice);
+            this.$emit('messageFromChild',this.index,this.choiceId,this.choiceBody,this.choiceIs_right_choice);
           },
          validate: function() {
            return this.$validate()

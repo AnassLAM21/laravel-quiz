@@ -76,6 +76,7 @@
           questionBody : '',
           choiceId : 10,
           question : { body : '', id : null }, 
+          //choices : [],
           choices : [{
              id : 1,
              body:'',
@@ -116,7 +117,9 @@
      },
 
 
-      created() {
+      mounted() { 
+
+         this.choiceId = this.highestChoiceId;
       },
 
       computed:{
@@ -131,13 +134,19 @@
       },
       methods: {
 
-         childDataReceived(index,choiceBody,choiceIs_right_choice){
+         childDataReceived(index,id,choiceBody,choiceIs_right_choice){
+
 
             
-            console.log(this.highestChoiceId);
-            console.log(index+' '+choiceBody+' '+choiceIs_right_choice);
-            this.choices[index] = { id : this.choiceId, body :  choiceBody , is_right_choice : choiceIs_right_choice };
 
+            console.log(this.choiceId);
+
+            
+            console.log(index+' '+choiceBody+' '+choiceIs_right_choice);
+            this.choices[index] = { id : id, body :  choiceBody , is_right_choice : choiceIs_right_choice };
+            
+
+            //this.choiceId++;
          },
          resetFrom(){
             this.questionBody = String, 
@@ -172,10 +181,17 @@
             
          },
         newChoice(){
+          console.log(this.choices.length + ' '+ this.choices.length + ' ' +this.highestChoiceId);
+          this.choiceId++;
+          console.log(this.highestChoiceId);
           this.choices.push({
+             id : this.choiceId,
              body : '',
              is_right_choice :  false,
           })
+
+          
+
         },
 
         submit(){
