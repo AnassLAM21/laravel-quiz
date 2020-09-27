@@ -5,7 +5,7 @@
          <input type="text" @keyup="messageFromChild()" class="form-control" :class="{'is-invalid': validation.hasError('choiceBody')}" v-model="choiceBody" name="choice"  placeholder="choice">
       </div>
       <div class="custom-control custom-checkbox col-12 col-sm-2">
-         <input type="checkbox" :checked="choiceIs_right_choice"  @change="checkChoice(index)" class="custom-control-input" :id="'' + index +''">
+         <input type="checkbox" :checked="choiceIs_right_choice"  @change="checkChoices(index)" class="custom-control-input" :id="'' + index +''">
          <label class="custom-control-label" :for="'' + index + ''">Right</label>
       </div>
       <div class="text-right col-12 col-sm-2">
@@ -47,6 +47,11 @@
          }
        },
        methods: {
+
+         checkChoices(index){
+
+           this.$emit('checkChoice',this.index);
+         },
 
         deleteChoices(){
           console.log('origin' + this.index);

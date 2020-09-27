@@ -34,7 +34,7 @@
             
 
 
-            <new-choice-component @deleteChoice='x' @messageFromChild='childDataReceived' 
+            <new-choice-component @deleteChoice='x' @checkChoice='y' @messageFromChild='childDataReceived' 
             v-for='(choice,index) in choices' :key='choice.id' :index = 'index' 
             :choice="choice">
             </new-choice-component>
@@ -72,39 +72,51 @@
       name: 'question-new',
       data () {
         return {
-          quizId : 3,
+          quizId : 1,
           questionBody : '',
           choiceId : 10,
           question : { body : '', id : null }, 
           //choices : [],
-          choices : [{
-             id : 1,
-             body:'',
-             is_right_choice : ''
-          },
-          {
-             id : 2,
-             body:'',
-             is_right_choice : ''
-          },
-          {
-             id : 3,
-             body:'',
-             is_right_choice : ''
-          },
-          {
-             id : 4,
-             body:'',
-             is_right_choice : ''
-          }],
+          choices : [
+         //     {
+         //     id : 1,
+         //     body:'',
+         //     is_right_choice : ''
+         //  },
+         //  {
+         //     id : 2,
+         //     body:'',
+         //     is_right_choice : ''
+         //  },
+         //  {
+         //     id : 3,
+         //     body:'',
+         //     is_right_choice : ''
+         //  },
+         //  {
+         //     id : 4,
+         //     body:'',
+         //     is_right_choice : ''
+         //  }
+          ],
         }
       },  
 
-      mounted: function (){
-            this.retrieveChoices();
-
-
+      created(){
+         console.log('created');
+         this.retrieveChoices();
+         console.log(this.choices);
       },
+      
+      beforeMount() { 
+        this.choiceId = this.highestChoiceId;
+         console.log('beforeMount');
+      },
+
+       mounted() { 
+         console.log('id' + this.choiceId);
+      },
+
 
 
       validators: {
@@ -115,13 +127,6 @@
             return Validator.value(value).required();
          }
      },
-
-
-      mounted() { 
-
-         this.choiceId = this.highestChoiceId;
-      },
-
       computed:{
 
          highestChoiceId(){
@@ -149,11 +154,11 @@
             //this.choiceId++;
          },
          resetFrom(){
-            this.questionBody = String, 
+            this.questionBody = '', 
             this.choices = [{
-                id : Number ,
-                body : String,
-                is_right_choice :  Boolean,
+                id : 0,
+                body : '',
+                is_right_choice :  false,
 
             }],
             this.validation.reset();
@@ -163,9 +168,15 @@
               this.choices.splice(deletedIndex, 1);
 
          },
+         
+         
+         // y(index){
+         //    console.log(index);
+         // },
+
     
-         checkChoice(checkedIndex){
-            
+         y(checkedIndex){
+            console.log(checkedIndex);
     
             this.choices.forEach((choice,index) => {
     
@@ -246,6 +257,9 @@
           },
 
            retrieveChoices () {
+
+
+              
     
                 axios.get(`/api/v1/questions/${this.quizId}/choice/`)
                 .catch(error => {
@@ -253,11 +267,14 @@
                 })
                 .then(({data}) => {
                    console.log("the choices has been created");
-
-                   console.log(data.data);
-
-                  
+                   
                    this.choices.push(...data.data);
+                  while (this.choices.length<4) {
+                     this.choices.push({
+                        id:this.highestChoiceId+1,
+                     });
+                  }
+
                 })
           }
 

@@ -1745,6 +1745,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMP
     }
   },
   methods: {
+    checkChoices: function checkChoices(index) {
+      this.$emit('checkChoice', this.index);
+    },
     deleteChoices: function deleteChoices() {
       console.log('origin' + this.index);
       this.$emit('deleteChoice', this.index);
@@ -1781,10 +1784,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMP
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var simple_vue_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! simple-vue-validator */ "./node_modules/simple-vue-validator/src/index.js");
 /* harmony import */ var simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0__);
-var _name$data$mounted$va;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1865,11 +1864,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var Validator = simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a.Validator;
 Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
-/* harmony default export */ __webpack_exports__["default"] = (_name$data$mounted$va = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   name: 'question-new',
   data: function data() {
     return {
-      quizId: 3,
+      quizId: 1,
       questionBody: '',
       choiceId: 10,
       question: {
@@ -1877,27 +1876,40 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
         id: null
       },
       //choices : [],
-      choices: [{
-        id: 1,
-        body: '',
-        is_right_choice: ''
-      }, {
-        id: 2,
-        body: '',
-        is_right_choice: ''
-      }, {
-        id: 3,
-        body: '',
-        is_right_choice: ''
-      }, {
-        id: 4,
-        body: '',
-        is_right_choice: ''
-      }]
+      choices: [//     {
+        //     id : 1,
+        //     body:'',
+        //     is_right_choice : ''
+        //  },
+        //  {
+        //     id : 2,
+        //     body:'',
+        //     is_right_choice : ''
+        //  },
+        //  {
+        //     id : 3,
+        //     body:'',
+        //     is_right_choice : ''
+        //  },
+        //  {
+        //     id : 4,
+        //     body:'',
+        //     is_right_choice : ''
+        //  }
+      ]
     };
   },
-  mounted: function mounted() {
+  created: function created() {
+    console.log('created');
     this.retrieveChoices();
+    console.log(this.choices);
+  },
+  beforeMount: function beforeMount() {
+    this.choiceId = this.highestChoiceId;
+    console.log('beforeMount');
+  },
+  mounted: function mounted() {
+    console.log('id' + this.choiceId);
   },
   validators: {
     questionBody: function questionBody(value) {
@@ -1906,115 +1918,124 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
     choices: function choices(value) {
       return Validator.value(value).required();
     }
-  }
-}, _defineProperty(_name$data$mounted$va, "mounted", function mounted() {
-  this.choiceId = this.highestChoiceId;
-}), _defineProperty(_name$data$mounted$va, "computed", {
-  highestChoiceId: function highestChoiceId() {
-    if (this.choices.length == 0) return;
-    return this.choiceId = this.choices.reduce(function (a, b) {
-      return Number(a.choice) > Number(b.choice) ? a : b;
-    }).id;
-  }
-}), _defineProperty(_name$data$mounted$va, "methods", {
-  childDataReceived: function childDataReceived(index, id, choiceBody, choiceIs_right_choice) {
-    console.log(this.choiceId);
-    console.log(index + ' ' + choiceBody + ' ' + choiceIs_right_choice);
-    this.choices[index] = {
-      id: id,
-      body: choiceBody,
-      is_right_choice: choiceIs_right_choice
-    }; //this.choiceId++;
   },
-  resetFrom: function resetFrom() {
-    this.questionBody = String, this.choices = [{
-      id: Number,
-      body: String,
-      is_right_choice: Boolean
-    }], this.validation.reset();
+  computed: {
+    highestChoiceId: function highestChoiceId() {
+      if (this.choices.length == 0) return;
+      return this.choiceId = this.choices.reduce(function (a, b) {
+        return Number(a.choice) > Number(b.choice) ? a : b;
+      }).id;
+    }
   },
-  x: function x(deletedIndex) {
-    this.choices.splice(deletedIndex, 1);
-  },
-  checkChoice: function checkChoice(checkedIndex) {
-    this.choices.forEach(function (choice, index) {
-      if (index == checkedIndex) {
-        if (choice.body == "") {
-          alert('hbes');
+  methods: {
+    childDataReceived: function childDataReceived(index, id, choiceBody, choiceIs_right_choice) {
+      console.log(this.choiceId);
+      console.log(index + ' ' + choiceBody + ' ' + choiceIs_right_choice);
+      this.choices[index] = {
+        id: id,
+        body: choiceBody,
+        is_right_choice: choiceIs_right_choice
+      }; //this.choiceId++;
+    },
+    resetFrom: function resetFrom() {
+      this.questionBody = '', this.choices = [{
+        id: 0,
+        body: '',
+        is_right_choice: false
+      }], this.validation.reset();
+    },
+    x: function x(deletedIndex) {
+      this.choices.splice(deletedIndex, 1);
+    },
+    // y(index){
+    //    console.log(index);
+    // },
+    y: function y(checkedIndex) {
+      console.log(checkedIndex);
+      this.choices.forEach(function (choice, index) {
+        if (index == checkedIndex) {
+          if (choice.body == "") {
+            alert('hbes');
+          }
+
+          choice.is_right_choice = !choice.is_right_choice;
+        } else choice.is_right_choice = false;
+      });
+    },
+    newChoice: function newChoice() {
+      console.log(this.choices.length + ' ' + this.choices.length + ' ' + this.highestChoiceId);
+      this.choiceId++;
+      console.log(this.highestChoiceId);
+      this.choices.push({
+        id: this.choiceId,
+        body: '',
+        is_right_choice: false
+      });
+    },
+    submit: function submit() {
+      console.log(this.choices);
+      return this.$validate().then(function (success) {
+        if (success) {
+          this.createQuestion();
         }
+      }.bind(this));
+    },
+    createQuestion: function createQuestion() {
+      var _this = this;
 
-        choice.is_right_choice = !choice.is_right_choice;
-      } else choice.is_right_choice = false;
-    });
-  },
-  newChoice: function newChoice() {
-    console.log(this.choices.length + ' ' + this.choices.length + ' ' + this.highestChoiceId);
-    this.choiceId++;
-    console.log(this.highestChoiceId);
-    this.choices.push({
-      id: this.choiceId,
-      body: '',
-      is_right_choice: false
-    });
-  },
-  submit: function submit() {
-    console.log(this.choices);
-    return this.$validate().then(function (success) {
-      if (success) {
-        this.createQuestion();
-      }
-    }.bind(this));
-  },
-  createQuestion: function createQuestion() {
-    var _this = this;
+      axios.post("/api/v1/quizzes/".concat(this.quizId, "/question"), {
+        title: 'title',
+        body: this.questionBody
+      })["catch"](function (error) {
+        console.log('Error');
+      }).then(function (_ref) {
+        var data = _ref.data;
+        _this.question.id = data.question.id;
+        console.log("the question has been created");
 
-    axios.post("/api/v1/quizzes/".concat(this.quizId, "/question"), {
-      title: 'title',
-      body: this.questionBody
-    })["catch"](function (error) {
-      console.log('Error');
-    }).then(function (_ref) {
-      var data = _ref.data;
-      _this.question.id = data.question.id;
-      console.log("the question has been created");
+        for (var index = 0; index < _this.choices.length; index++) {
+          var choice = _this.choices[index];
 
-      for (var index = 0; index < _this.choices.length; index++) {
-        var choice = _this.choices[index];
-
-        if (choice.body != "") {
-          _this.createChoice(choice);
+          if (choice.body != "") {
+            _this.createChoice(choice);
+          }
         }
-      }
-    });
-  },
-  createChoice: function createChoice(choice) {
-    axios.post("/api/v1/question/".concat(this.question.id, "/choice"), {
-      body: choice.body,
-      is_right_choice: choice.is_right_choice
-    })["catch"](function (error) {
-      console.log('Error');
-    }).then(function (_ref2) {
-      var data = _ref2.data;
-      console.log("the choices has been created");
-      console.log(choice.body + ' ' + choice.is_right_choice);
-    });
-  },
-  retrieveChoices: function retrieveChoices() {
-    var _this2 = this;
+      });
+    },
+    createChoice: function createChoice(choice) {
+      axios.post("/api/v1/question/".concat(this.question.id, "/choice"), {
+        body: choice.body,
+        is_right_choice: choice.is_right_choice
+      })["catch"](function (error) {
+        console.log('Error');
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        console.log("the choices has been created");
+        console.log(choice.body + ' ' + choice.is_right_choice);
+      });
+    },
+    retrieveChoices: function retrieveChoices() {
+      var _this2 = this;
 
-    axios.get("/api/v1/questions/".concat(this.quizId, "/choice/"))["catch"](function (error) {
-      console.log('Error');
-    }).then(function (_ref3) {
-      var _this2$choices;
+      axios.get("/api/v1/questions/".concat(this.quizId, "/choice/"))["catch"](function (error) {
+        console.log('Error');
+      }).then(function (_ref3) {
+        var _this2$choices;
 
-      var data = _ref3.data;
-      console.log("the choices has been created");
-      console.log(data.data);
+        var data = _ref3.data;
+        console.log("the choices has been created");
 
-      (_this2$choices = _this2.choices).push.apply(_this2$choices, _toConsumableArray(data.data));
-    });
+        (_this2$choices = _this2.choices).push.apply(_this2$choices, _toConsumableArray(data.data));
+
+        while (_this2.choices.length < 4) {
+          _this2.choices.push({
+            id: _this2.highestChoiceId + 1
+          });
+        }
+      });
+    }
   }
-}), _name$data$mounted$va);
+});
 
 /***/ }),
 
@@ -40263,7 +40284,7 @@ var render = function() {
           domProps: { checked: _vm.choiceIs_right_choice },
           on: {
             change: function($event) {
-              return _vm.checkChoice(_vm.index)
+              return _vm.checkChoices(_vm.index)
             }
           }
         }),
@@ -40400,6 +40421,7 @@ var render = function() {
                 attrs: { index: index, choice: choice },
                 on: {
                   deleteChoice: _vm.x,
+                  checkChoice: _vm.y,
                   messageFromChild: _vm.childDataReceived
                 }
               })
