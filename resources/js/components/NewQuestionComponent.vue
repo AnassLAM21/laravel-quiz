@@ -48,7 +48,7 @@
             <div class="form-group row">
                <div class="col-sm-3"> </div>
                <div class="col-sm-9" >
-                  <button type="button" @click="newChoice" class="w-100 p-1 btn btn-outline-primary"> <i class="m-r-5 fas fa-plus-circle"></i> Add a choice</button>
+                  <button type="button" @click="newChoice" class="w-100 p-1 btn btn-outline-primary"> <i class="m-r-5 fas fa-plus-circle"></i> Add a choice</button> 
                </div>
             </div>
          </div>
@@ -104,17 +104,33 @@
 
       created(){
          console.log('created');
+         
          this.retrieveChoices();
-         console.log(this.choices);
+
       },
       
       beforeMount() { 
-        this.choiceId = this.highestChoiceId;
-         console.log('beforeMount');
+
+         
+
+
       },
 
        mounted() { 
-         console.log('id' + this.choiceId);
+         if (this.highestChoiceId !== undefined) {
+            this.choiceId = this.highestChoiceId;
+         }
+
+         this.choiceId++;
+
+         while (this.choices.length<4) {
+            this.choices.push({
+               id:this.choiceId++,
+               is_right_choice : false,
+            });
+         }
+
+         
       },
 
 
@@ -189,7 +205,8 @@
                 }
                else choice.is_right_choice = false; 
             });
-            
+
+            console.log(this.choices);
          },
         newChoice(){
           console.log(this.choices.length + ' '+ this.choices.length + ' ' +this.highestChoiceId);
@@ -266,14 +283,9 @@
                    console.log('Error');
                 })
                 .then(({data}) => {
-                   console.log("the choices has been created");
                    
                    this.choices.push(...data.data);
-                  while (this.choices.length<4) {
-                     this.choices.push({
-                        id:this.highestChoiceId+1,
-                     });
-                  }
+                  
 
                 })
           }

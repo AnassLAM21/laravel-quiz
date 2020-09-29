@@ -1731,11 +1731,21 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMP
     return {
       choiceId: this.choice.id,
       choiceBody: this.choice.body,
-      choiceIs_right_choice: false // choiceIs_right_choice : this.choice.is_right_choice,
-
+      choiceIs_right_choice: this.choice.is_right_choice
     };
   },
-  created: function created() {},
+  computed: {
+    check: function check() {
+      if (this.choice.is_right_choice == 1 || this.choice.is_right_choice == true) {
+        return true;
+      }
+
+      return false;
+    }
+  },
+  created: function created() {
+    console.log(this.choiceIs_right_choice);
+  },
   validators: {
     choiceBody: function choiceBody(value) {
       return Validator.value(value).required();
@@ -1902,14 +1912,21 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
   created: function created() {
     console.log('created');
     this.retrieveChoices();
-    console.log(this.choices);
   },
-  beforeMount: function beforeMount() {
-    this.choiceId = this.highestChoiceId;
-    console.log('beforeMount');
-  },
+  beforeMount: function beforeMount() {},
   mounted: function mounted() {
-    console.log('id' + this.choiceId);
+    if (this.highestChoiceId !== undefined) {
+      this.choiceId = this.highestChoiceId;
+    }
+
+    this.choiceId++;
+
+    while (this.choices.length < 4) {
+      this.choices.push({
+        id: this.choiceId++,
+        is_right_choice: false
+      });
+    }
   },
   validators: {
     questionBody: function questionBody(value) {
@@ -1961,6 +1978,7 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
           choice.is_right_choice = !choice.is_right_choice;
         } else choice.is_right_choice = false;
       });
+      console.log(this.choices);
     },
     newChoice: function newChoice() {
       console.log(this.choices.length + ' ' + this.choices.length + ' ' + this.highestChoiceId);
@@ -2023,15 +2041,8 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_0___default.a);
         var _this2$choices;
 
         var data = _ref3.data;
-        console.log("the choices has been created");
 
         (_this2$choices = _this2.choices).push.apply(_this2$choices, _toConsumableArray(data.data));
-
-        while (_this2.choices.length < 4) {
-          _this2.choices.push({
-            id: _this2.highestChoiceId + 1
-          });
-        }
       });
     }
   }
@@ -40281,7 +40292,7 @@ var render = function() {
         _c("input", {
           staticClass: "custom-control-input",
           attrs: { type: "checkbox", id: "" + _vm.index + "" },
-          domProps: { checked: _vm.choiceIs_right_choice },
+          domProps: { checked: _vm.check },
           on: {
             change: function($event) {
               return _vm.checkChoices(_vm.index)

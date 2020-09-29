@@ -5,7 +5,7 @@
          <input type="text" @keyup="messageFromChild()" class="form-control" :class="{'is-invalid': validation.hasError('choiceBody')}" v-model="choiceBody" name="choice"  placeholder="choice">
       </div>
       <div class="custom-control custom-checkbox col-12 col-sm-2">
-         <input type="checkbox" :checked="choiceIs_right_choice"  @change="checkChoices(index)" class="custom-control-input" :id="'' + index +''">
+         <input type="checkbox" :checked="check"  @change="checkChoices(index)" class="custom-control-input" :id="'' + index +''">
          <label class="custom-control-label" :for="'' + index + ''">Right</label>
       </div>
       <div class="text-right col-12 col-sm-2">
@@ -33,11 +33,27 @@
          return { 
                 choiceId : this.choice.id,
                 choiceBody : this.choice.body,
-                choiceIs_right_choice : false,
-                // choiceIs_right_choice : this.choice.is_right_choice,
+                choiceIs_right_choice : this.choice.is_right_choice,
            };
        }, 
-       created(){},
+       computed:{
+         check(){
+
+           if (this.choice.is_right_choice == 1 || this.choice.is_right_choice == true) {
+             return true;
+           }
+            return  false;
+          
+           
+          }
+
+          
+       },
+   
+       created(){
+         
+         console.log(this.choiceIs_right_choice);
+       },
        validators: {
          choiceBody: function(value) {
            return Validator.value(value).required();
@@ -46,16 +62,22 @@
            return Validator.value(value).required().boolean();
          }
        },
+
+
        methods: {
 
          checkChoices(index){
 
-           this.$emit('checkChoice',this.index);
+           this.$emit('checkChoice',this.index); 
+
+            
          },
 
         deleteChoices(){
           console.log('origin' + this.index);
           this.$emit('deleteChoice',this.index);
+
+
         },
 
          messageFromChild() {          
@@ -71,6 +93,8 @@
          },
          reset: function() {
            this.validation.reset();
+
+
          }
        },
 
