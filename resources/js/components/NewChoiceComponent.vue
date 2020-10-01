@@ -4,9 +4,9 @@
       <div class="col-12 col-sm-5">
          <input type="text" @keyup="messageFromChild()" class="form-control" :class="{'is-invalid': validation.hasError('choiceBody')}" v-model="choiceBody" name="choice"  placeholder="choice">
       </div>
-      <div class="custom-control custom-checkbox col-12 col-sm-2">
-         <input type="checkbox" :checked="check"  @change="checkChoices(index)" class="custom-control-input" :id="'' + index +''">
-         <label class="custom-control-label" :for="'' + index + ''">Right</label>
+      <div class="form-check">
+         <input type="radio" :checked="check"  @change="checkChoices(index)" class="form-check-input" :id="'' + index +''">
+         <label class="" :for="'' + index + ''">Right</label>
       </div>
       <div class="text-right col-12 col-sm-2">
          <button @click="deleteChoices" type="button" class="btn btn-outline-danger"> <i class="m-r-5 fas fa-trash-alt"></i> Delete </button>
@@ -105,3 +105,13 @@
    
    
 </script>
+
+
+<style>
+
+
+.form-check{
+  top:5px;
+}
+
+</style>

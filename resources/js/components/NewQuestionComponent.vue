@@ -74,7 +74,7 @@
         return {
           quizId : 1,
           questionBody : '',
-          choiceId : 10,
+          choiceId : 1,
           question : { body : '', id : null }, 
           //choices : [],
           choices : [
@@ -102,10 +102,12 @@
         }
       },  
 
-      created(){
+       created(){
+
+        
          console.log('created');
          
-         this.retrieveChoices();
+         
 
       },
       
@@ -116,12 +118,14 @@
 
       },
 
-       mounted() { 
-         if (this.highestChoiceId !== undefined) {
-            this.choiceId = this.highestChoiceId;
-         }
+       async  mounted() { 
 
-         this.choiceId++;
+
+         await  this.retrieveChoices();
+         
+         if (this.highestChoiceId !== undefined) {
+            this.choiceId = this.highestChoiceId+1;
+         };
 
          while (this.choices.length<4) {
             this.choices.push({
@@ -273,12 +277,12 @@
                 })
           },
 
-           retrieveChoices () {
+            async retrieveChoices () {
 
 
               
     
-                axios.get(`/api/v1/questions/${this.quizId}/choice/`)
+                await  axios.get(`/api/v1/questions/${this.quizId}/choice/`)
                 .catch(error => {
                    console.log('Error');
                 })
