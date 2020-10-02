@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\User;
+use App\Models\Module;
 use Illuminate\Database\Eloquent\Model;
 
 class Quiz extends Model
@@ -21,13 +23,13 @@ class Quiz extends Model
     //created By
     public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id','id');
     }
 
     //passed By
     public function participants()
     {
-        return $this->belongsToMany('App\Quiz', 'user_quiz')
+        return $this->belongsToMany('App\Models\Quiz', 'user_quiz')
                     ->withTimestamps()
                     ->withPivot('score');
     }

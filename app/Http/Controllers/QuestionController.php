@@ -13,8 +13,10 @@ class QuestionController extends Controller
 {
     public function index(Quiz $quiz)
     {
+        
         $questions = $quiz->questions()->get();
         return QuestionResource::collection($questions);
+
     }
 
     public function show(Quiz $quiz,Question $question)

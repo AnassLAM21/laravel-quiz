@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-;
+
 use App\Models\Quiz;
 use App\Models\Module;
 use Illuminate\Http\Request;
@@ -13,6 +13,9 @@ class QuizController extends Controller
 {
     public function index(Module $module)
     {
+
+        return Quiz::with('author')->get();
+
         $quizzes = $module->quizzes()->get();
         return QuizResource::collection($quizzes);
     }
