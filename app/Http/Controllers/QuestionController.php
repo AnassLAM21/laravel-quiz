@@ -11,23 +11,28 @@ use Illuminate\Support\Facades\Validator;
 
 class QuestionController extends Controller
 {
-    public function index(Quiz $quiz)
+    public function index()
     {
+        return Question::with('choices')->get();
         
-        $questions = $quiz->questions()->get();
-        return QuestionResource::collection($questions);
+        //$questions = $quiz->questions()->get();
+        //return QuestionResource::collection($questions);
 
     }
 
-    public function show(Quiz $quiz,Question $question)
+    public function show(Question $question)
     {
-        return response()->json([
-            'id' => $this->id,
-            'title' => $this->title,
-            'body' => $this->body,
-            'user_id' => $this->user_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at], 200);
+        // return response()->json([
+        //     'id' => $this->id,
+        //     'title' => $this->title,
+        //     'body' => $this->body,
+        //     'user_id' => $this->user_id,
+        //     'created_at' => $this->created_at,
+        //     'updated_at' => $this->updated_at], 200);
+
+        return response()->json(['question'=>$question,'choices'=>$question->choices], 200);
+
+
     }
 
     public function store(Request $request,Quiz $quiz)

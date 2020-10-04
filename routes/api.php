@@ -49,9 +49,10 @@ Route::delete('modules/{module}', 'ModuleController@destroy');
  Route::resource('modules.quizzes', 'QuizController');
 
 // Question API
-Route::resource('quizzes.question', 'QuestionController');
+Route::resource('questions', 'QuestionController');
+Route::resource('quizzes.questions', 'QuestionController')->except(['index', 'create', 'show']);
 
 // Choice API
-Route::resource('questions.choice', 'ChoiceController');
+Route::resource('questions.choices', 'ChoiceController');
 
 Route::post('files', 'FileController@upload');

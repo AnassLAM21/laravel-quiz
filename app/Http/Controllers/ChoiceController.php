@@ -13,6 +13,7 @@ class ChoiceController extends Controller
 {
     public function index(Question $question)
     {
+
         $choices = $question->choices()->get();
         return ChoiceResource::collection($choices); 
     }

@@ -123,6 +123,8 @@
 
          await  this.retrieveChoices();
          
+
+         this.questionBody = this.question.body;
          if (this.highestChoiceId !== undefined) {
             this.choiceId = this.highestChoiceId+1;
          };
@@ -148,6 +150,7 @@
          }
      },
       computed:{
+
 
          highestChoiceId(){
             if (this.choices.length == 0) return;
@@ -280,16 +283,17 @@
             async retrieveChoices () {
 
 
-              
-    
-                await  axios.get(`/api/v1/questions/${this.quizId}/choice/`)
+                await  axios.get(`/api/v1/questions/${this.quizId}`)
+
                 .catch(error => {
                    console.log('Error');
                 })
                 .then(({data}) => {
-                   
-                   this.choices.push(...data.data);
-                  
+
+                  console.log(data.question);
+                  this.question =  data.question;
+
+                  this.choices.push(...data.question.choices);
 
                 })
           }
