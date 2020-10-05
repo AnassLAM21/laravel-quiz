@@ -17,6 +17,10 @@ class CreateQuestionsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('body');
+
+            $table->unsignedInteger('choices_count')->nullable();
+            $table->unsignedInteger('right_choice_id')->nullable();
+
             $table->unsignedInteger('quiz_id')->nullable();
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             

@@ -13,7 +13,6 @@ class ChoiceController extends Controller
 {
     public function index(Question $question)
     {
-
         $choices = $question->choices()->get();
         return ChoiceResource::collection($choices); 
     }
@@ -22,7 +21,7 @@ class ChoiceController extends Controller
     {
         return response()->json($choice, 200);
     }
-
+    
     public function store(Request $request,Question $question)
     { 
         // dd($request->all());

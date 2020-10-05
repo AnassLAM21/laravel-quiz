@@ -21,6 +21,7 @@ class QuestionResource extends JsonResource
             'quiz_id' => $this->quiz_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'choices' => ChoiceResource::collection($this->choices),
         ];
     }
 }

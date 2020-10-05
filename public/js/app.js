@@ -1711,8 +1711,8 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var simple_vue_validator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! simple-vue-validator */ "./node_modules/simple-vue-validator/src/index.js");
-/* harmony import */ var simple_vue_validator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(simple_vue_validator__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var simple_vue_validator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! simple-vue-validator */ "./node_modules/simple-vue-validator/src/index.js");
+/* harmony import */ var simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -1733,8 +1733,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
-var Validator = simple_vue_validator__WEBPACK_IMPORTED_MODULE_2___default.a.Validator;
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_2___default.a);
+var Validator = simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a.Validator;
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'answer-new',
@@ -6763,7 +6763,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.form-check{\r\n  top:5px;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.form-check{\n  top:5px;\n}\n\n", ""]);
 
 // exports
 
@@ -54464,8 +54464,8 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var simple_vue_validator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! simple-vue-validator */ "./node_modules/simple-vue-validator/src/index.js");
-/* harmony import */ var simple_vue_validator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(simple_vue_validator__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var simple_vue_validator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! simple-vue-validator */ "./node_modules/simple-vue-validator/src/index.js");
+/* harmony import */ var simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -54476,8 +54476,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_2___default.a);
-var Validator = simple_vue_validator__WEBPACK_IMPORTED_MODULE_2___default.a.Validator;
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
+var Validator = simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a.Validator;
 var bus = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$bus = bus;
 var eventHub = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
@@ -54878,8 +54878,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\laravel-quiz\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-quiz\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),

@@ -13,11 +13,8 @@ class QuestionController extends Controller
 {
     public function index()
     {
-        return Question::with('choices')->get();
-        
-        //$questions = $quiz->questions()->get();
-        //return QuestionResource::collection($questions);
-
+        $questions =  Question::with('choices')->get();
+        return QuestionResource::collection($questions);
     }
 
     public function show(Question $question)
@@ -30,9 +27,7 @@ class QuestionController extends Controller
         //     'created_at' => $this->created_at,
         //     'updated_at' => $this->updated_at], 200);
 
-        return response()->json(['question'=>$question,'choices'=>$question->choices], 200);
-
-
+        return response()->json(['question'=> new QuestionResource($question)], 200);
     }
 
     public function store(Request $request,Quiz $quiz)
