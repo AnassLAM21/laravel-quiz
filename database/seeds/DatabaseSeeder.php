@@ -58,6 +58,12 @@ class DatabaseSeeder extends Seeder
         }
 
 
+        foreach(Question::all() as $question){
+            $choice = $question->choices->random();
+            $question->right_choice_id = $choice->id;
+            $question->save();
+        }
+
         // factory(App\Module::class, 5)->create();
         // factory(App\Quiz::class, 5)->create();
                 
