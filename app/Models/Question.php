@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-
-    protected $fillable = ['title','body','choices_count','right_choice_id'];
+    protected $fillable = ['body','choices_count','right_choice_id'];
 
     public function quiz()
     {
@@ -28,4 +27,12 @@ class Question extends Model
     {
         return $this->morphMany(File::class, 'fillable');
     }
+
+    public function acceptRightChoice(Choice $choice)
+    {
+        $this->right_choice_id = $choice->id;
+        $this->save();
+    }
+
+
 }

@@ -77,37 +77,15 @@
           choiceId : 1,
           question : { body : '', id : null }, 
           //choices : [],
-          choices : [
-         //     {
-         //     id : 1,
-         //     body:'',
-         //     is_right_choice : ''
-         //  },
-         //  {
-         //     id : 2,
-         //     body:'',
-         //     is_right_choice : ''
-         //  },
-         //  {
-         //     id : 3,
-         //     body:'',
-         //     is_right_choice : ''
-         //  },
-         //  {
-         //     id : 4,
-         //     body:'',
-         //     is_right_choice : ''
-         //  }
-          ],
+          choices : [],
+          choice2 : []
         }
       },  
 
        created(){
 
         
-         console.log('created');
-         
-         
+
 
       },
       
@@ -136,18 +114,28 @@
             });
          }
 
+
+         this.choices.forEach(choice => {
+            if (this.question.right_choice_id == choice.id) {
+               choice.right_choice_id == true;
+            }
+         });
+
+
+       
+
          
       },
 
 
 
       validators: {
-          questionBody : function (value) {
-             return Validator.value(value).required();
-         },
-         choices: function (value) {
-            return Validator.value(value).required();
-         }
+         //  questionBody : function (value) {
+         //     return Validator.value(value).required();
+         // },
+         // choices: function (value) {
+         //    return Validator.value(value).required();
+         // }
      },
       computed:{
 
@@ -177,14 +165,31 @@
             //this.choiceId++;
          },
          resetFrom(){
-            this.questionBody = '', 
-            this.choices = [{
-                id : 0,
-                body : '',
-                is_right_choice :  false,
 
-            }],
-            this.validation.reset();
+           for (let index = 0; index < this.choices.length; index++) {
+            const choice = this.choices[index];
+
+             console.log(choice);
+
+             
+             
+            if (this.question.right_choice_id == choice.id) {
+               choice.is_right_choice == true;
+            }
+
+            this.choice2.push({
+
+                body : choice.body,
+                is_right_choice : choice.is_right_choice,
+             });
+         }
+
+            //this.choices.splice(0, this.choices.length);
+            this.choices.push(this.choices2);
+
+            console.log("2");
+            console.log(this.choices);
+
          },
          x(deletedIndex){
 
@@ -242,8 +247,7 @@
         },
         createQuestion () {
            
-           axios.post(`/api/v1/quizzes/${this.quizId}/question`, {
-                   title : 'title',
+           axios.post(`/api/v1/quizzes/${this.quizId}/questions`, { 
                    body: this.questionBody,
                 })
                 .catch(error => {
@@ -266,16 +270,15 @@
           
           createChoice (choice) {
     
-                axios.post(`/api/v1/question/${this.question.id}/choice`, {
+                axios.post(`/api/v1/questions/${this.question.id}/choices`, {
                    body: choice.body,
-                   is_right_choice : choice.is_right_choice,
+                   is_right_choice : true,
                 })
                 .catch(error => {
                    console.log('Error');
                 })
                 .then(({data}) => {
                    console.log("the choices has been created");
-   
                    console.log(choice.body + ' '+ choice.is_right_choice);
                 })
           },

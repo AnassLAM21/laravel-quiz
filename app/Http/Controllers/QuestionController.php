@@ -30,14 +30,11 @@ class QuestionController extends Controller
         return response()->json(['question'=> new QuestionResource($question)], 200);
     }
 
+
     public function store(Request $request,Quiz $quiz)
     {
-
         $validator = Validator::make($request->all(), [
-
-            'title' => 'required|string',
             'body' => 'required|string',
-            
         ]);
          
         if ($validator->fails()) {

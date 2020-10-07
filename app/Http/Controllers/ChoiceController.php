@@ -24,7 +24,6 @@ class ChoiceController extends Controller
     
     public function store(Request $request,Question $question)
     { 
-        // dd($request->all());
         $validator = Validator::make($request->all(), [
 
             'body' => 'required|string',
@@ -36,6 +35,9 @@ class ChoiceController extends Controller
             return response()->json($validator->errors()->get('*'),500);
         }else{
             $choice = $question->choices()->create($request->all());
+            if ($request->is_right_choice == true) {
+                $choice->question->acceptRightChoice($choice);
+            }
             return response()->json(['message' => 'Your choice has been submitted successfully',
             'choice' => new ChoiceResource($choice, 201)]);
         }

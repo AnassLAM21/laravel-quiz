@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Choice extends Model
 {
-    protected $fillable = ['body','is_right_choice'];
+    protected $fillable = ['body'];
 
     public function question()
     {
@@ -27,6 +27,10 @@ class Choice extends Model
             $choice->question->decrement('choices_count');  
         });
     }
+
+
+
+    
 
 
 

@@ -1906,32 +1906,11 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
         id: null
       },
       //choices : [],
-      choices: [//     {
-        //     id : 1,
-        //     body:'',
-        //     is_right_choice : ''
-        //  },
-        //  {
-        //     id : 2,
-        //     body:'',
-        //     is_right_choice : ''
-        //  },
-        //  {
-        //     id : 3,
-        //     body:'',
-        //     is_right_choice : ''
-        //  },
-        //  {
-        //     id : 4,
-        //     body:'',
-        //     is_right_choice : ''
-        //  }
-      ]
+      choices: [],
+      choice2: []
     };
   },
-  created: function created() {
-    console.log('created');
-  },
+  created: function created() {},
   beforeMount: function beforeMount() {},
   mounted: function mounted() {
     var _this = this;
@@ -1960,7 +1939,13 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
                 });
               }
 
-            case 6:
+              _this.choices.forEach(function (choice) {
+                if (_this.question.right_choice_id == choice.id) {
+                  choice.right_choice_id == true;
+                }
+              });
+
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -1968,13 +1953,12 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
       }, _callee);
     }))();
   },
-  validators: {
-    questionBody: function questionBody(value) {
-      return Validator.value(value).required();
-    },
-    choices: function choices(value) {
-      return Validator.value(value).required();
-    }
+  validators: {//  questionBody : function (value) {
+    //     return Validator.value(value).required();
+    // },
+    // choices: function (value) {
+    //    return Validator.value(value).required();
+    // }
   },
   computed: {
     highestChoiceId: function highestChoiceId() {
@@ -1995,11 +1979,24 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
       }; //this.choiceId++;
     },
     resetFrom: function resetFrom() {
-      this.questionBody = '', this.choices = [{
-        id: 0,
-        body: '',
-        is_right_choice: false
-      }], this.validation.reset();
+      for (var index = 0; index < this.choices.length; index++) {
+        var choice = this.choices[index];
+        console.log(choice);
+
+        if (this.question.right_choice_id == choice.id) {
+          choice.is_right_choice == true;
+        }
+
+        this.choice2.push({
+          body: choice.body,
+          is_right_choice: choice.is_right_choice
+        });
+      } //this.choices.splice(0, this.choices.length);
+
+
+      this.choices.push(this.choices2);
+      console.log("2");
+      console.log(this.choices);
     },
     x: function x(deletedIndex) {
       this.choices.splice(deletedIndex, 1);
@@ -2041,8 +2038,7 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
     createQuestion: function createQuestion() {
       var _this2 = this;
 
-      axios.post("/api/v1/quizzes/".concat(this.quizId, "/question"), {
-        title: 'title',
+      axios.post("/api/v1/quizzes/".concat(this.quizId, "/questions"), {
         body: this.questionBody
       })["catch"](function (error) {
         console.log('Error');
@@ -2061,9 +2057,9 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
       });
     },
     createChoice: function createChoice(choice) {
-      axios.post("/api/v1/question/".concat(this.question.id, "/choice"), {
+      axios.post("/api/v1/questions/".concat(this.question.id, "/choices"), {
         body: choice.body,
-        is_right_choice: choice.is_right_choice
+        is_right_choice: true
       })["catch"](function (error) {
         console.log('Error');
       }).then(function (_ref2) {

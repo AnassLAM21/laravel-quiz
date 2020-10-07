@@ -14,10 +14,13 @@ class QuestionResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
             'id' => $this->id,
             'title' => $this->title,
             'body' => $this->body,
+            'choices_count' => $this->choices_count,
+            'right_choice_id' => $this->right_choice_id,
             'quiz_id' => $this->quiz_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
