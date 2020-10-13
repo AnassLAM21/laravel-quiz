@@ -1755,8 +1755,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMP
       return false;
     }
   },
-  created: function created() {
-    console.log(this.choiceIs_right_choice);
+  mounted: function mounted() {
+    console.log(this.choice.is_right_choice);
   },
   validators: {
     choiceBody: function choiceBody(value) {
@@ -1810,29 +1810,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1__);
 
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -1906,8 +1887,7 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
         id: null
       },
       //choices : [],
-      choices: [],
-      choice2: []
+      choices: []
     };
   },
   created: function created() {},
@@ -1916,6 +1896,7 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var index;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -1939,13 +1920,15 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
                 });
               }
 
-              _this.choices.forEach(function (choice) {
-                if (_this.question.right_choice_id == choice.id) {
-                  choice.right_choice_id == true;
-                }
-              });
+              ;
 
-            case 7:
+              for (index = 0; index < _this.choices.length; index++) {
+                if (_this.choices[index].id == _this.question.right_choice_id) {
+                  _this.choices[index].is_right_choice = true;
+                } else _this.choices[index].is_right_choice = false;
+              }
+
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -2005,7 +1988,7 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
     //    console.log(index);
     // },
     y: function y(checkedIndex) {
-      console.log(checkedIndex);
+      console.log(this.choices[checkedIndex]);
       this.choices.forEach(function (choice, index) {
         if (index == checkedIndex) {
           if (choice.body == "") {
@@ -2080,13 +2063,10 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
                 return axios.get("/api/v1/questions/".concat(_this3.quizId))["catch"](function (error) {
                   console.log('Error');
                 }).then(function (_ref3) {
-                  var _this3$choices;
-
                   var data = _ref3.data;
                   console.log(data.question);
                   _this3.question = data.question;
-
-                  (_this3$choices = _this3.choices).push.apply(_this3$choices, _toConsumableArray(data.question.choices));
+                  _this3.choices = data.question.choices;
                 });
 
               case 2:

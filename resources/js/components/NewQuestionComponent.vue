@@ -3,13 +3,13 @@
       <form class="form-horizontal"  @submit.prevent="submit">
          <div class="card-body">
             <h4 class="card-title">New question</h4>
+
             <div class="form-group row">
                <label for="fname" class="col-sm-3 text-right control-label col-form-label">Body</label>
                <div class="col-sm-9">
                   <input type="text" :class="{'is-invalid': validation.hasError('questionBody')}" v-model="questionBody" class="form-control" id="body" name="body" placeholder="body">
                   <div class="invalid-feedback" :class="{'d-block': validation.hasError('questionBody')}">Example invalid custom file feedback</div>
                </div>
-               
                <div class="valid-feedback"> Please provide a valid state. </div>
             </div>
             <div class="form-group row">
@@ -22,35 +22,28 @@
                   </div>
                </div>
             </div>
-    
             <!-- <template v-for="(choice,index) in choices">
                <new-choice-component @deleteChoice="x" @messageFromChild="childDataReceived" :key="choice.id" :index = "index" :choice="choice"/>
                <hr>
-            </template> -->
-
-
+               </template> -->
             <!-- <new-choice-component v-for="(choice,index) in choices" :key="choice.id" :index = "index" :choice="choice" @deleteChoice="x" 
-            @messageFromChild="childDataReceived" @deleteChoice="x"></new-choice-component> -->
-            
-
-
+               @messageFromChild="childDataReceived" @deleteChoice="x"></new-choice-component> -->
             <new-choice-component @deleteChoice='x' @checkChoice='y' @messageFromChild='childDataReceived' 
             v-for='(choice,index) in choices' :key='choice.id' :index = 'index' 
             :choice="choice">
             </new-choice-component>
-
-
             <!-- <todo-item v-for="todo in todosFiltered" :key="todo.id" :todo="todo" 
-            :checkAll="!anyRemaining" @removedTodo="removeTodo" 
-            @finishedEdit="finishedEdit"></todo-item> -->
-              
-
+               :checkAll="!anyRemaining" @removedTodo="removeTodo" 
+               @finishedEdit="finishedEdit"></todo-item> -->
             <div class="form-group row">
                <div class="col-sm-3"> </div>
                <div class="col-sm-9" >
                   <button type="button" @click="newChoice" class="w-100 p-1 btn btn-outline-primary"> <i class="m-r-5 fas fa-plus-circle"></i> Add a choice</button> 
                </div>
             </div>
+
+
+
          </div>
          <div class="border-top">
             <div class="card-body">
@@ -78,57 +71,55 @@
           question : { body : '', id : null }, 
           //choices : [],
           choices : [],
-          choice2 : []
         }
       },  
-
+   
        created(){
-
+   
         
-
-
+   
+   
       },
       
       beforeMount() { 
-
+   
          
-
-
+   
+   
       },
-
+   
        async  mounted() { 
-
-
+   
+   
          await  this.retrieveChoices();
          
-
+   
          this.questionBody = this.question.body;
          if (this.highestChoiceId !== undefined) {
             this.choiceId = this.highestChoiceId+1;
          };
-
+   
+         
+   
+   
          while (this.choices.length<4) {
             this.choices.push({
                id:this.choiceId++,
                is_right_choice : false,
             });
+         };
+   
+         for (let index = 0; index < this.choices.length; index++) {
+            
+            if (this.choices[index].id == this.question.right_choice_id) {
+               this.choices[index].is_right_choice = true;
+            }else this.choices[index].is_right_choice = false;
          }
-
-
-         this.choices.forEach(choice => {
-            if (this.question.right_choice_id == choice.id) {
-               choice.right_choice_id == true;
-            }
-         });
-
-
-       
-
          
       },
-
-
-
+   
+   
+   
       validators: {
          //  questionBody : function (value) {
          //     return Validator.value(value).required();
@@ -138,73 +129,75 @@
          // }
      },
       computed:{
-
-
+   
+   
          highestChoiceId(){
             if (this.choices.length == 0) return;
             return this.choiceId = this.choices.reduce((a,b) => Number(a.choice) > Number(b.choice) ? a : b).id;
     
          }
-
-
+   
+   
       },
       methods: {
 
+   
+   
          childDataReceived(index,id,choiceBody,choiceIs_right_choice){
-
-
+   
+   
             
-
+   
             console.log(this.choiceId);
-
+   
             
             console.log(index+' '+choiceBody+' '+choiceIs_right_choice);
             this.choices[index] = { id : id, body :  choiceBody , is_right_choice : choiceIs_right_choice };
             
-
+   
             //this.choiceId++;
          },
          resetFrom(){
-
+   
            for (let index = 0; index < this.choices.length; index++) {
             const choice = this.choices[index];
-
+   
              console.log(choice);
-
+   
              
              
             if (this.question.right_choice_id == choice.id) {
                choice.is_right_choice == true;
             }
-
+   
             this.choice2.push({
-
+   
                 body : choice.body,
                 is_right_choice : choice.is_right_choice,
              });
          }
-
+   
             //this.choices.splice(0, this.choices.length);
             this.choices.push(this.choices2);
-
+   
             console.log("2");
             console.log(this.choices);
-
+   
          },
          x(deletedIndex){
-
+   
               this.choices.splice(deletedIndex, 1);
-
+   
          },
          
          
          // y(index){
          //    console.log(index);
          // },
-
+   
     
          y(checkedIndex){
-            console.log(checkedIndex);
+            console.log(this.choices[checkedIndex]);
     
             this.choices.forEach((choice,index) => {
     
@@ -217,7 +210,7 @@
                 }
                else choice.is_right_choice = false; 
             });
-
+   
             console.log(this.choices);
          },
         newChoice(){
@@ -229,15 +222,15 @@
              body : '',
              is_right_choice :  false,
           })
-
+   
           
-
+   
         },
-
+   
         submit(){
-
+   
            console.log(this.choices);
-
+   
            return this.$validate()
             .then(function(success) {
                if (success) {
@@ -282,27 +275,26 @@
                    console.log(choice.body + ' '+ choice.is_right_choice);
                 })
           },
-
+   
             async retrieveChoices () {
-
-
+   
+   
                 await  axios.get(`/api/v1/questions/${this.quizId}`)
-
+   
                 .catch(error => {
                    console.log('Error');
                 })
                 .then(({data}) => {
-
+   
                   console.log(data.question);
                   this.question =  data.question;
-
-                  this.choices.push(...data.question.choices);
-
+                  this.choices = data.question.choices;
+    
                 })
           }
-
-
+   
+   
         
       }
-}    
+   }    
 </script>

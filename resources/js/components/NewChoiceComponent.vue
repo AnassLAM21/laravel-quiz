@@ -50,9 +50,10 @@
           
        },
    
-       created(){
+       mounted(){
+
+         console.log(this.choice.is_right_choice);
          
-         console.log(this.choiceIs_right_choice);
        },
        validators: {
          choiceBody: function(value) {
