@@ -41829,6 +41829,222 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/NewQuizComponent.vue?vue&type=template&id=03d19a5a&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/NewQuizComponent.vue?vue&type=template&id=03d19a5a& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card" }, [
+    _c(
+      "form",
+      {
+        staticClass: "form-horizontal",
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.submit($event)
+          }
+        }
+      },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "border-top" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                attrs: { type: "submit" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                  }
+                }
+              },
+              [_c("i", { staticClass: "m-r-5 fas fa-save" }), _vm._v("Save")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "btn btn-primary", attrs: { type: "button" } },
+              [_vm._v("X")]
+            ),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2)
+          ])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-body" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("New Quiz")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("label", { staticClass: "col-md-2 ", attrs: { for: "fname" } }, [
+          _vm._v("Title")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-10" }, [
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "title",
+              name: "title",
+              placeholder: "title"
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v("Example invalid custom file feedback")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "valid-feedback" }, [
+          _vm._v(" Please provide a valid state. ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c(
+          "label",
+          { staticClass: "col-md-2 this.choices", attrs: { for: "fname" } },
+          [_vm._v("Body")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-10" }, [
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "body",
+              name: "body",
+              placeholder: "body"
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v("Example invalid custom file feedback")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "valid-feedback" }, [
+          _vm._v(" Please provide a valid state. ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("label", { staticClass: "col-md-2 ", attrs: { for: "fname" } }, [
+          _vm._v("File Upload")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-10" }, [
+          _c("div", { staticClass: "custom-file" }, [
+            _c("input", {
+              staticClass: "custom-file-input",
+              attrs: { type: "file", id: "file", name: "file" }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "custom-file-label", attrs: { for: "file" } },
+              [_vm._v("Choose file...")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v("Example invalid custom file feedback")
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("label", { staticClass: "col-md-2 " }, [_vm._v("Options")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-10" }, [
+          _c("div", { staticClass: "custom-control custom-checkbox mr-sm-2" }, [
+            _c("input", {
+              staticClass: "custom-control-input",
+              attrs: { type: "checkbox", id: "customControlAutosizing1" }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "custom-control-label",
+                attrs: { for: "customControlAutosizing1" }
+              },
+              [_vm._v("Publish")]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-sm-3" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-9" }, [
+          _c(
+            "button",
+            {
+              staticClass: "w-100 p-1 btn btn-outline-primary",
+              attrs: { type: "button" }
+            },
+            [
+              _c("i", { staticClass: "m-r-5 fas fa-plus-circle" }),
+              _vm._v(" Add a choice")
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-info", attrs: { type: "button" } },
+      [_c("i", { staticClass: "m-r-5 fas fa-edit" }), _vm._v("Edit")]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-danger", attrs: { type: "button" } },
+      [_c("i", { staticClass: "m-r-5 fas fa-window-close" }), _vm._v(" Cancel")]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -54030,6 +54246,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.eventHub = eventHub;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('new-quiz-component', __webpack_require__(/*! ./components/NewQuizComponent.vue */ "./resources/js/components/NewQuizComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('new-question-component', __webpack_require__(/*! ./components/NewQuestionComponent.vue */ "./resources/js/components/NewQuestionComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('new-choice-component', __webpack_require__(/*! ./components/NewChoiceComponent.vue */ "./resources/js/components/NewChoiceComponent.vue")["default"]);
 /**
@@ -54253,6 +54470,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewQuestionComponent_vue_vue_type_template_id_f67ea93c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewQuestionComponent_vue_vue_type_template_id_f67ea93c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/NewQuizComponent.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/NewQuizComponent.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _NewQuizComponent_vue_vue_type_template_id_03d19a5a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NewQuizComponent.vue?vue&type=template&id=03d19a5a& */ "./resources/js/components/NewQuizComponent.vue?vue&type=template&id=03d19a5a&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _NewQuizComponent_vue_vue_type_template_id_03d19a5a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _NewQuizComponent_vue_vue_type_template_id_03d19a5a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/NewQuizComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/NewQuizComponent.vue?vue&type=template&id=03d19a5a&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/NewQuizComponent.vue?vue&type=template&id=03d19a5a& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewQuizComponent_vue_vue_type_template_id_03d19a5a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./NewQuizComponent.vue?vue&type=template&id=03d19a5a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/NewQuizComponent.vue?vue&type=template&id=03d19a5a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewQuizComponent_vue_vue_type_template_id_03d19a5a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewQuizComponent_vue_vue_type_template_id_03d19a5a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

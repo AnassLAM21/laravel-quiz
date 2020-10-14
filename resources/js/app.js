@@ -33,6 +33,7 @@ Vue.eventHub = eventHub;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.component('new-quiz-component', require('./components/NewQuizComponent.vue').default);
 Vue.component('new-question-component', require('./components/NewQuestionComponent.vue').default);
 Vue.component('new-choice-component', require('./components/NewChoiceComponent.vue').default);
 
