@@ -1877,11 +1877,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
 
 var Validator = simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a.Validator;
 Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
@@ -1900,13 +1895,13 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
       choices: []
     };
   },
-  mounted: function mounted() {},
+  create$: function create$() {},
   beforeMount: function beforeMount() {},
-  created: function created() {
+  mounted: function mounted() {
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var index;
+      var index, arr;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -1939,9 +1934,11 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
                 } else _this.choices[index].is_right_choice = false;
               }
 
-              console.log(_this.choices);
+              arr = _this.choices;
+              _this.choices = [];
+              _this.choices = arr;
 
-            case 9:
+            case 11:
             case "end":
               return _context.stop();
           }
@@ -1994,14 +1991,9 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
       console.log("Checked" + checkedIndex);
       this.choices.forEach(function (choice, index) {
         if (index == checkedIndex) {
-          if (choice.body == "") {
-            alert('hbes');
-          }
-
           choice.is_right_choice = !choice.is_right_choice;
         } else choice.is_right_choice = false;
       });
-      console.log(this.choices);
     },
     newChoice: function newChoice() {
       this.choiceId++;
@@ -41623,9 +41615,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _vm._m(0),
-            _vm._v(
-              "\n\n\n         " + _vm._s(_vm.choices) + "\n         \n         "
-            ),
+            _vm._v(" "),
             _vm._l(_vm.choices, function(choice, index) {
               return _c(
                 "div",
@@ -41640,9 +41630,6 @@ var render = function() {
                   false
                 ),
                 [
-                  _vm._v(
-                    "\n\n            " + _vm._s(choice) + "\n            "
-                  ),
                   _c(
                     "label",
                     {
@@ -41688,7 +41675,9 @@ var render = function() {
                     _c("input", {
                       staticClass: "form-check-input",
                       attrs: { type: "radio", id: "" + index + "" },
-                      domProps: { checked: choice.is_right_choice },
+                      domProps: {
+                        checked: choice.id == _vm.choices[index].is_right_choice
+                      },
                       on: {
                         change: function($event) {
                           return _vm.checkChoices(index)

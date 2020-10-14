@@ -24,24 +24,19 @@
             </div>
 
 
-            {{ choices  }}
-            
+
             <div  class="form-group row" v-for="(choice,index) in choices" v-bind="choice" :key="choice.id" :index = "index">
 
-               {{    choice }}
                <label for="lname" class="col-3 col-sm-3 text-right control-label col-form-label">Choice {{ index + 1 }} </label>
                <div class="col-12 col-sm-5">
                   <input type="text" @keyup="changeChoice()" class="form-control" v-model="choice.body"  name="choice"  placeholder="choice">
                </div>
                <div class="form-check">
-                  <input type="radio" :checked="choice.is_right_choice"  @change="checkChoices(index)" class="form-check-input"  :id="'' + index +''">
+                  <input type="radio" :checked="choice.id  == choices[index].is_right_choice"  @change="checkChoices(index)" class="form-check-input"  :id="'' + index +''">
                   <label class="" :for="'' + index + ''">Right</label>
                </div>
                <div class="text-right col-12 col-sm-2">
                   <button @click="deleteChoices(index)" type="button" class="btn btn-outline-danger"> <i class="m-r-5 fas fa-trash-alt"></i> Delete </button>
-            
-               
-            
                </div>
             </div>
 
@@ -84,10 +79,9 @@
         }
       },  
    
-       mounted(){
+       create$(){
    
-        
-   
+      
    
       },
       
@@ -98,7 +92,7 @@
    
       },
    
-       async  created() { 
+       async  mounted() { 
    
    
          await  this.retrieveChoices();
@@ -128,7 +122,10 @@
          
 
 
-         console.log(this.choices);
+         let arr = this.choices;
+         this.choices = [];
+         
+         this.choices = arr;
 
 
          
@@ -204,24 +201,19 @@
 
     
          checkChoices(checkedIndex){
-
-
             console.log("Checked" + checkedIndex);
     
             this.choices.forEach((choice,index) => {
             
-            
+
               
                if (index == checkedIndex){ 
-                   if (choice.body == "") {
-                      alert('hbes');
-                   }
+
                   choice.is_right_choice = !choice.is_right_choice;
                 }
                else choice.is_right_choice = false; 
             });
 
-            console.log(this.choices);
          },
         newChoice(){
           this.choiceId++;
