@@ -283,7 +283,6 @@
             <div class="container-fluid" id="app"> 
 
                 <new-question-component></new-question-component>
-                <todo-list></todo-list>
                 
             </div>
             <!-- ============================================================== -->

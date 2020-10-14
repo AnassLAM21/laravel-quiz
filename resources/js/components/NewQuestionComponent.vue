@@ -22,19 +22,29 @@
                   </div>
                </div>
             </div>
-            <!-- <template v-for="(choice,index) in choices">
-               <new-choice-component @deleteChoice="x" @messageFromChild="childDataReceived" :key="choice.id" :index = "index" :choice="choice"/>
-               <hr>
-               </template> -->
-            <!-- <new-choice-component v-for="(choice,index) in choices" :key="choice.id" :index = "index" :choice="choice" @deleteChoice="x" 
-               @messageFromChild="childDataReceived" @deleteChoice="x"></new-choice-component> -->
-            <new-choice-component @deleteChoice='x' @checkChoice='y' @messageFromChild='childDataReceived' 
-            v-for='(choice,index) in choices' :key='choice.id' :index = 'index' 
-            :choice="choice">
-            </new-choice-component>
-            <!-- <todo-item v-for="todo in todosFiltered" :key="todo.id" :todo="todo" 
-               :checkAll="!anyRemaining" @removedTodo="removeTodo" 
-               @finishedEdit="finishedEdit"></todo-item> -->
+
+
+            {{ choices  }}
+            
+            <div  class="form-group row" v-for="(choice,index) in choices" v-bind="choice" :key="choice.id" :index = "index">
+
+               {{    choice }}
+               <label for="lname" class="col-3 col-sm-3 text-right control-label col-form-label">Choice {{ index + 1 }} </label>
+               <div class="col-12 col-sm-5">
+                  <input type="text" @keyup="changeChoice()" class="form-control" v-model="choice.body"  name="choice"  placeholder="choice">
+               </div>
+               <div class="form-check">
+                  <input type="radio" :checked="choice.is_right_choice"  @change="checkChoices(index)" class="form-check-input"  :id="'' + index +''">
+                  <label class="" :for="'' + index + ''">Right</label>
+               </div>
+               <div class="text-right col-12 col-sm-2">
+                  <button @click="deleteChoices(index)" type="button" class="btn btn-outline-danger"> <i class="m-r-5 fas fa-trash-alt"></i> Delete </button>
+            
+               
+            
+               </div>
+            </div>
+
             <div class="form-group row">
                <div class="col-sm-3"> </div>
                <div class="col-sm-9" >
@@ -69,12 +79,12 @@
           questionBody : '',
           choiceId : 1,
           question : { body : '', id : null }, 
-          //choices : [],
+          choices1 : [],
           choices : [],
         }
       },  
    
-       created(){
+       mounted(){
    
         
    
@@ -88,12 +98,12 @@
    
       },
    
-       async  mounted() { 
+       async  created() { 
    
    
          await  this.retrieveChoices();
-         
-   
+
+
          this.questionBody = this.question.body;
          if (this.highestChoiceId !== undefined) {
             this.choiceId = this.highestChoiceId+1;
@@ -101,10 +111,10 @@
    
          
    
-   
          while (this.choices.length<4) {
             this.choices.push({
                id:this.choiceId++,
+               body:'',
                is_right_choice : false,
             });
          };
@@ -115,6 +125,12 @@
                this.choices[index].is_right_choice = true;
             }else this.choices[index].is_right_choice = false;
          }
+         
+
+
+         console.log(this.choices);
+
+
          
       },
    
@@ -128,7 +144,13 @@
          //    return Validator.value(value).required();
          // }
      },
+
       computed:{
+
+         check(){                   
+
+         },
+           
    
    
          highestChoiceId(){
@@ -143,15 +165,9 @@
 
    
    
-         childDataReceived(index,id,choiceBody,choiceIs_right_choice){
+         changeChoice(index,id,choiceBody,choiceIs_right_choice){
    
    
-            
-   
-            console.log(this.choiceId);
-   
-            
-            console.log(index+' '+choiceBody+' '+choiceIs_right_choice);
             this.choices[index] = { id : id, body :  choiceBody , is_right_choice : choiceIs_right_choice };
             
    
@@ -161,8 +177,6 @@
    
            for (let index = 0; index < this.choices.length; index++) {
             const choice = this.choices[index];
-   
-             console.log(choice);
    
              
              
@@ -177,30 +191,26 @@
              });
          }
    
-            //this.choices.splice(0, this.choices.length);
-            this.choices.push(this.choices2);
-   
-            console.log("2");
-            console.log(this.choices);
    
          },
-         x(deletedIndex){
+         deleteChoices(deletedIndex){
    
               this.choices.splice(deletedIndex, 1);
    
          },
          
-         
-         // y(index){
-         //    console.log(index);
-         // },
-   
+
+
+
     
-         y(checkedIndex){
-            console.log(this.choices[checkedIndex]);
+         checkChoices(checkedIndex){
+
+
+            console.log("Checked" + checkedIndex);
     
             this.choices.forEach((choice,index) => {
-    
+            
+            
               
                if (index == checkedIndex){ 
                    if (choice.body == "") {
@@ -210,13 +220,11 @@
                 }
                else choice.is_right_choice = false; 
             });
-   
+
             console.log(this.choices);
          },
         newChoice(){
-          console.log(this.choices.length + ' '+ this.choices.length + ' ' +this.highestChoiceId);
           this.choiceId++;
-          console.log(this.highestChoiceId);
           this.choices.push({
              id : this.choiceId,
              body : '',
@@ -228,8 +236,6 @@
         },
    
         submit(){
-   
-           console.log(this.choices);
    
            return this.$validate()
             .then(function(success) {
@@ -248,7 +254,6 @@
                 })
                 .then(({data}) => {
                    this.question.id = data.question.id;
-                   console.log("the question has been created");
     
                    for (let index = 0; index < this.choices.length; index++) {
                       const choice = this.choices[index];
@@ -272,7 +277,6 @@
                 })
                 .then(({data}) => {
                    console.log("the choices has been created");
-                   console.log(choice.body + ' '+ choice.is_right_choice);
                 })
           },
    
@@ -286,9 +290,10 @@
                 })
                 .then(({data}) => {
    
-                  console.log(data.question);
                   this.question =  data.question;
                   this.choices = data.question.choices;
+
+                  console.log(this.choices);
     
                 })
           }

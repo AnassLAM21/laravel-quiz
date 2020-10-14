@@ -42,9 +42,7 @@
            if (this.choice.is_right_choice == 1 || this.choice.is_right_choice == true) {
              return true;
            }
-            return  false;
-          
-           
+            return  false;         
           }
 
           
@@ -52,7 +50,7 @@
    
        mounted(){
 
-         console.log(this.choice.is_right_choice);
+         console.log(this.choice);
          
        },
        validators: {
@@ -75,10 +73,8 @@
          },
 
         deleteChoices(){
-          console.log('origin' + this.index);
-          this.$emit('deleteChoice',this.index);
-
-
+            this.$emit('deleteChoice',this.index);
+           console.log(this.choice.is_right_choice);
         },
 
          messageFromChild() {          
