@@ -66,7 +66,7 @@
             <div class="form-group row">
                <label class="col-md-2">Time</label>
                <div class="col-md-10">
-                  <input class="form-control" type="time" v-model="time" id="example-time-input">
+                  <input class="form-control" type="time" v-model="time" id="time">
                </div>
             </div>
          </div>
@@ -96,7 +96,7 @@
             views_count : 0, 
             votes_count : null,
             publish : true,
-            time : '12:00:00'
+            time : '00'
          }
       },
    

@@ -1895,7 +1895,7 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
       choices: []
     };
   },
-  create$: function create$() {},
+  create: function create() {},
   beforeMount: function beforeMount() {},
   mounted: function mounted() {
     var _this = this;
@@ -2178,7 +2178,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       views_count: 0,
       votes_count: null,
       publish: true,
-      time: '12:00:00'
+      time: '00'
     };
   },
   created: function created() {},
@@ -42296,7 +42296,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "time", id: "example-time-input" },
+                attrs: { type: "time", id: "time" },
                 domProps: { value: _vm.time },
                 on: {
                   input: function($event) {
@@ -54916,8 +54916,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\laravel-quiz\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-quiz\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),
