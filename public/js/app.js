@@ -2072,6 +2072,154 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/NewQuizComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/NewQuizComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'quiz-component',
+  data: function data() {
+    return {
+      moduleId: 1,
+      quizId: 1,
+      modules: [],
+      title: '123',
+      body: 'Body .... ',
+      publish: true,
+      time: '12:00:00'
+    };
+  },
+  created: function created() {
+    this.getModules();
+  },
+  methods: {
+    submit: function submit() {
+      var quiz = _defineProperty({
+        title: this.title,
+        body: this.body,
+        time: this.time,
+        publish: this.publish
+      }, "title", this.title);
+
+      axios.post("/api/v1/modules/".concat(this.moduleId, "/quizzes"), _defineProperty({
+        title: this.title,
+        body: this.body,
+        time: this.time,
+        publish: this.publish
+      }, "title", this.title))["catch"](function (error) {
+        console.log('Error');
+      }).then(function (_ref) {
+        var data = _ref.data;
+        console.log("the quiz has been created");
+      });
+    },
+    getModules: function getModules() {
+      var _this = this;
+
+      axios.get("api/v1/modules")["catch"](function (error) {
+        console.log('Error');
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        _this.modules = data.quizzes;
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -41857,7 +42005,199 @@ var render = function() {
         }
       },
       [
-        _vm._m(0),
+        _c("div", { staticClass: "card-body" }, [
+          _c("h4", { staticClass: "card-title" }, [_vm._v("New Quiz")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "col-md-2 ", attrs: { for: "fname" } }, [
+              _vm._v("Title")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-10" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.title,
+                    expression: "title"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", name: "title", placeholder: "title" },
+                domProps: { value: _vm.title },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.title = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v("Example invalid custom file feedback")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v(" Please provide a valid state. ")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c(
+              "label",
+              { staticClass: "col-md-2 this.choices", attrs: { for: "fname" } },
+              [_vm._v("Body")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-10" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.body,
+                    expression: "body"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", name: "body", placeholder: "body" },
+                domProps: { value: _vm.body },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.body = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v("Example invalid custom file feedback")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v(" Please provide a valid state. ")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "col-md-2" }, [_vm._v("Module")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-10" }, [
+              _c(
+                "select",
+                {
+                  staticClass: "select2 form-control ",
+                  staticStyle: { height: "36px", width: "100%" }
+                },
+                _vm._l(_vm.modules, function(module) {
+                  return _c(
+                    "option",
+                    { key: module.id, domProps: { value: module.title } },
+                    [_vm._v("Alabama")]
+                  )
+                }),
+                0
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "col-md-2 " }, [_vm._v("Options")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-10" }, [
+              _c(
+                "div",
+                { staticClass: "custom-control custom-checkbox mr-sm-2" },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.publish,
+                        expression: "publish"
+                      }
+                    ],
+                    staticClass: "custom-control-input",
+                    attrs: { type: "checkbox", id: "customControlAutosizing1" },
+                    domProps: {
+                      checked: Array.isArray(_vm.publish)
+                        ? _vm._i(_vm.publish, null) > -1
+                        : _vm.publish
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.publish,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.publish = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.publish = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.publish = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "custom-control-label",
+                      attrs: { for: "customControlAutosizing1" }
+                    },
+                    [_vm._v("Publish")]
+                  )
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "col-md-2" }, [_vm._v("Time")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-10" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.time,
+                    expression: "time"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "time", id: "example-time-input" },
+                domProps: { value: _vm.time },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.time = $event.target.value
+                  }
+                }
+              })
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "border-top" }, [
           _c("div", { staticClass: "card-body" }, [
@@ -41895,125 +42235,27 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("h4", { staticClass: "card-title" }, [_vm._v("New Quiz")]),
+    return _c("div", { staticClass: "form-group row" }, [
+      _c("label", { staticClass: "col-md-2 ", attrs: { for: "fname" } }, [
+        _vm._v("File Upload")
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("label", { staticClass: "col-md-2 ", attrs: { for: "fname" } }, [
-          _vm._v("Title")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-10" }, [
+      _c("div", { staticClass: "col-md-10" }, [
+        _c("div", { staticClass: "custom-file" }, [
           _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "title",
-              name: "title",
-              placeholder: "title"
-            }
+            staticClass: "custom-file-input",
+            attrs: { type: "file", id: "file", name: "file" }
           }),
           _vm._v(" "),
-          _c("div", { staticClass: "invalid-feedback" }, [
-            _vm._v("Example invalid custom file feedback")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "valid-feedback" }, [
-          _vm._v(" Please provide a valid state. ")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "label",
-          { staticClass: "col-md-2 this.choices", attrs: { for: "fname" } },
-          [_vm._v("Body")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-10" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "body",
-              name: "body",
-              placeholder: "body"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "invalid-feedback" }, [
-            _vm._v("Example invalid custom file feedback")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "valid-feedback" }, [
-          _vm._v(" Please provide a valid state. ")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("label", { staticClass: "col-md-2 ", attrs: { for: "fname" } }, [
-          _vm._v("File Upload")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-10" }, [
-          _c("div", { staticClass: "custom-file" }, [
-            _c("input", {
-              staticClass: "custom-file-input",
-              attrs: { type: "file", id: "file", name: "file" }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "custom-file-label", attrs: { for: "file" } },
-              [_vm._v("Choose file...")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v("Example invalid custom file feedback")
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("label", { staticClass: "col-md-2 " }, [_vm._v("Options")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-10" }, [
-          _c("div", { staticClass: "custom-control custom-checkbox mr-sm-2" }, [
-            _c("input", {
-              staticClass: "custom-control-input",
-              attrs: { type: "checkbox", id: "customControlAutosizing1" }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "custom-control-label",
-                attrs: { for: "customControlAutosizing1" }
-              },
-              [_vm._v("Publish")]
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-sm-3" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-9" }, [
           _c(
-            "button",
-            {
-              staticClass: "w-100 p-1 btn btn-outline-primary",
-              attrs: { type: "button" }
-            },
-            [
-              _c("i", { staticClass: "m-r-5 fas fa-plus-circle" }),
-              _vm._v(" Add a choice")
-            ]
-          )
+            "label",
+            { staticClass: "custom-file-label", attrs: { for: "file" } },
+            [_vm._v("Choose file...")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v("Example invalid custom file feedback")
+          ])
         ])
       ])
     ])
@@ -54485,15 +54727,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NewQuizComponent_vue_vue_type_template_id_03d19a5a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NewQuizComponent.vue?vue&type=template&id=03d19a5a& */ "./resources/js/components/NewQuizComponent.vue?vue&type=template&id=03d19a5a&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _NewQuizComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewQuizComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/NewQuizComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _NewQuizComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _NewQuizComponent_vue_vue_type_template_id_03d19a5a___WEBPACK_IMPORTED_MODULE_0__["render"],
   _NewQuizComponent_vue_vue_type_template_id_03d19a5a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -54507,6 +54751,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/NewQuizComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/NewQuizComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/NewQuizComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NewQuizComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./NewQuizComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/NewQuizComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NewQuizComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

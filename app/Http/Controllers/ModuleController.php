@@ -13,8 +13,8 @@ class ModuleController extends Controller
 {
     public function index()
     {
-        $modules = Module::all();
-        return ModuleResource::collection($modules);
+        $modules = Module::with('quizzes')->get();
+        return response()->json(['quizzes'=> ModuleResource::collection($modules)], 200);
     }
 
     public function show(Module $module)
