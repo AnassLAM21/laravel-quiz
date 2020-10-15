@@ -2166,33 +2166,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'quiz-component',
   data: function data() {
     return {
-      moduleId: 1,
+      moduleId: null,
       quizId: 1,
       modules: [],
       title: '123',
       body: 'Body .... ',
+      views_count: 0,
+      votes_count: null,
       publish: true,
       time: '12:00:00'
     };
   },
-  created: function created() {
+  created: function created() {},
+  mounted: function mounted() {
     this.getModules();
   },
   methods: {
+    onChangeModule: function onChangeModule(e) {
+      this.moduleId = e.target.value;
+    },
     submit: function submit() {
-      var quiz = _defineProperty({
+      var quiz = {
         title: this.title,
         body: this.body,
         time: this.time,
         publish: this.publish
-      }, "title", this.title);
-
+      };
       axios.post("/api/v1/modules/".concat(this.moduleId, "/quizzes"), _defineProperty({
         title: this.title,
         body: this.body,
@@ -2213,6 +2216,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (_ref2) {
         var data = _ref2.data;
         _this.modules = data.quizzes;
+        _this.modules[0] != null && _this.moduleId == null ? _this.moduleId = _this.modules[0].id : null;
       });
     }
   }
@@ -42087,20 +42091,128 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row" }, [
+            _c(
+              "label",
+              { staticClass: "col-md-2 this.choices", attrs: { for: "fname" } },
+              [_vm._v("Views count ")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-10" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.views_count,
+                    expression: "views_count"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", name: "views_count", disabled: "false" },
+                domProps: { value: _vm.views_count },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.views_count = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v("Example invalid custom file feedback")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v(" Please provide a valid state. ")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c(
+              "label",
+              { staticClass: "col-md-2 this.choices", attrs: { for: "fname" } },
+              [_vm._v("Votes count")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-10" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.votes_count,
+                    expression: "votes_count"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", name: "votes_count", disabled: "false" },
+                domProps: { value: _vm.votes_count },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.votes_count = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v("Example invalid custom file feedback")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v(" Please provide a valid state. ")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
             _c("label", { staticClass: "col-md-2" }, [_vm._v("Module")]),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-10" }, [
               _c(
                 "select",
                 {
-                  staticClass: "select2 form-control ",
-                  staticStyle: { height: "36px", width: "100%" }
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.moduleId,
+                      expression: "moduleId"
+                    }
+                  ],
+                  staticClass: "select2 form-control",
+                  staticStyle: { height: "36px", width: "100%" },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.moduleId = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      function($event) {
+                        return _vm.onChangeModule($event)
+                      }
+                    ]
+                  }
                 },
                 _vm._l(_vm.modules, function(module) {
                   return _c(
                     "option",
-                    { key: module.id, domProps: { value: module.title } },
-                    [_vm._v("Alabama")]
+                    { key: module.id, domProps: { value: module.id } },
+                    [_vm._v(" " + _vm._s(module.title))]
                   )
                 }),
                 0

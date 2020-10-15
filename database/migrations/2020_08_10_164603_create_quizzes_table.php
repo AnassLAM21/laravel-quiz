@@ -19,7 +19,7 @@ class CreateQuizzesTable extends Migration
             $table->boolean('publish')->nullable();
             $table->dateTime('published_at')->nullable();
             $table->time('time')->nullable();
-            $table->unsignedInteger('views_count')->nullable();
+            $table->unsignedInteger('views_count')->default(0);
             $table->integer('votes_count')->nullable();
             $table->unsignedInteger('module_id')->nullable();
             $table->unsignedInteger('user_id')->nullable();

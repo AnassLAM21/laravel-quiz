@@ -19,30 +19,30 @@
                </div>
                <div class="valid-feedback"> Please provide a valid state. </div>
             </div>
-
+            <div class="form-group row">
+               <label for="fname" class="col-md-2 this.choices">Views count </label>
+               <div class="col-md-10">
+                  <input type="text"  class="form-control" v-model="views_count" name="views_count" disabled="false">
+                  <div class="invalid-feedback" >Example invalid custom file feedback</div>
+               </div>
+               <div class="valid-feedback"> Please provide a valid state. </div>
+            </div>
+            <div class="form-group row">
+               <label for="fname" class="col-md-2 this.choices">Votes count</label>
+               <div class="col-md-10">
+                  <input type="text"  class="form-control" v-model="votes_count" name="votes_count" disabled="false">
+                  <div class="invalid-feedback" >Example invalid custom file feedback</div>
+               </div>
+               <div class="valid-feedback"> Please provide a valid state. </div>
+            </div>
             <div class="form-group row">
                <label class="col-md-2">Module</label>
                <div class="col-md-10">
-
-                  
-
-
-                  <select class="select2 form-control "   style="height: 36px;width: 100%;">
-                                        
-                                 
-                                                <option v-for="module in modules" :key="module.id" :value="module.title">Alabama</option>
-                                      
-                                        </select>
-
-
-                  
-
-
-
+                  <select class="select2 form-control" v-model="moduleId" v-on:change="onChangeModule($event)" style="height: 36px;width: 100%;">
+                     <option v-for="module in modules" :key="module.id" :value="module.id"> {{ module.title }}</option>
+                  </select>
                </div>
             </div>
-
-
             <div class="form-group row">
                <label for="fname" class="col-md-2 ">File Upload</label>
                <div class="col-md-10">
@@ -81,65 +81,62 @@
       </form>
    </div>
 </template>
-
-
 <script>
-export default {
-   name : 'quiz-component',
-
-   data(){
-      return {
-         moduleId : 1,
-         quizId : 1,
-         modules : [],
-         title:'123',
-         body:'Body .... ',
-         publish : true,
-         time : '12:00:00'
-      }
-   },
-
-   created(){
-      this.getModules();
-   },
-
-   methods:{
-
-      submit(){
-         
-         let quiz = { title : this.title , body : this.body , time : this.time , publish  : this.publish ,  title :  this.title }
-
-         
-
- 
-                axios.post(`/api/v1/modules/${this.moduleId}/quizzes`, {
-                   title : this.title , body : this.body , time : this.time , publish  : this.publish ,  title :  this.title 
-                })
-                .catch(error => {
-                   console.log('Error');
-                })
-                .then(({data}) => {
-                   console.log("the quiz has been created");
-                })
-          
-
-
-
-
+   export default {
+      name : 'quiz-component',
+   
+      data(){
+         return {
+   
+            moduleId : null,
+            quizId : 1,
+            modules : [],
+            title:'123',
+            body:'Body .... ',
+            views_count : 0, 
+            votes_count : null,
+            publish : true,
+            time : '12:00:00'
+         }
       },
-      getModules(){
-         axios.get(`api/v1/modules`)
-                .catch(error => {
-                   console.log('Error');
-                })
-                .then(({data}) => {
-                   this.modules = data.quizzes;
-                })
-      }
-
-   },
-
-
-
-}
+   
+      created(){ },
+   
+      mounted(){        
+       this.getModules();
+      },
+   
+       methods:{
+   
+         onChangeModule(e){
+   
+            this.moduleId = e.target.value;
+         },
+   
+         submit(){
+            
+            let quiz = { title : this.title , body : this.body , time : this.time , publish  : this.publish }
+   
+                   axios.post(`/api/v1/modules/${this.moduleId}/quizzes`, {
+                      title : this.title , body : this.body , time : this.time , publish  : this.publish ,  title :  this.title 
+                   })
+                   .catch(error => {
+                      console.log('Error');
+                   })
+                   .then(({data}) => {
+                      console.log("the quiz has been created");
+                   })   
+         },
+            getModules(){
+              axios.get(`api/v1/modules`)
+                   .catch(error => {
+                      console.log('Error');
+                   })
+                   .then(({data}) => {
+                     this.modules = data.quizzes;
+                     this.modules[0] != null && this.moduleId ==null ? this.moduleId = this.modules[0].id : null
+                   })
+         }
+      },
+   }
 </script>
