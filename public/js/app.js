@@ -2324,8 +2324,6 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -2414,14 +2412,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       moduleId: null,
-      quizId: 1,
       modules: [],
-      title: '123',
-      body: 'Body .... ',
-      views_count: 0,
-      votes_count: null,
-      publish: true,
-      time: '00'
+      // quizId : 1,
+      // title:'123',
+      // body:'Body .... ',
+      // views_count : 0, 
+      // votes_count : null,
+      // publish : true,
+      // time : '00:00:00',
+      quiz: {
+        quizId: null,
+        title: '',
+        body: '',
+        views_count: 0,
+        votes_count: 0,
+        publish: true,
+        time: '00:00:00'
+      }
     };
   },
   created: function created() {},
@@ -2433,22 +2440,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.moduleId = e.target.value;
     },
     submit: function submit() {
-      var quiz = {
-        title: this.title,
-        body: this.body,
-        time: this.time,
-        publish: this.publish
-      };
-      axios.post("/api/v1/modules/".concat(this.moduleId, "/quizzes"), _defineProperty({
-        title: this.title,
-        body: this.body,
-        time: this.time,
-        publish: this.publish
-      }, "title", this.title))["catch"](function (error) {
+      // console.log(this.quiz);
+      axios.post("/api/v1/modules/".concat(this.moduleId, "/quizzes"), this.quiz)["catch"](function (error) {
         console.log('Error');
       }).then(function (_ref) {
         var data = _ref.data;
         console.log("the quiz has been created");
+        setTimeout(alert("the quiz has been created"), 2);
       });
     },
     getModules: function getModules() {
@@ -43120,19 +43118,19 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.title,
-                    expression: "title"
+                    value: _vm.quiz.title,
+                    expression: "quiz.title"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text", name: "title", placeholder: "title" },
-                domProps: { value: _vm.title },
+                domProps: { value: _vm.quiz.title },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.title = $event.target.value
+                    _vm.$set(_vm.quiz, "title", $event.target.value)
                   }
                 }
               }),
@@ -43160,19 +43158,19 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.body,
-                    expression: "body"
+                    value: _vm.quiz.body,
+                    expression: "quiz.body"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text", name: "body", placeholder: "body" },
-                domProps: { value: _vm.body },
+                domProps: { value: _vm.quiz.body },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.body = $event.target.value
+                    _vm.$set(_vm.quiz, "body", $event.target.value)
                   }
                 }
               }),
@@ -43200,19 +43198,19 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.views_count,
-                    expression: "views_count"
+                    value: _vm.quiz.views_count,
+                    expression: "quiz.views_count"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text", name: "views_count", disabled: "false" },
-                domProps: { value: _vm.views_count },
+                domProps: { value: _vm.quiz.views_count },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.views_count = $event.target.value
+                    _vm.$set(_vm.quiz, "views_count", $event.target.value)
                   }
                 }
               }),
@@ -43240,19 +43238,19 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.votes_count,
-                    expression: "votes_count"
+                    value: _vm.quiz.votes_count,
+                    expression: "quiz.votes_count"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text", name: "votes_count", disabled: "false" },
-                domProps: { value: _vm.votes_count },
+                domProps: { value: _vm.quiz.votes_count },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.votes_count = $event.target.value
+                    _vm.$set(_vm.quiz, "votes_count", $event.target.value)
                   }
                 }
               }),
@@ -43332,35 +43330,38 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.publish,
-                        expression: "publish"
+                        value: _vm.quiz.publish,
+                        expression: "quiz.publish"
                       }
                     ],
                     staticClass: "custom-control-input",
                     attrs: { type: "checkbox", id: "customControlAutosizing1" },
                     domProps: {
-                      checked: Array.isArray(_vm.publish)
-                        ? _vm._i(_vm.publish, null) > -1
-                        : _vm.publish
+                      checked: Array.isArray(_vm.quiz.publish)
+                        ? _vm._i(_vm.quiz.publish, null) > -1
+                        : _vm.quiz.publish
                     },
                     on: {
                       change: function($event) {
-                        var $$a = _vm.publish,
+                        var $$a = _vm.quiz.publish,
                           $$el = $event.target,
                           $$c = $$el.checked ? true : false
                         if (Array.isArray($$a)) {
                           var $$v = null,
                             $$i = _vm._i($$a, $$v)
                           if ($$el.checked) {
-                            $$i < 0 && (_vm.publish = $$a.concat([$$v]))
+                            $$i < 0 &&
+                              _vm.$set(_vm.quiz, "publish", $$a.concat([$$v]))
                           } else {
                             $$i > -1 &&
-                              (_vm.publish = $$a
-                                .slice(0, $$i)
-                                .concat($$a.slice($$i + 1)))
+                              _vm.$set(
+                                _vm.quiz,
+                                "publish",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
                           }
                         } else {
-                          _vm.publish = $$c
+                          _vm.$set(_vm.quiz, "publish", $$c)
                         }
                       }
                     }
@@ -43388,19 +43389,19 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.time,
-                    expression: "time"
+                    value: _vm.quiz.time,
+                    expression: "quiz.time"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "time", id: "time" },
-                domProps: { value: _vm.time },
+                domProps: { value: _vm.quiz.time },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.time = $event.target.value
+                    _vm.$set(_vm.quiz, "time", $event.target.value)
                   }
                 }
               })
@@ -56132,8 +56133,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\laravel-quiz\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-quiz\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),

@@ -6,7 +6,7 @@
             <div class="form-group row">
                <label for="fname" class="col-md-2 ">Title</label>
                <div class="col-md-10">
-                  <input type="text"  class="form-control" v-model="title" name="title" placeholder="title">
+                  <input type="text"  class="form-control" v-model="quiz.title" name="title" placeholder="title">
                   <div class="invalid-feedback" >Example invalid custom file feedback</div>
                </div>
                <div class="valid-feedback"> Please provide a valid state. </div>
@@ -14,7 +14,7 @@
             <div class="form-group row">
                <label for="fname" class="col-md-2 this.choices">Body</label>
                <div class="col-md-10">
-                  <input type="text"  class="form-control" v-model="body" name="body" placeholder="body">
+                  <input type="text"  class="form-control" v-model="quiz.body" name="body" placeholder="body">
                   <div class="invalid-feedback" >Example invalid custom file feedback</div>
                </div>
                <div class="valid-feedback"> Please provide a valid state. </div>
@@ -22,7 +22,7 @@
             <div class="form-group row">
                <label for="fname" class="col-md-2 this.choices">Views count </label>
                <div class="col-md-10">
-                  <input type="text"  class="form-control" v-model="views_count" name="views_count" disabled="false">
+                  <input type="text"  class="form-control" v-model="quiz.views_count" name="views_count" disabled="false">
                   <div class="invalid-feedback" >Example invalid custom file feedback</div>
                </div>
                <div class="valid-feedback"> Please provide a valid state. </div>
@@ -30,7 +30,7 @@
             <div class="form-group row">
                <label for="fname" class="col-md-2 this.choices">Votes count</label>
                <div class="col-md-10">
-                  <input type="text"  class="form-control" v-model="votes_count" name="votes_count" disabled="false">
+                  <input type="text"  class="form-control" v-model="quiz.votes_count" name="votes_count" disabled="false">
                   <div class="invalid-feedback" >Example invalid custom file feedback</div>
                </div>
                <div class="valid-feedback"> Please provide a valid state. </div>
@@ -58,7 +58,7 @@
                <div class="col-md-10">
                   <div class="custom-control custom-checkbox mr-sm-2">
                      <input type="checkbox" class="custom-control-input"
-                        id="customControlAutosizing1" v-model="publish">
+                        id="customControlAutosizing1" v-model="quiz.publish">
                      <label class="custom-control-label" for="customControlAutosizing1">Publish</label>
                   </div>
                </div>
@@ -66,7 +66,7 @@
             <div class="form-group row">
                <label class="col-md-2">Time</label>
                <div class="col-md-10">
-                  <input class="form-control" type="time" v-model="time" id="time">
+                  <input class="form-control" type="time" v-model="quiz.time" id="time">
                </div>
             </div>
          </div>
@@ -89,14 +89,18 @@
          return {
    
             moduleId : null,
-            quizId : 1,
             modules : [],
-            title:'123',
-            body:'Body .... ',
-            views_count : 0, 
-            votes_count : null,
-            publish : true,
-            time : '00'
+            
+            // quizId : 1,
+            // title:'123',
+            // body:'Body .... ',
+            // views_count : 0, 
+            // votes_count : null,
+            // publish : true,
+            // time : '00:00:00',
+
+            quiz:{ quizId:null, title : '',body:'',views_count:0,votes_count:0,publish:true,time : '00:00:00'  }
+
          }
       },
    
@@ -114,17 +118,14 @@
          },
    
          submit(){
-            
-            let quiz = { title : this.title , body : this.body , time : this.time , publish  : this.publish }
-   
-                   axios.post(`/api/v1/modules/${this.moduleId}/quizzes`, {
-                      title : this.title , body : this.body , time : this.time , publish  : this.publish ,  title :  this.title 
-                   })
+                  // console.log(this.quiz);
+                   axios.post(`/api/v1/modules/${this.moduleId}/quizzes`, this.quiz)
                    .catch(error => {
                       console.log('Error');
                    })
                    .then(({data}) => {
                       console.log("the quiz has been created");
+                      setTimeout(alert("the quiz has been created"), 2);
                    })   
          },
             getModules(){
