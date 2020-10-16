@@ -2411,15 +2411,10 @@ __webpack_require__.r(__webpack_exports__);
   name: 'quiz-component',
   data: function data() {
     return {
+      isEditing: true,
+      beforeEdit: {},
       moduleId: null,
       modules: [],
-      // quizId : 1,
-      // title:'123',
-      // body:'Body .... ',
-      // views_count : 0, 
-      // votes_count : null,
-      // publish : true,
-      // time : '00:00:00',
       quiz: {
         quizId: null,
         title: '',
@@ -2433,9 +2428,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {},
   mounted: function mounted() {
-    this.getModules();
+    this.fetchModules();
+
+    if (this.isEditing) {
+      this.fetchQuiz();
+      this.moduleId = this.quiz.id;
+    }
   },
   methods: {
+    cancel: function cancel() {
+      if (this.isEditing) {
+        this.quiz = this.beforeEdit;
+      }
+    },
     onChangeModule: function onChangeModule(e) {
       this.moduleId = e.target.value;
     },
@@ -2446,10 +2451,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (_ref) {
         var data = _ref.data;
         console.log("the quiz has been created");
-        setTimeout(alert("the quiz has been created"), 2);
       });
     },
-    getModules: function getModules() {
+    fetchModules: function fetchModules() {
       var _this = this;
 
       axios.get("api/v1/modules")["catch"](function (error) {
@@ -2458,6 +2462,18 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref2.data;
         _this.modules = data.quizzes;
         _this.modules[0] != null && _this.moduleId == null ? _this.moduleId = _this.modules[0].id : null;
+      });
+    },
+    fetchQuiz: function fetchQuiz() {
+      var _this2 = this;
+
+      this.quiz.id = 1;
+      axios.get("api/v1/quizzes/".concat(this.quiz.id))["catch"](function (error) {
+        console.log('Error');
+      }).then(function (_ref3) {
+        var data = _ref3.data;
+        _this2.quiz = data.quiz;
+        _this2.beforeEdit = _this2.quiz;
       });
     }
   }
@@ -43433,7 +43449,18 @@ var render = function() {
             _vm._v(" "),
             _vm._m(1),
             _vm._v(" "),
-            _vm._m(2)
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                attrs: { type: "button" },
+                on: { click: _vm.cancel }
+              },
+              [
+                _c("i", { staticClass: "m-r-5 fas fa-window-close" }),
+                _vm._v(" Cancel")
+              ]
+            )
           ])
         ])
       ]
@@ -43478,16 +43505,6 @@ var staticRenderFns = [
       "button",
       { staticClass: "btn btn-info", attrs: { type: "button" } },
       [_c("i", { staticClass: "m-r-5 fas fa-edit" }), _vm._v("Edit")]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-danger", attrs: { type: "button" } },
-      [_c("i", { staticClass: "m-r-5 fas fa-window-close" }), _vm._v(" Cancel")]
     )
   }
 ]
@@ -56133,8 +56150,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\laravel-quiz\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-quiz\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),

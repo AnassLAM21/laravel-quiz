@@ -75,7 +75,7 @@
                <button type="submit" class="btn btn-success" @submit.prevent=""><i class="m-r-5 fas fa-save"></i>Save</button>
                <button type="button" class="btn btn-primary">X</button>
                <button type="button" class="btn btn-info"><i class="m-r-5 fas fa-edit"></i>Edit</button>
-               <button type="button" class="btn btn-danger" ><i class="m-r-5 fas fa-window-close"></i> Cancel</button>
+               <button type="button" class="btn btn-danger" @click="cancel"><i class="m-r-5 fas fa-window-close"></i> Cancel</button>
             </div>
          </div>
       </form>
@@ -87,18 +87,11 @@
    
       data(){
          return {
-   
+
+            isEditing : true,
+            beforeEdit : {},
             moduleId : null,
             modules : [],
-            
-            // quizId : 1,
-            // title:'123',
-            // body:'Body .... ',
-            // views_count : 0, 
-            // votes_count : null,
-            // publish : true,
-            // time : '00:00:00',
-
             quiz:{ quizId:null, title : '',body:'',views_count:0,votes_count:0,publish:true,time : '00:00:00'  }
 
          }
@@ -107,11 +100,25 @@
       created(){ },
    
       mounted(){        
-       this.getModules();
+          this.fetchModules();
+
+         if (this.isEditing) {
+            this.fetchQuiz();
+            this.moduleId = this.quiz.id;
+         }
+
       },
    
        methods:{
-   
+
+
+         cancel(){
+
+            
+            if (this.isEditing) {
+               this.quiz  = this.beforeEdit;
+            }
+         },
          onChangeModule(e){
    
             this.moduleId = e.target.value;
@@ -125,10 +132,9 @@
                    })
                    .then(({data}) => {
                       console.log("the quiz has been created");
-                      setTimeout(alert("the quiz has been created"), 2);
                    })   
          },
-            getModules(){
+            fetchModules(){
               axios.get(`api/v1/modules`)
                    .catch(error => {
                       console.log('Error');
@@ -137,7 +143,21 @@
                      this.modules = data.quizzes;
                      this.modules[0] != null && this.moduleId ==null ? this.moduleId = this.modules[0].id : null
                    })
-         }
+         },
+         fetchQuiz(){
+               this.quiz.id = 1;
+              axios.get(`api/v1/quizzes/${this.quiz.id}`)
+                   .catch(error => {
+                      console.log('Error');
+                   })
+                   .then(({data}) => {
+                     this.quiz = data.quiz;
+                     this.beforeEdit = this.quiz
+              })
+         },
+
+
+
       },
    }
 </script>

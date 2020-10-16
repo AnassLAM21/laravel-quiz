@@ -20,15 +20,9 @@ class QuizController extends Controller
         return QuizResource::collection($quizzes);
     }
 
-    public function show(Module $module,Quiz $quiz)
+    public function show(Quiz $quiz)
     {
-        return response()->json([
-            'id' => $this->id,
-            'publish' => $this->publish,
-            'published_at' => $this->published_at,
-            'time' => $this->time,
-            'views_count' => $this->created_at,
-            'votes_count' => $this->updated_at], 200);
+        return response()->json(['quiz' => new QuizResource($quiz)],200);
     }
 
     public function store(Request $request,Module $module)

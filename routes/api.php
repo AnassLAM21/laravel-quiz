@@ -45,8 +45,8 @@ Route::delete('modules/{module}', 'ModuleController@destroy');
 
 
 // Quizzes API
-// Route::resource('modules.quizzes', 'QuizController')->except(['index', 'create', 'show']);
- Route::resource('modules.quizzes', 'QuizController');
+ Route::resource('modules.quizzes', 'QuizController')->except(['index', 'create', 'show']);
+ Route::resource('quizzes', 'QuizController')->except(['update', 'destroy','store']);
 
 // Question API
 Route::resource('questions', 'QuestionController');
