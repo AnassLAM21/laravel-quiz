@@ -33,11 +33,12 @@ Vue.eventHub = eventHub;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('new-quiz-component', require('./components/NewQuizComponent.vue').default);
-Vue.component('new-question-component', require('./components/NewQuestionComponent.vue').default);
-Vue.component('new-choice-component', require('./components/NewChoiceComponent.vue').default);
+Vue.component('quiz-component', require('./components/QuizComponent.vue').default);
+Vue.component('question-component', require('./components/QuestionComponent.vue').default);
+Vue.component('choice-component', require('./components/ChoiceComponent.vue').default);
 
-
+Vue.component('aside-component', require('./components/AsideComponent.vue').default);
+Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
