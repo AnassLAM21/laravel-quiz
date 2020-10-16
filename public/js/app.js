@@ -1732,6 +1732,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -1840,8 +1852,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMP
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -41892,7 +41902,9 @@ var staticRenderFns = [
                   },
                   [
                     _c("i", { staticClass: "mdi mdi-receipt" }),
-                    _c("span", { staticClass: "hide-menu" }, [_vm._v("Forms ")])
+                    _c("span", { staticClass: "hide-menu" }, [
+                      _vm._v("Users Management")
+                    ])
                   ]
                 ),
                 _vm._v(" "),
@@ -41913,7 +41925,7 @@ var staticRenderFns = [
                         [
                           _c("i", { staticClass: "mdi mdi-note-outline" }),
                           _c("span", { staticClass: "hide-menu" }, [
-                            _vm._v(" Form Basic ")
+                            _vm._v(" New User ")
                           ])
                         ]
                       )
@@ -41929,7 +41941,129 @@ var staticRenderFns = [
                         [
                           _c("i", { staticClass: "mdi mdi-note-plus" }),
                           _c("span", { staticClass: "hide-menu" }, [
-                            _vm._v(" Form Wizard ")
+                            _vm._v(" List ")
+                          ])
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "sidebar-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "sidebar-link has-arrow waves-effect waves-dark",
+                    attrs: {
+                      href: "javascript:void(0)",
+                      "aria-expanded": "false"
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "mdi mdi-receipt" }),
+                    _c("span", { staticClass: "hide-menu" }, [
+                      _vm._v("Quizzes Management")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "collapse  first-level",
+                    attrs: { "aria-expanded": "false" }
+                  },
+                  [
+                    _c("li", { staticClass: "sidebar-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "sidebar-link",
+                          attrs: { href: "form-basic.html" }
+                        },
+                        [
+                          _c("i", { staticClass: "mdi mdi-note-outline" }),
+                          _c("span", { staticClass: "hide-menu" }, [
+                            _vm._v(" New Quiz ")
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "sidebar-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "sidebar-link",
+                          attrs: { href: "form-wizard.html" }
+                        },
+                        [
+                          _c("i", { staticClass: "mdi mdi-note-plus" }),
+                          _c("span", { staticClass: "hide-menu" }, [
+                            _vm._v(" List ")
+                          ])
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "sidebar-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "sidebar-link has-arrow waves-effect waves-dark",
+                    attrs: {
+                      href: "javascript:void(0)",
+                      "aria-expanded": "false"
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "mdi mdi-receipt" }),
+                    _c("span", { staticClass: "hide-menu" }, [
+                      _vm._v("Questions Management ")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "collapse  first-level",
+                    attrs: { "aria-expanded": "false" }
+                  },
+                  [
+                    _c("li", { staticClass: "sidebar-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "sidebar-link",
+                          attrs: { href: "form-basic.html" }
+                        },
+                        [
+                          _c("i", { staticClass: "mdi mdi-note-outline" }),
+                          _c("span", { staticClass: "hide-menu" }, [
+                            _vm._v(" New Question ")
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "sidebar-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "sidebar-link",
+                          attrs: { href: "form-wizard.html" }
+                        },
+                        [
+                          _c("i", { staticClass: "mdi mdi-note-plus" }),
+                          _c("span", { staticClass: "hide-menu" }, [
+                            _vm._v(" List ")
                           ])
                         ]
                       )
@@ -55537,11 +55671,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var simple_vue_validator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! simple-vue-validator */ "./node_modules/simple-vue-validator/src/index.js");
 /* harmony import */ var simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1__);
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -55553,27 +55682,11 @@ var bus = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$bus = bus;
 var eventHub = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.eventHub = eventHub;
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('quiz-component', __webpack_require__(/*! ./components/QuizComponent.vue */ "./resources/js/components/QuizComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('question-component', __webpack_require__(/*! ./components/QuestionComponent.vue */ "./resources/js/components/QuestionComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('choice-component', __webpack_require__(/*! ./components/ChoiceComponent.vue */ "./resources/js/components/ChoiceComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('aside-component', __webpack_require__(/*! ./components/AsideComponent.vue */ "./resources/js/components/AsideComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('header-component', __webpack_require__(/*! ./components/HeaderComponent.vue */ "./resources/js/components/HeaderComponent.vue")["default"]);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app'
 });
