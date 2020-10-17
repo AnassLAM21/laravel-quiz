@@ -47,7 +47,7 @@
                     <label for="fname" class="col-md-2">File Upload</label>
                     <div class="col-md-10">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="file" name="file" />
+                            <input type="file" class="custom-file-input" id="file" @change="selectFile" name="file" />
                             <label class="custom-file-label" for="file">Choose file...</label>
                             <div class="invalid-feedback">Example invalid custom file feedback</div>
                         </div>
@@ -65,7 +65,7 @@
                 <div class="form-group row">
                     <label class="col-md-2">Time</label>
                     <div class="col-md-10">
-                        <input class="form-control" type="time" v-model="quiz.time" id="time" />
+                        <input class="form-control" type="text" v-model="quiz.time" id="time" />
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
 
         data() {
             return {
-                isEditing: true,
+                isEditing: false,
                 cachedQuiz: {},
                 moduleId: null,
                 modules: [],
@@ -94,6 +94,7 @@
                     id: null,
                     title: "",
                     body: "",
+                    photo : null,
                     publish: true,
                     views_count: null,
                     votes_count: null,
@@ -119,6 +120,12 @@
         },
 
         methods: {
+
+            selectFile(event) {
+                this.quiz.photo = event.target.files[0];
+            },
+
+
             save() {
                 if (this.isEditing) {
                     this.update();
@@ -139,8 +146,18 @@
             },
 
             submit() {
+
+                const formData = new FormData();
+                
+                for ( var key in this.quiz) {
+                    formData.append(key, this.quiz[key]);
+                }
+
+
+                console.log(formData);
+                
                 axios
-                    .post(`/api/v1/modules/${this.moduleId}/quizzes`, this.quiz)
+                    .post(`/api/v1/modules/${this.moduleId}/quizzes`, formData)
                     .catch((error) => {
                         console.log("Error");
                     })

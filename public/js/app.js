@@ -2167,7 +2167,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "quiz-component",
   data: function data() {
     return {
-      isEditing: true,
+      isEditing: false,
       cachedQuiz: {},
       moduleId: null,
       modules: [],
@@ -2175,6 +2175,7 @@ __webpack_require__.r(__webpack_exports__);
         id: null,
         title: "",
         body: "",
+        photo: null,
         publish: true,
         views_count: null,
         votes_count: null
@@ -2201,6 +2202,9 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    selectFile: function selectFile(event) {
+      this.quiz.photo = event.target.files[0];
+    },
     save: function save() {
       if (this.isEditing) {
         this.update();
@@ -2218,7 +2222,14 @@ __webpack_require__.r(__webpack_exports__);
       this.moduleId = e.target.value;
     },
     submit: function submit() {
-      axios.post("/api/v1/modules/".concat(this.moduleId, "/quizzes"), this.quiz)["catch"](function (error) {
+      var formData = new FormData();
+
+      for (var key in this.quiz) {
+        formData.append(key, this.quiz[key]);
+      }
+
+      console.log(formData);
+      axios.post("/api/v1/modules/".concat(this.moduleId, "/quizzes"), formData)["catch"](function (error) {
         console.log("Error");
       }).then(function (_ref) {
         var data = _ref.data;
@@ -42506,7 +42517,31 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(0),
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "col-md-2", attrs: { for: "fname" } }, [
+              _vm._v("File Upload")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-10" }, [
+              _c("div", { staticClass: "custom-file" }, [
+                _c("input", {
+                  staticClass: "custom-file-input",
+                  attrs: { type: "file", id: "file", name: "file" },
+                  on: { change: _vm.selectFile }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  { staticClass: "custom-file-label", attrs: { for: "file" } },
+                  [_vm._v("Choose file...")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v("Example invalid custom file feedback")
+                ])
+              ])
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row" }, [
             _c("label", { staticClass: "col-md-2" }, [_vm._v("Options")]),
@@ -42585,7 +42620,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "time", id: "time" },
+                attrs: { type: "text", id: "time" },
                 domProps: { value: _vm.quiz.time },
                 on: {
                   input: function($event) {
@@ -42622,7 +42657,7 @@ var render = function() {
               [_vm._v("X")]
             ),
             _vm._v(" "),
-            _vm._m(1),
+            _vm._m(0),
             _vm._v(" "),
             _c(
               "button",
@@ -42643,35 +42678,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c("label", { staticClass: "col-md-2", attrs: { for: "fname" } }, [
-        _vm._v("File Upload")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-10" }, [
-        _c("div", { staticClass: "custom-file" }, [
-          _c("input", {
-            staticClass: "custom-file-input",
-            attrs: { type: "file", id: "file", name: "file" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            { staticClass: "custom-file-label", attrs: { for: "file" } },
-            [_vm._v("Choose file...")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "invalid-feedback" }, [
-            _vm._v("Example invalid custom file feedback")
-          ])
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -56179,8 +56185,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\laravel-quiz\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-quiz\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),

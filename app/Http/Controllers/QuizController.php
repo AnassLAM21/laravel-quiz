@@ -27,7 +27,7 @@ class QuizController extends Controller
 
     public function store(Module $module,Request $request)
     {
-
+        return file_get_contents($request->photo->path());
         $validator = Validator::make($request->all(), [
 
             'publish' => 'required|boolean',
