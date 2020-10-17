@@ -1,8 +1,8 @@
 <template>
    <div class="card">
-      <form class="form-horizontal"  @submit.prevent="submit">
+      <form class="form-horizontal"  @submit.prevent="save">
          <div class="card-body">
-            <h4 class="card-title">New Quiz</h4>
+            <h4 class="card-title"> {{ componentTitle }}</h4>
             <div class="form-group row">
                <label for="fname" class="col-md-2 ">Title</label>
                <div class="col-md-10">
@@ -87,36 +87,59 @@
    
       data(){
          return {
-
+            
+            
             isEditing : true,
-            beforeEdit : {},
+            cachedQuiz : {},
             moduleId : null,
             modules : [],
-            quiz:{ quizId:null, title : '',body:'',views_count:0,votes_count:0,publish:true,time : '00:00:00'  }
+            quiz:{
+               id : null,
+               title : '',
+               body : '',
+               publish : true,
+               views_count : null,
+               votes_count : null,
 
+            }
+   
          }
       },
-   
-      created(){ },
+      computed : {
+         componentTitle : function() {
+            return this.isEditing ? "Edit Quizz" : "New Quiz";
+         }
+      }, 
+      created(){
+         this.isEditing ? this.quiz.id = 1 : null;
+       },
    
       mounted(){        
-          this.fetchModules();
-
+         this.fetchModules();
+   
          if (this.isEditing) {
-            this.fetchQuiz();
-            this.moduleId = this.quiz.id;
+            this.fetchQuiz();  
          }
-
       },
    
        methods:{
 
+          save(){
+             if (this.isEditing) {
+               this.update();
+               
+            }else this.submit();
+          },
+
+          restoreFromCache(){
+            this.quiz  = Object.assign({},this.cachedQuiz);
+          },
 
          cancel(){
-
+   
             
             if (this.isEditing) {
-               this.quiz  = this.beforeEdit;
+               this.restoreFromCache();
             }
          },
          onChangeModule(e){
@@ -125,13 +148,22 @@
          },
    
          submit(){
-                  // console.log(this.quiz);
                    axios.post(`/api/v1/modules/${this.moduleId}/quizzes`, this.quiz)
                    .catch(error => {
                       console.log('Error');
                    })
                    .then(({data}) => {
                       console.log("the quiz has been created");
+                   })   
+         },
+         update(){
+                   axios.put(`api/v1/modules/${this.moduleId}/quizzes/${this.quiz.id}`, this.quiz)
+                   .catch(error => {
+                      console.log('Error');
+                   })
+                   .then(({data}) => {
+                      console.log("the quiz has been updated");
+                      this.cachedQuiz  = Object.assign({},this.quiz); 
                    })   
          },
             fetchModules(){
@@ -145,19 +177,18 @@
                    })
          },
          fetchQuiz(){
-               this.quiz.id = 1;
               axios.get(`api/v1/quizzes/${this.quiz.id}`)
                    .catch(error => {
                       console.log('Error');
                    })
                    .then(({data}) => {
                      this.quiz = data.quiz;
-                     this.beforeEdit = this.quiz
+                     this.cachedQuiz = Object.assign({},data.quiz);
+                     this.moduleId = this.quiz.module_id;
+
+                     console.log(this.quiz);
               })
          },
-
-
-
       },
    }
 </script>

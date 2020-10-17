@@ -2412,40 +2412,52 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       isEditing: true,
-      beforeEdit: {},
+      cachedQuiz: {},
       moduleId: null,
       modules: [],
       quiz: {
-        quizId: null,
+        id: null,
         title: '',
         body: '',
-        views_count: 0,
-        votes_count: 0,
         publish: true,
-        time: '00:00:00'
+        views_count: null,
+        votes_count: null
       }
     };
   },
-  created: function created() {},
+  computed: {
+    componentTitle: function componentTitle() {
+      return this.isEditing ? "Edit Quizz" : "New Quiz";
+    }
+  },
+  created: function created() {
+    this.isEditing ? this.quiz.id = 1 : null;
+  },
   mounted: function mounted() {
     this.fetchModules();
 
     if (this.isEditing) {
       this.fetchQuiz();
-      this.moduleId = this.quiz.id;
     }
   },
   methods: {
+    save: function save() {
+      if (this.isEditing) {
+        this.update();
+      } else this.submit();
+    },
+    restoreFromCache: function restoreFromCache() {
+      this.quiz = Object.assign({}, this.cachedQuiz);
+    },
     cancel: function cancel() {
       if (this.isEditing) {
-        this.quiz = this.beforeEdit;
+        this.restoreFromCache();
       }
     },
     onChangeModule: function onChangeModule(e) {
       this.moduleId = e.target.value;
     },
     submit: function submit() {
-      // console.log(this.quiz);
       axios.post("/api/v1/modules/".concat(this.moduleId, "/quizzes"), this.quiz)["catch"](function (error) {
         console.log('Error');
       }).then(function (_ref) {
@@ -2453,27 +2465,39 @@ __webpack_require__.r(__webpack_exports__);
         console.log("the quiz has been created");
       });
     },
-    fetchModules: function fetchModules() {
+    update: function update() {
       var _this = this;
 
-      axios.get("api/v1/modules")["catch"](function (error) {
+      axios.put("api/v1/modules/".concat(this.moduleId, "/quizzes/").concat(this.quiz.id), this.quiz)["catch"](function (error) {
         console.log('Error');
       }).then(function (_ref2) {
         var data = _ref2.data;
-        _this.modules = data.quizzes;
-        _this.modules[0] != null && _this.moduleId == null ? _this.moduleId = _this.modules[0].id : null;
+        console.log("the quiz has been updated");
+        _this.cachedQuiz = Object.assign({}, _this.quiz);
       });
     },
-    fetchQuiz: function fetchQuiz() {
+    fetchModules: function fetchModules() {
       var _this2 = this;
 
-      this.quiz.id = 1;
-      axios.get("api/v1/quizzes/".concat(this.quiz.id))["catch"](function (error) {
+      axios.get("api/v1/modules")["catch"](function (error) {
         console.log('Error');
       }).then(function (_ref3) {
         var data = _ref3.data;
-        _this2.quiz = data.quiz;
-        _this2.beforeEdit = _this2.quiz;
+        _this2.modules = data.quizzes;
+        _this2.modules[0] != null && _this2.moduleId == null ? _this2.moduleId = _this2.modules[0].id : null;
+      });
+    },
+    fetchQuiz: function fetchQuiz() {
+      var _this3 = this;
+
+      axios.get("api/v1/quizzes/".concat(this.quiz.id))["catch"](function (error) {
+        console.log('Error');
+      }).then(function (_ref4) {
+        var data = _ref4.data;
+        _this3.quiz = data.quiz;
+        _this3.cachedQuiz = Object.assign({}, data.quiz);
+        _this3.moduleId = _this3.quiz.module_id;
+        console.log(_this3.quiz);
       });
     }
   }
@@ -43115,13 +43139,15 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.submit($event)
+            return _vm.save($event)
           }
         }
       },
       [
         _c("div", { staticClass: "card-body" }, [
-          _c("h4", { staticClass: "card-title" }, [_vm._v("New Quiz")]),
+          _c("h4", { staticClass: "card-title" }, [
+            _vm._v(" " + _vm._s(_vm.componentTitle))
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row" }, [
             _c("label", { staticClass: "col-md-2 ", attrs: { for: "fname" } }, [

@@ -25,7 +25,7 @@ class QuizController extends Controller
         return response()->json(['quiz' => new QuizResource($quiz)],200);
     }
 
-    public function store(Request $request,Module $module)
+    public function store(Module $module,Request $request)
     {
 
         $validator = Validator::make($request->all(), [
@@ -33,8 +33,8 @@ class QuizController extends Controller
             'publish' => 'required|boolean',
             'published_at' => 'nullable|date',
             'time' => 'nullable|date_format:H:i:s', //"time" :  "02:17:00", 
-            'views_count' => 'Integer',
-            'votes_count' => 'Integer',
+            'views_count' => 'nullable|Integer',
+            'votes_count' => 'nullable|Integer',
             
         ]);
          
