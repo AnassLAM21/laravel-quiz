@@ -8,7 +8,7 @@
                     <div class="col-md-10">
                         <input type="text" class="form-control" v-model="quiz.title" name="title" placeholder="title" />
                         <div class="invalid-feedback">Example invalid custom file feedback</div>
-                    </div>
+                    </div> 
                     <div class="valid-feedback">Please provide a valid state.</div>
                 </div>
                 <div class="form-group row">
