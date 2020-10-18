@@ -9,15 +9,25 @@ use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
+
+
+    function __construct() {
+  
+    }
+
     public function upload(Request $request)
     {
         //name	extension	path	type	
         $this->validate($request, [
             'file' => 'required',
           ]);
+
+
+          
           if ($request->hasFile('file')) {
 
             $image = $request->file('file');
+            $fileName = time().'_'.$image->getClientOriginalName();;
             $file = new File();
 
             // $file->name = time().'.'.$image->getClientOriginalExtension();

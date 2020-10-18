@@ -94,7 +94,7 @@
                     id: null,
                     title: "",
                     body: "",
-                    photo : null,
+                    file : null,
                     publish: true,
                     views_count: null,
                     votes_count: null,
@@ -122,7 +122,7 @@
         methods: {
 
             selectFile(event) {
-                this.quiz.photo = event.target.files[0];
+                this.quiz.file = event.target.files[0];
             },
 
 
@@ -150,11 +150,10 @@
                 const formData = new FormData();
                 
                 for ( var key in this.quiz) {
-                    formData.append(key, this.quiz[key]);
+                    formData.append(key, this.quiz[key]); 
                 }
 
 
-                console.log(formData);
                 
                 axios
                     .post(`/api/v1/modules/${this.moduleId}/quizzes`, formData)

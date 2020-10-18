@@ -2175,7 +2175,7 @@ __webpack_require__.r(__webpack_exports__);
         id: null,
         title: "",
         body: "",
-        photo: null,
+        file: null,
         publish: true,
         views_count: null,
         votes_count: null
@@ -2203,7 +2203,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     selectFile: function selectFile(event) {
-      this.quiz.photo = event.target.files[0];
+      this.quiz.file = event.target.files[0];
     },
     save: function save() {
       if (this.isEditing) {
@@ -2228,7 +2228,6 @@ __webpack_require__.r(__webpack_exports__);
         formData.append(key, this.quiz[key]);
       }
 
-      console.log(formData);
       axios.post("/api/v1/modules/".concat(this.moduleId, "/quizzes"), formData)["catch"](function (error) {
         console.log("Error");
       }).then(function (_ref) {
@@ -56185,8 +56184,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\laravel-quiz\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-quiz\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),
