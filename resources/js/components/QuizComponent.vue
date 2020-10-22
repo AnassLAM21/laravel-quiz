@@ -153,10 +153,7 @@
                     formData.append(key, this.quiz[key]); 
                 }
 
-
-                
-                axios
-                    .post(`/api/v1/modules/${this.moduleId}/quizzes`, formData)
+                axios.post(`/api/v1/modules/${this.moduleId}/quizzes`, formData)
                     .catch((error) => {
                         console.log("Error");
                     })
