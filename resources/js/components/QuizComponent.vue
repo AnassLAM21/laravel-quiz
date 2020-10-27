@@ -147,13 +147,14 @@
 
             submit() {
 
-                const formData = new FormData();
-                
+                const formData = new FormData(); 
+
                 for ( var key in this.quiz) {
                     formData.append(key, this.quiz[key]); 
-                }
+                } 
 
-                axios.post(`/api/v1/modules/${this.moduleId}/quizzes`, formData)
+
+                axios.post(`/api/v1/modules/${this.moduleId}/quizzes`, this.quiz)
                     .catch((error) => {
                         console.log("Error");
                     })

@@ -2228,7 +2228,7 @@ __webpack_require__.r(__webpack_exports__);
         formData.append(key, this.quiz[key]);
       }
 
-      axios.post("/api/v1/modules/".concat(this.moduleId, "/quizzes"), formData)["catch"](function (error) {
+      axios.post("/api/v1/modules/".concat(this.moduleId, "/quizzes"), this.quiz)["catch"](function (error) {
         console.log("Error");
       }).then(function (_ref) {
         var data = _ref.data;
