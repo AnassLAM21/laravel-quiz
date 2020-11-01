@@ -2177,6 +2177,7 @@ __webpack_require__.r(__webpack_exports__);
         body: "",
         file: null,
         publish: true,
+        publish_published_at: new Date(),
         views_count: null,
         votes_count: null
       }
@@ -2228,7 +2229,8 @@ __webpack_require__.r(__webpack_exports__);
         formData.append(key, this.quiz[key]);
       }
 
-      axios.post("/api/v1/modules/".concat(this.moduleId, "/quizzes"), this.quiz)["catch"](function (error) {
+      console.log(this.quiz);
+      axios.post("/api/v1/modules/".concat(this.moduleId, "/quizzes"), formData)["catch"](function (error) {
         console.log("Error");
       }).then(function (_ref) {
         var data = _ref.data;
@@ -42386,85 +42388,103 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
-              { staticClass: "col-md-2 this.choices", attrs: { for: "fname" } },
-              [_vm._v("Views count ")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-10" }, [
-              _c("input", {
-                directives: [
+          _vm.isEditing
+            ? _c("div", { staticClass: "form-group row" }, [
+                _c(
+                  "label",
                   {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.quiz.views_count,
-                    expression: "quiz.views_count"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", name: "views_count", disabled: "false" },
-                domProps: { value: _vm.quiz.views_count },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                    staticClass: "col-md-2 this.choices",
+                    attrs: { for: "fname" }
+                  },
+                  [_vm._v("Views count ")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-10" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.quiz.views_count,
+                        expression: "quiz.views_count"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "views_count",
+                      disabled: "false"
+                    },
+                    domProps: { value: _vm.quiz.views_count },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.quiz, "views_count", $event.target.value)
+                      }
                     }
-                    _vm.$set(_vm.quiz, "views_count", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "invalid-feedback" }, [
-                _vm._v("Example invalid custom file feedback")
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "invalid-feedback" }, [
+                    _vm._v("Example invalid custom file feedback")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "valid-feedback" }, [
+                  _vm._v("Please provide a valid state.")
+                ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "valid-feedback" }, [
-              _vm._v("Please provide a valid state.")
-            ])
-          ]),
+            : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
-              { staticClass: "col-md-2 this.choices", attrs: { for: "fname" } },
-              [_vm._v("Votes count")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-10" }, [
-              _c("input", {
-                directives: [
+          _vm.isEditing
+            ? _c("div", { staticClass: "form-group row" }, [
+                _c(
+                  "label",
                   {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.quiz.votes_count,
-                    expression: "quiz.votes_count"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", name: "votes_count", disabled: "false" },
-                domProps: { value: _vm.quiz.votes_count },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                    staticClass: "col-md-2 this.choices",
+                    attrs: { for: "fname" }
+                  },
+                  [_vm._v("Votes count")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-10" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.quiz.votes_count,
+                        expression: "quiz.votes_count"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "votes_count",
+                      disabled: "false"
+                    },
+                    domProps: { value: _vm.quiz.votes_count },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.quiz, "votes_count", $event.target.value)
+                      }
                     }
-                    _vm.$set(_vm.quiz, "votes_count", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "invalid-feedback" }, [
-                _vm._v("Example invalid custom file feedback")
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "invalid-feedback" }, [
+                    _vm._v("Example invalid custom file feedback")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "valid-feedback" }, [
+                  _vm._v("Please provide a valid state.")
+                ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "valid-feedback" }, [
-              _vm._v("Please provide a valid state.")
-            ])
-          ]),
+            : _vm._e(),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row" }, [
             _c("label", { staticClass: "col-md-2" }, [_vm._v("Module")]),
@@ -42619,7 +42639,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", id: "time" },
+                attrs: { type: "time", id: "time" },
                 domProps: { value: _vm.quiz.time },
                 on: {
                   input: function($event) {

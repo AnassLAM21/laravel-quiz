@@ -19,7 +19,7 @@
                     </div>
                     <div class="valid-feedback">Please provide a valid state.</div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row" v-if="isEditing">
                     <label for="fname" class="col-md-2 this.choices">Views count </label>
                     <div class="col-md-10">
                         <input type="text" class="form-control" v-model="quiz.views_count" name="views_count" disabled="false" />
@@ -27,7 +27,7 @@
                     </div>
                     <div class="valid-feedback">Please provide a valid state.</div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row" v-if="isEditing">
                     <label for="fname" class="col-md-2 this.choices">Votes count</label>
                     <div class="col-md-10">
                         <input type="text" class="form-control" v-model="quiz.votes_count" name="votes_count" disabled="false" />
@@ -65,7 +65,7 @@
                 <div class="form-group row">
                     <label class="col-md-2">Time</label>
                     <div class="col-md-10">
-                        <input class="form-control" type="text" v-model="quiz.time" id="time" />
+                        <input class="form-control" type="time" v-model="quiz.time" id="time" />
                     </div>
                 </div>
             </div>
@@ -96,6 +96,7 @@
                     body: "",
                     file : null,
                     publish: true,
+                    publish_published_at : new Date(),
                     views_count: null,
                     votes_count: null,
                 },
@@ -146,15 +147,15 @@
             },
 
             submit() {
-
+              
                 const formData = new FormData(); 
 
                 for ( var key in this.quiz) {
                     formData.append(key, this.quiz[key]); 
                 } 
 
-
-                axios.post(`/api/v1/modules/${this.moduleId}/quizzes`, this.quiz)
+                console.log(this.quiz);
+                axios.post(`/api/v1/modules/${this.moduleId}/quizzes`, formData)
                     .catch((error) => {
                         console.log("Error");
                     })

@@ -10,6 +10,7 @@ use App\Http\Resources\QuizResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use phpDocumentor\Reflection\Types\Boolean;
+use stdClass;
 
 class QuizController extends Controller 
 {
@@ -31,37 +32,55 @@ class QuizController extends Controller
     {
 
         
-        // if ($request->hasFile('file')) {
-        //     $image = $request->file('file');
-        //     $file = new File();
-        //     $path = public_path('storage/images');
-        //     $file->name = time().'.'.$image->getClientOriginalExtension();
-        //     $file->extension = $image->getClientOriginalExtension();
-        //     $file->type = $request->type;
-        //     $path = public_path('storage/images');
-        //     $file->path = $image->move($path,$file->name);
-            
-        //     $file->save();
-        //     return response()->json(["message" => "The fil has been syccessfully uploaded "]);
-        //   }
+        if ($request->hasFile('file')) {
+            $image = $request->file('file');
+            $file = new File();
+            $file->name = time().'.'.$image->getClientOriginalExtension();
+            $file->extension = $image->getClientOriginalExtension();
+            $file->type = 'Image';
+            $path = $image->move('storage/images',$file->name);
+
+            $PATHName = pathinfo($path);
+            $file->path = $PATHName['dirname'].'/'.$PATHName['basename'];
+
+
+            $file->save();
+
+            return response()->json(["message" => "The fil has been syccessfully uploaded "]);
+          }
 
    
 
         
+  
+        $request = new Request([
 
-      
-        
+            'title' => $request->title,
+            'body' => $request->body,
+            'publish' => (Boolean) $request->publish,
+            'published_at' =>  $request->published_at,
+            'time' =>  $request->time, //"time" :  "02:17:00", 
+            'views_count'  => (int) $request->views_count,
+            'votes_count'  => (int) $request->votes_count,
+            'file'  => $request->file,
+        ]);
+
+
+
+   
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             'body' => 'required|string',
             'publish' => 'required|boolean',
             'published_at' => 'nullable|date',
-            'time' => 'nullable|date_format:H:i:s', //"time" :  "02:17:00", 
+            'time' => 'nullable|date_format:H:i', //"time" :  "02:17:00", 
             'views_count' => 'nullable|Integer',
             'votes_count' => 'nullable|Integer',
             
         ]);
             
+        
+  
         //$FileController = new FileController();
         //$FileController->upload($request);
 
