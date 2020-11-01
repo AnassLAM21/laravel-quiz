@@ -96,7 +96,8 @@
                     body: "",
                     file : null,
                     publish: true,
-                    publish_published_at : new Date(),
+                    publish_published_at : null,
+                    time : null,
                     views_count: null,
                     votes_count: null,
                 },
@@ -108,7 +109,7 @@
             },
         },
         created() {
-            this.isEditing ? (this.quiz.id = 1) : null;
+            this.isEditing ? (this.quiz.id = 2) : null;
         },
 
         mounted() {

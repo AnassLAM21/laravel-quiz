@@ -42,12 +42,8 @@ class QuizController extends Controller
 
             $PATHName = pathinfo($path);
             $file->path = $PATHName['dirname'].'/'.$PATHName['basename'];
-
-
             $file->save();
-
-            return response()->json(["message" => "The fil has been syccessfully uploaded "]);
-          }
+        }
 
    
 

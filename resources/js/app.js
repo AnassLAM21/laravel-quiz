@@ -15,8 +15,6 @@ Vue.prototype.$bus = bus;
 var eventHub = new Vue();
 Vue.eventHub = eventHub;
 
-
-
 Vue.component('quiz-component', require('./components/QuizComponent.vue').default);
 Vue.component('question-component', require('./components/QuestionComponent.vue').default);
 Vue.component('choice-component', require('./components/ChoiceComponent.vue').default);

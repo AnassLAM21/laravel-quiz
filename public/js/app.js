@@ -2177,7 +2177,8 @@ __webpack_require__.r(__webpack_exports__);
         body: "",
         file: null,
         publish: true,
-        publish_published_at: new Date(),
+        publish_published_at: null,
+        time: null,
         views_count: null,
         votes_count: null
       }
@@ -2189,7 +2190,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.isEditing ? this.quiz.id = 1 : null;
+    this.isEditing ? this.quiz.id = 2 : null;
   },
   mounted: function mounted() {
     var _this = this;
