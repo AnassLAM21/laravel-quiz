@@ -56,7 +56,8 @@
 
             <div class="container-fluid"> 
 
-                <quiz-component></quiz-component>
+                {{-- <question-component></question-component> --}}
+                <quiz-component></quiz-component>                
                 
             </div>
 

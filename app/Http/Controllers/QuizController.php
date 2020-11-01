@@ -35,22 +35,24 @@ class QuizController extends Controller
         if ($request->hasFile('file')) {
             $image = $request->file('file');
             $file = new File();
-            $file->name = time().'.'.$image->getClientOriginalExtension();
-            $file->extension = $image->getClientOriginalExtension();
+            
+            $extension = $image->getClientOriginalExtension();
+            $file->extension = $extension;
+            $file->name = time().'.'.$extension;
+
             $file->type = 'Image';
             $path = $image->move('storage/images',$file->name);
 
-            $PATHName = pathinfo($path);
-            $file->path = $PATHName['dirname'].'/'.$PATHName['basename'];
+            $pathName = pathinfo($path);
+            $file->path = $pathName['dirname'].'/'.$pathName['basename'];
             $file->save();
         }
 
-   
+        
 
         
   
         $request = new Request([
-
             'title' => $request->title,
             'body' => $request->body,
             'publish' => (Boolean) $request->publish,
