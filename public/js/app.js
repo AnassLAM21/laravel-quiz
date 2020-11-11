@@ -2162,12 +2162,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "quiz-component",
   data: function data() {
     return {
-      isEditing: false,
+      isEditing: true,
       cachedQuiz: {},
       moduleId: null,
       modules: [],
@@ -2204,6 +2203,28 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    remove: function remove() {
+      var _this2 = this;
+
+      axios["delete"]("api/v1/modules/".concat(this.moduleId, "/quizzes/").concat(this.quiz.id))["catch"](function (error) {
+        console.log("Error");
+      }).then(function (_ref) {
+        var data = _ref.data;
+        console.log("the quiz has been deleted");
+        _this2.isEditing = false;
+        _this2.quiz = {
+          id: null,
+          title: "",
+          body: "",
+          file: null,
+          publish: true,
+          publish_published_at: null,
+          time: null,
+          views_count: null,
+          votes_count: null
+        };
+      });
+    },
     selectFile: function selectFile(event) {
       this.quiz.file = event.target.files[0];
     },
@@ -2214,6 +2235,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     restoreFromCache: function restoreFromCache() {
       this.quiz = Object.assign({}, this.cachedQuiz);
+      this.moduleId = this.quiz.module_id;
     },
     cancel: function cancel() {
       if (this.isEditing) {
@@ -2233,44 +2255,44 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.quiz);
       axios.post("/api/v1/modules/".concat(this.moduleId, "/quizzes"), formData)["catch"](function (error) {
         console.log("Error");
-      }).then(function (_ref) {
-        var data = _ref.data;
+      }).then(function (_ref2) {
+        var data = _ref2.data;
         console.log("the quiz has been created");
       });
     },
     update: function update() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.put("api/v1/modules/".concat(this.moduleId, "/quizzes/").concat(this.quiz.id), this.quiz)["catch"](function (error) {
         console.log("Error");
-      }).then(function (_ref2) {
-        var data = _ref2.data;
+      }).then(function (_ref3) {
+        var data = _ref3.data;
         console.log("the quiz has been updated");
-        _this2.cachedQuiz = Object.assign({}, _this2.quiz);
+        _this3.cachedQuiz = Object.assign({}, _this3.quiz);
       });
     },
     fetchModules: function fetchModules() {
-      var _this3 = this;
+      var _this4 = this;
 
       return axios.get("api/v1/modules")["catch"](function (error) {
         console.log("Error");
-      }).then(function (_ref3) {
-        var data = _ref3.data;
+      }).then(function (_ref4) {
+        var data = _ref4.data;
         console.log("fetch module");
-        _this3.modules = data.quizzes;
-        _this3.modules[0] != null && _this3.moduleId == null ? _this3.moduleId = _this3.modules[0].id : null;
+        _this4.modules = data.quizzes;
+        _this4.modules[0] != null && _this4.moduleId == null ? _this4.moduleId = _this4.modules[0].id : null;
       });
     },
     fetchQuiz: function fetchQuiz() {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.get("api/v1/quizzes/".concat(this.quiz.id))["catch"](function (error) {
         console.log("Error");
-      }).then(function (_ref4) {
-        var data = _ref4.data;
-        _this4.quiz = data.quiz;
-        _this4.cachedQuiz = Object.assign({}, data.quiz);
-        _this4.moduleId = _this4.quiz.module_id;
+      }).then(function (_ref5) {
+        var data = _ref5.data;
+        _this5.quiz = data.quiz;
+        _this5.cachedQuiz = Object.assign({}, data.quiz);
+        _this5.moduleId = _this5.quiz.module_id;
       });
     }
   }
@@ -42640,7 +42662,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "time", id: "time" },
+                attrs: { type: "text", id: "time" },
                 domProps: { value: _vm.quiz.time },
                 on: {
                   input: function($event) {
@@ -42656,11 +42678,37 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "border-top" }, [
-          _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "card-body text-right" }, [
             _c(
               "button",
               {
-                staticClass: "btn btn-success",
+                staticClass: "btn btn-outline-primary",
+                attrs: { type: "button" },
+                on: { click: _vm.remove }
+              },
+              [
+                _c("i", { staticClass: "m-r-5 fas fa-window-close" }),
+                _vm._v(" Delete ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-danger",
+                attrs: { type: "button" },
+                on: { click: _vm.cancel }
+              },
+              [
+                _c("i", { staticClass: " fas fa-trash-alt" }),
+                _vm._v(" Cancel ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-success",
                 attrs: { type: "submit" },
                 on: {
                   submit: function($event) {
@@ -42669,27 +42717,6 @@ var render = function() {
                 }
               },
               [_c("i", { staticClass: "m-r-5 fas fa-save" }), _vm._v("Save")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", attrs: { type: "button" } },
-              [_vm._v("X")]
-            ),
-            _vm._v(" "),
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-danger",
-                attrs: { type: "button" },
-                on: { click: _vm.cancel }
-              },
-              [
-                _c("i", { staticClass: "m-r-5 fas fa-window-close" }),
-                _vm._v(" Cancel")
-              ]
             )
           ])
         ])
@@ -42697,18 +42724,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-info", attrs: { type: "button" } },
-      [_c("i", { staticClass: "m-r-5 fas fa-edit" }), _vm._v("Edit")]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

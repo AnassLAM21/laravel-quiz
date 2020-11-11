@@ -65,16 +65,15 @@
                 <div class="form-group row">
                     <label class="col-md-2">Time</label>
                     <div class="col-md-10">
-                        <input class="form-control" type="time" v-model="quiz.time" id="time" />
+                        <input class="form-control" type="text" v-model="quiz.time" id="time" />
                     </div>
                 </div>
             </div>
             <div class="border-top">
-                <div class="card-body">
-                    <button type="submit" class="btn btn-success" @submit.prevent=""><i class="m-r-5 fas fa-save"></i>Save</button>
-                    <button type="button" class="btn btn-primary">X</button>
-                    <button type="button" class="btn btn-info"><i class="m-r-5 fas fa-edit"></i>Edit</button>
-                    <button type="button" class="btn btn-danger" @click="cancel"><i class="m-r-5 fas fa-window-close"></i> Cancel</button>
+                <div class="card-body text-right">
+                    <button type="button" class="btn btn-outline-primary" @click="remove"><i class="m-r-5 fas fa-window-close"></i> Delete </button>
+                    <button type="button" class="btn btn-outline-danger" @click="cancel"> <i class=" fas fa-trash-alt"></i> Cancel </button>
+                    <button type="submit" class="btn btn-outline-success" @submit.prevent=""><i class="m-r-5 fas fa-save"></i>Save</button>
                 </div>
             </div>
         </form>
@@ -86,7 +85,7 @@
 
         data() {
             return {
-                isEditing: false,
+                isEditing: true,
                 cachedQuiz: {},
                 moduleId: null,
                 modules: [],
@@ -123,6 +122,30 @@
 
         methods: {
 
+            remove() {
+              
+                axios.delete(`api/v1/modules/${this.moduleId}/quizzes/${this.quiz.id}`)
+                .catch((error) => {
+                    console.log("Error");
+                })
+                .then(({ data }) => {
+                    console.log("the quiz has been deleted");
+                    this.isEditing = false;
+                    this.quiz = {
+                    id: null,
+                    title: "",
+                    body: "",
+                    file : null,
+                    publish: true,
+                    publish_published_at : null,
+                    time : null,
+                    views_count: null,
+                    votes_count: null,
+                }
+                });
+
+            },
+
             selectFile(event) {
                 this.quiz.file = event.target.files[0];
             },
@@ -136,6 +159,7 @@
 
             restoreFromCache() {
                 this.quiz = Object.assign({}, this.cachedQuiz);
+                this.moduleId = this.quiz.module_id;
             },
 
             cancel() {
@@ -165,8 +189,7 @@
                     });
             },
             update() {
-                axios
-                    .put(`api/v1/modules/${this.moduleId}/quizzes/${this.quiz.id}`, this.quiz)
+                axios.put(`api/v1/modules/${this.moduleId}/quizzes/${this.quiz.id}`, this.quiz)
                     .catch((error) => {
                         console.log("Error");
                     })
