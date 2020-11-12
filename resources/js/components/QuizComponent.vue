@@ -11,10 +11,13 @@
                     </div> 
                     <div class="valid-feedback">Please provide a valid state.</div>
                 </div>
+                
                 <div class="form-group row">
                     <label for="fname" class="col-md-2 this.choices">Body</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" v-model="quiz.body" name="body" placeholder="body" />
+                        
+                        <textarea type="text" class="form-control" v-model="quiz.body" name="body" placeholder="body" rows="3"></textarea>
+
                         <div class="invalid-feedback">Example invalid custom file feedback</div>
                     </div>
                     <div class="valid-feedback">Please provide a valid state.</div>
@@ -71,9 +74,9 @@
             </div>
             <div class="border-top">
                 <div class="card-body text-right">
-                    <button type="button" class="btn btn-outline-primary" @click="remove"><i class="m-r-5 fas fa-window-close"></i> Delete </button>
-                    <button type="button" class="btn btn-outline-danger" @click="cancel"> <i class=" fas fa-trash-alt"></i> Cancel </button>
-                    <button type="submit" class="btn btn-outline-success" @submit.prevent=""><i class="m-r-5 fas fa-save"></i>Save</button>
+                    <button type="button" class="btn btn-outline-primary" @click="remove"><i class="m-r-3 fas fa-trash-alt"></i> Delete </button>
+                    <button type="button" class="btn btn-outline-danger" @click="cancel"> <i class="m-r-3 fas fa-ban"></i> Cancel </button>
+                    <button type="submit" class="btn btn-outline-success" @submit.prevent=""><i class="m-r-3 fas fa-save"></i> Save</button>
                 </div>
             </div>
         </form>

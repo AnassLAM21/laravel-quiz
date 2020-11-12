@@ -11,10 +11,8 @@ $factory->define(Quiz::class, function (Faker $faker) {
     $moduleCount = Module::all()->count();
 
     return [
-
-
         'title' => rtrim($faker->sentence(rand(1,3)),"."),
-        'body' =>  rtrim($faker->paragraph(rand(3,7),true),"."),
+        'body' =>  rtrim($faker->paragraph(rand(2,5),true),"."),
         'publish' => rand(0,1),
         'published_at' => $faker->dateTimeThisYear($max = 'now', $timezone = null)->format('Y-m-d H:i:s')        ,
         'time' => date('H:i:s', rand(500,1000)),
