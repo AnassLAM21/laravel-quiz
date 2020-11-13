@@ -5,14 +5,14 @@
             <table id="cssTable" class="table table-bordered table-sm">
                 <thead>
                     <tr>
-                        <td class="text-center">Title</td>
+                        <th class="text-center">Title</th>
 
-                        <td class="text-center">Publish</td>
-                        <td class="text-center">Module</td>
-                        <td class="text-center">Views Count</td>
-                        <td class="text-center">Created By</td>
-                        <td class="text-center">Created At</td>
-                        <td class="text-center">Action</td>
+                        <th class="text-center">Publish</th>
+                        <th class="text-center">Module</th>
+                        <th class="text-center">Views Count</th>
+                        <th class="text-center">Created By</th>
+                        <th class="text-center">Created At</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,8 +68,12 @@
 
 <style>
     td {
-        height: 50px;
-        width: 50px;
+        width: 10px;
+        padding:0 0 10px 0; 
+    }
+
+    th{
+        font-weight: bold;
     }
 
     #cssTable td {
@@ -80,7 +84,7 @@
     }
 
     button {
-        margin-top:3px;
+        margin-top:2px;
     }
 
 </style> 

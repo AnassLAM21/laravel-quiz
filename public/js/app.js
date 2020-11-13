@@ -7058,7 +7058,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntd {\n    height: 50px;\n    width: 50px;\n}\n#cssTable td {\n    text-align: center;\n    vertical-align: middle;\n    text-align: center;\n    vertical-align: middle;\n}\nbutton {\n    margin-top:3px;\n}\n\n", ""]);
+exports.push([module.i, "\ntd {\n    width: 10px;\n    padding:0 0 10px 0;\n}\nth{\n    font-weight: bold;\n}\n#cssTable td {\n    text-align: center;\n    vertical-align: middle;\n    text-align: center;\n    vertical-align: middle;\n}\nbutton {\n    margin-top:2px;\n}\n\n", ""]);
 
 // exports
 
@@ -42930,19 +42930,19 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("td", { staticClass: "text-center" }, [_vm._v("Title")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Title")]),
         _vm._v(" "),
-        _c("td", { staticClass: "text-center" }, [_vm._v("Publish")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Publish")]),
         _vm._v(" "),
-        _c("td", { staticClass: "text-center" }, [_vm._v("Module")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Module")]),
         _vm._v(" "),
-        _c("td", { staticClass: "text-center" }, [_vm._v("Views Count")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Views Count")]),
         _vm._v(" "),
-        _c("td", { staticClass: "text-center" }, [_vm._v("Created By")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Created By")]),
         _vm._v(" "),
-        _c("td", { staticClass: "text-center" }, [_vm._v("Created At")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Created At")]),
         _vm._v(" "),
-        _c("td", { staticClass: "text-center" }, [_vm._v("Action")])
+        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
       ])
     ])
   },
