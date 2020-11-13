@@ -2354,37 +2354,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "quiz-component"
+  name: "quiz-component",
+  data: function data() {
+    return {
+      quizzes: []
+    };
+  },
+  created: function created() {
+    console.log("l'9lawi");
+    console.log(this.fetchModules());
+  },
+  methods: {
+    fetchModules: function fetchModules() {
+      var _this = this;
+
+      axios.get("api/v1/quizzes")["catch"](function (error) {
+        console.log("Error");
+      }).then(function (_ref) {
+        var data = _ref.data;
+        _this.quizzes = data.quizzes;
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -42886,260 +42878,163 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-body" }, [
+      _c("h5", { staticClass: "card-title m-b-0" }, [_vm._v("Static Table")]),
+      _vm._v(" "),
+      _c(
+        "table",
+        {
+          staticClass: "table table-bordered table-sm",
+          attrs: { id: "cssTable" }
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.quizzes, function(quiz, index) {
+              return _c(
+                "tr",
+                _vm._b(
+                  { key: quiz.id, attrs: { index: index } },
+                  "tr",
+                  quiz,
+                  false
+                ),
+                [
+                  _c(
+                    "th",
+                    { staticClass: "text-center", attrs: { scope: "row" } },
+                    [_vm._v(" " + _vm._s(quiz.title))]
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [
+                    _vm._v(" " + _vm._s(quiz.publish) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [
+                    _vm._v(" " + _vm._s(quiz.module.title) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [
+                    _vm._v(" " + _vm._s(quiz.views_count) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [
+                    _vm._v(" " + _vm._s(quiz.user.name) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [
+                    _vm._v(" " + _vm._s(quiz.created_at) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(1, true)
+                ]
+              )
+            }),
+            0
+          )
+        ]
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _c("h5", { staticClass: "card-title m-b-0" }, [_vm._v("Static Table")]),
+    return _c("thead", [
+      _c("tr", [
+        _c(
+          "td",
+          {
+            staticClass: "text-center",
+            staticStyle: { "text-align": "center", "vertical-align": "middle" }
+          },
+          [_vm._v("Title")]
+        ),
         _vm._v(" "),
         _c(
-          "table",
+          "td",
           {
-            staticClass: "table table-bordered table-sm",
-            attrs: { id: "cssTable" }
+            staticClass: "text-center",
+            staticStyle: { "text-align": "center", "vertical-align": "middle" }
           },
-          [
-            _c("thead", [
-              _c("tr", [
-                _c(
-                  "td",
-                  {
-                    staticClass: "text-center",
-                    staticStyle: {
-                      "text-align": "center",
-                      "vertical-align": "middle"
-                    }
-                  },
-                  [_vm._v("Title")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  {
-                    staticClass: "text-center",
-                    staticStyle: {
-                      "text-align": "center",
-                      "vertical-align": "middle"
-                    }
-                  },
-                  [_vm._v("Body")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  {
-                    staticClass: "text-center",
-                    staticStyle: {
-                      "text-align": "center",
-                      "vertical-align": "middle"
-                    }
-                  },
-                  [_vm._v("Publish")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  {
-                    staticClass: "text-center",
-                    staticStyle: {
-                      "text-align": "center",
-                      "vertical-align": "middle"
-                    }
-                  },
-                  [_vm._v("Module")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  {
-                    staticClass: "text-center",
-                    staticStyle: {
-                      "text-align": "center",
-                      "vertical-align": "middle"
-                    }
-                  },
-                  [_vm._v("Views Count")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  {
-                    staticClass: "text-center",
-                    staticStyle: {
-                      "text-align": "center",
-                      "vertical-align": "middle"
-                    }
-                  },
-                  [_vm._v("Updated At")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "th",
-                  {
-                    staticClass: "text-center",
-                    staticStyle: {
-                      "text-align": "center",
-                      "vertical-align": "middle"
-                    },
-                    attrs: { scope: "col" }
-                  },
-                  [_vm._v("Action")]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tbody", [
-              _c("tr", [
-                _c(
-                  "th",
-                  { staticClass: "text-center", attrs: { scope: "row" } },
-                  [_vm._v("1")]
-                ),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [_vm._v("Title")]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [_vm._v("Body")]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [_vm._v("Publish")]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [_vm._v("Module")]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [
-                  _vm._v("Updated At")
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-primary",
-                      attrs: { type: "button" }
-                    },
-                    [_c("i", { staticClass: "m-r-3 fas fa-trash-alt" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-danger",
-                      attrs: { type: "button" }
-                    },
-                    [_c("i", { staticClass: "m-r-3 fas fa-ban" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-success",
-                      attrs: { type: "submit" }
-                    },
-                    [_c("i", { staticClass: "m-r-3 fas fa-save" })]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tr", [
-                _c(
-                  "th",
-                  { staticClass: "text-center", attrs: { scope: "row" } },
-                  [_vm._v("1")]
-                ),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [_vm._v("Mark")]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [_vm._v("Otto")]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [_vm._v("Mark")]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [_vm._v("Otto")]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [_vm._v("Mark")]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-primary",
-                      attrs: { type: "button" }
-                    },
-                    [_c("i", { staticClass: "m-r-3 fas fa-trash-alt" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-danger",
-                      attrs: { type: "button" }
-                    },
-                    [_c("i", { staticClass: "m-r-3 fas fa-ban" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-success",
-                      attrs: { type: "submit" }
-                    },
-                    [_c("i", { staticClass: "m-r-3 fas fa-save" })]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tr", [
-                _c(
-                  "th",
-                  { staticClass: "text-center", attrs: { scope: "row" } },
-                  [_vm._v("1")]
-                ),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [_vm._v("Mark")]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [_vm._v("Otto")]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [_vm._v("Mark")]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [_vm._v("Otto")]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [_vm._v("Mark")]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-primary",
-                      attrs: { type: "button" }
-                    },
-                    [_c("i", { staticClass: "m-r-3 fas fa-trash-alt" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-danger",
-                      attrs: { type: "button" }
-                    },
-                    [_c("i", { staticClass: "m-r-3 fas fa-ban" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-success",
-                      attrs: { type: "submit" }
-                    },
-                    [_c("i", { staticClass: "m-r-3 fas fa-save" })]
-                  )
-                ])
-              ])
-            ])
-          ]
+          [_vm._v("Publish")]
+        ),
+        _vm._v(" "),
+        _c(
+          "td",
+          {
+            staticClass: "text-center",
+            staticStyle: { "text-align": "center", "vertical-align": "middle" }
+          },
+          [_vm._v("Module")]
+        ),
+        _vm._v(" "),
+        _c(
+          "td",
+          {
+            staticClass: "text-center",
+            staticStyle: { "text-align": "center", "vertical-align": "middle" }
+          },
+          [_vm._v("Views Count")]
+        ),
+        _vm._v(" "),
+        _c(
+          "td",
+          {
+            staticClass: "text-center",
+            staticStyle: { "text-align": "center", "vertical-align": "middle" }
+          },
+          [_vm._v("Created By")]
+        ),
+        _vm._v(" "),
+        _c(
+          "td",
+          {
+            staticClass: "text-center",
+            staticStyle: { "text-align": "center", "vertical-align": "middle" }
+          },
+          [_vm._v("Created At")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "text-center",
+            staticStyle: { "text-align": "center", "vertical-align": "middle" },
+            attrs: { scope: "col" }
+          },
+          [_vm._v("Action")]
         )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "text-center" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-outline-primary", attrs: { type: "button" } },
+        [_c("i", { staticClass: "m-r-3 fas fa-trash-alt" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-outline-danger", attrs: { type: "button" } },
+        [_c("i", { staticClass: "m-r-3 fas fa-ban" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-outline-success", attrs: { type: "submit" } },
+        [_c("i", { staticClass: "m-r-3 fas fa-save" })]
+      )
     ])
   }
 ]

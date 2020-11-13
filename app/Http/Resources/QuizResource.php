@@ -23,10 +23,11 @@ class QuizResource extends JsonResource
             'time' => $this->time,
             'views_count' => $this->views_count,
             'votes_count' => $this->votes_count,
-            'module_id' => $this->module_id,
             'user_id' => $this->user_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'module' => new ModuleResource($this->Module),
+            'user' => new UserResource($this->author),
         ];
     }
 }
