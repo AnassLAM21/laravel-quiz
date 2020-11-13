@@ -1728,17 +1728,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 var Validator = simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a.Validator;
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'answer-new',
-  props: ['index', 'choice'],
+  name: "answer-new",
+  props: ["index", "choice"],
   data: function data() {
     return {
       choiceId: this.choice.id,
@@ -1768,14 +1765,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(simple_vue_validator__WEBPACK_IMP
   },
   methods: {
     checkChoices: function checkChoices(index) {
-      this.$emit('checkChoice', this.index);
+      this.$emit("checkChoice", this.index);
     },
     deleteChoices: function deleteChoices() {
-      this.$emit('deleteChoice', this.index);
+      this.$emit("deleteChoice", this.index);
       console.log(this.choice.is_right_choice);
     },
     messageFromChild: function messageFromChild() {
-      this.$emit('messageFromChild', this.index, this.choiceId, this.choiceBody, this.choiceIs_right_choice);
+      this.$emit("messageFromChild", this.index, this.choiceId, this.choiceBody, this.choiceIs_right_choice);
     },
     validate: function validate() {
       return this.$validate().then(function (success) {
@@ -1871,24 +1868,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 var Validator = simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a.Validator;
 Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'question-new',
+  name: "question-new",
   data: function data() {
     return {
       quizId: 1,
-      questionBody: '',
+      questionBody: "",
       choiceId: 1,
       question: {
-        body: '',
+        body: "",
         id: null
       },
       choices1: [],
@@ -1916,17 +1907,13 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
                 _this.choiceId = _this.highestChoiceId + 1;
               }
 
-              ;
-
               while (_this.choices.length < 4) {
                 _this.choices.push({
                   id: _this.choiceId++,
-                  body: '',
+                  body: "",
                   is_right_choice: false
                 });
               }
-
-              ;
 
               for (index = 0; index < _this.choices.length; index++) {
                 if (_this.choices[index].id == _this.question.right_choice_id) {
@@ -1938,7 +1925,7 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
               _this.choices = [];
               _this.choices = arr;
 
-            case 11:
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -1999,7 +1986,7 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
       this.choiceId++;
       this.choices.push({
         id: this.choiceId,
-        body: '',
+        body: "",
         is_right_choice: false
       });
     },
@@ -2016,7 +2003,7 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
       axios.post("/api/v1/quizzes/".concat(this.quizId, "/questions"), {
         body: this.questionBody
       })["catch"](function (error) {
-        console.log('Error');
+        console.log("Error");
       }).then(function (_ref) {
         var data = _ref.data;
         _this2.question.id = data.question.id;
@@ -2035,7 +2022,7 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
         body: choice.body,
         is_right_choice: true
       })["catch"](function (error) {
-        console.log('Error');
+        console.log("Error");
       }).then(function (_ref2) {
         var data = _ref2.data;
         console.log("the choices has been created");
@@ -2051,7 +2038,7 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
               case 0:
                 _context2.next = 2;
                 return axios.get("/api/v1/questions/".concat(_this3.quizId))["catch"](function (error) {
-                  console.log('Error');
+                  console.log("Error");
                 }).then(function (_ref3) {
                   var data = _ref3.data;
                   _this3.question = data.question;
@@ -2351,9 +2338,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "quiz-component",
   data: function data() {
@@ -2362,7 +2346,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    console.log("l'9lawi");
     console.log(this.fetchModules());
   },
   methods: {
@@ -7056,7 +7039,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.form-check{\r\n  top:5px;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.form-check {\n    top: 5px;\n}\n", ""]);
 
 // exports
 
@@ -7075,7 +7058,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntd \r\n{\r\n    height: 50px; \r\n    width: 50px;\n}\n#cssTable td \r\n{\r\n    text-align: center; \r\n    vertical-align: middle;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\ntd {\n    height: 50px;\n    width: 50px;\n}\n#cssTable td {\n    text-align: center;\n    vertical-align: middle;\n    text-align: center;\n    vertical-align: middle;\n}\nbutton {\n    margin-top:3px;\n}\n\n", ""]);
 
 // exports
 
@@ -42110,7 +42093,7 @@ var render = function() {
           attrs: { type: "button" },
           on: { click: _vm.deleteChoices }
         },
-        [_c("i", { staticClass: "m-r-5 fas fa-trash-alt" }), _vm._v(" Delete ")]
+        [_c("i", { staticClass: "m-r-5 fas fa-trash-alt" }), _vm._v(" Delete")]
       )
     ])
   ])
@@ -42211,7 +42194,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "valid-feedback" }, [
-                _vm._v(" Please provide a valid state. ")
+                _vm._v("Please provide a valid state.")
               ])
             ]),
             _vm._v(" "),
@@ -42305,7 +42288,7 @@ var render = function() {
                       },
                       [
                         _c("i", { staticClass: "m-r-5 fas fa-trash-alt" }),
-                        _vm._v(" Delete ")
+                        _vm._v(" Delete")
                       ]
                     )
                   ])
@@ -42880,7 +42863,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-body" }, [
-      _c("h5", { staticClass: "card-title m-b-0" }, [_vm._v("Static Table")]),
+      _c("h5", { staticClass: "card-title m-b-0" }, [_vm._v("Quizzes List ")]),
       _vm._v(" "),
       _c(
         "table",
@@ -42904,29 +42887,29 @@ var render = function() {
                 ),
                 [
                   _c(
-                    "th",
+                    "td",
                     { staticClass: "text-center", attrs: { scope: "row" } },
-                    [_vm._v(" " + _vm._s(quiz.title))]
+                    [_vm._v(_vm._s(quiz.title))]
                   ),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-center" }, [
-                    _vm._v(" " + _vm._s(quiz.publish) + " ")
+                    _vm._v(_vm._s(quiz.publish))
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-center" }, [
-                    _vm._v(" " + _vm._s(quiz.module.title) + " ")
+                    _vm._v(_vm._s(quiz.module.title))
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-center" }, [
-                    _vm._v(" " + _vm._s(quiz.views_count) + " ")
+                    _vm._v(_vm._s(quiz.views_count))
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-center" }, [
-                    _vm._v(" " + _vm._s(quiz.user.name) + " ")
+                    _vm._v(_vm._s(quiz.user.name))
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-center" }, [
-                    _vm._v(" " + _vm._s(quiz.created_at) + " ")
+                    _vm._v(_vm._s(quiz.created_at))
                   ]),
                   _vm._v(" "),
                   _vm._m(1, true)
@@ -42947,69 +42930,19 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c(
-          "td",
-          {
-            staticClass: "text-center",
-            staticStyle: { "text-align": "center", "vertical-align": "middle" }
-          },
-          [_vm._v("Title")]
-        ),
+        _c("td", { staticClass: "text-center" }, [_vm._v("Title")]),
         _vm._v(" "),
-        _c(
-          "td",
-          {
-            staticClass: "text-center",
-            staticStyle: { "text-align": "center", "vertical-align": "middle" }
-          },
-          [_vm._v("Publish")]
-        ),
+        _c("td", { staticClass: "text-center" }, [_vm._v("Publish")]),
         _vm._v(" "),
-        _c(
-          "td",
-          {
-            staticClass: "text-center",
-            staticStyle: { "text-align": "center", "vertical-align": "middle" }
-          },
-          [_vm._v("Module")]
-        ),
+        _c("td", { staticClass: "text-center" }, [_vm._v("Module")]),
         _vm._v(" "),
-        _c(
-          "td",
-          {
-            staticClass: "text-center",
-            staticStyle: { "text-align": "center", "vertical-align": "middle" }
-          },
-          [_vm._v("Views Count")]
-        ),
+        _c("td", { staticClass: "text-center" }, [_vm._v("Views Count")]),
         _vm._v(" "),
-        _c(
-          "td",
-          {
-            staticClass: "text-center",
-            staticStyle: { "text-align": "center", "vertical-align": "middle" }
-          },
-          [_vm._v("Created By")]
-        ),
+        _c("td", { staticClass: "text-center" }, [_vm._v("Created By")]),
         _vm._v(" "),
-        _c(
-          "td",
-          {
-            staticClass: "text-center",
-            staticStyle: { "text-align": "center", "vertical-align": "middle" }
-          },
-          [_vm._v("Created At")]
-        ),
+        _c("td", { staticClass: "text-center" }, [_vm._v("Created At")]),
         _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass: "text-center",
-            staticStyle: { "text-align": "center", "vertical-align": "middle" },
-            attrs: { scope: "col" }
-          },
-          [_vm._v("Action")]
-        )
+        _c("td", { staticClass: "text-center" }, [_vm._v("Action")])
       ])
     ])
   },
@@ -43020,20 +42953,26 @@ var staticRenderFns = [
     return _c("td", { staticClass: "text-center" }, [
       _c(
         "button",
-        { staticClass: "btn btn-outline-primary", attrs: { type: "button" } },
+        { staticClass: "btn btn-outline-danger", attrs: { type: "button" } },
         [_c("i", { staticClass: "m-r-3 fas fa-trash-alt" })]
       ),
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-outline-danger", attrs: { type: "button" } },
-        [_c("i", { staticClass: "m-r-3 fas fa-ban" })]
+        { staticClass: "btn btn-outline-primary", attrs: { type: "button" } },
+        [_c("i", { staticClass: "m-r-3 fas fa-eye" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-outline-warning", attrs: { type: "button" } },
+        [_c("i", { staticClass: "m-r-3 fas fa-copy" })]
       ),
       _vm._v(" "),
       _c(
         "button",
         { staticClass: "btn btn-outline-success", attrs: { type: "submit" } },
-        [_c("i", { staticClass: "m-r-3 fas fa-save" })]
+        [_c("i", { staticClass: "m-r-3 fas fa-edit" })]
       )
     ])
   }
