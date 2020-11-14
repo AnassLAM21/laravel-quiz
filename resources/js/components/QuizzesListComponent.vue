@@ -34,34 +34,62 @@
                     </tr>
                 </tbody>
             </table>
+
+
+            <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item"><a class="page-link" href="#" @click="fetchQuizzes(pagination.prev_page_url)">Previous</a></li>
+
+        <li class="page-item disabled"><a class="page-link text-dark" href="#">Page {{ pagination.current_page }} of {{ pagination.last_page }}</a></li>
+    
+        <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item"><a class="page-link" href="#" @click="fetchQuizzes(pagination.next_page_url)">Next</a></li>
+      </ul>
+    </nav>
+
+
         </div>
     </div>
 </template>
 <script>
     export default {
         name: "quiz-component",
-
         data() {
             return {
                 quizzes: [],
+                pagination: {},
+
             };
         },
-
         created() {
-            console.log(this.fetchModules());
+            this.fetchQuizzes();
         },
-
         methods: {
-            fetchModules() {
+            fetchQuizzes(page_url) {
+
+                let vm = this;
+                 page_url = page_url || 'api/v1/quizzes';
+
                 axios
-                    .get(`api/v1/quizzes`)
+                    .get(page_url)
                     .catch((error) => {
                         console.log("Error");
                     })
                     .then(({ data }) => {
                         this.quizzes = data.quizzes;
+
+                        console.log(data.meta);
+                        vm.makePagination(data.meta, data.links);
                     });
             },
+            makePagination(meta, links) {
+                let pagination = {
+                    current_page: meta.current_page,
+                    last_page: meta.last_page,
+                    next_page_url: links.next,
+                    prev_page_url: links.prev
+                };
+                this.pagination = pagination;
+                },
         },
     };
 </script>
@@ -71,20 +99,16 @@
         width: 10px;
         padding:0 0 10px 0; 
     }
-
     th{
         font-weight: bold;
     }
-
     #cssTable td {
         text-align: center;
         vertical-align: middle;
         text-align: center;
         vertical-align: middle;
     }
-
     button {
         margin-top:2px;
     }
-
 </style> 

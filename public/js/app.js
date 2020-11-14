@@ -2338,26 +2338,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "quiz-component",
   data: function data() {
     return {
-      quizzes: []
+      quizzes: [],
+      pagination: {}
     };
   },
   created: function created() {
-    console.log(this.fetchModules());
+    this.fetchQuizzes();
   },
   methods: {
-    fetchModules: function fetchModules() {
+    fetchQuizzes: function fetchQuizzes(page_url) {
       var _this = this;
 
-      axios.get("api/v1/quizzes")["catch"](function (error) {
+      var vm = this;
+      page_url = page_url || 'api/v1/quizzes';
+      axios.get(page_url)["catch"](function (error) {
         console.log("Error");
       }).then(function (_ref) {
         var data = _ref.data;
         _this.quizzes = data.quizzes;
+        console.log(data.meta);
+        vm.makePagination(data.meta, data.links);
       });
+    },
+    makePagination: function makePagination(meta, links) {
+      var pagination = {
+        current_page: meta.current_page,
+        last_page: meta.last_page,
+        next_page_url: links.next,
+        prev_page_url: links.prev
+      };
+      this.pagination = pagination;
     }
   }
 });
@@ -7058,7 +7085,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntd {\n    width: 10px;\n    padding:0 0 10px 0;\n}\nth{\n    font-weight: bold;\n}\n#cssTable td {\n    text-align: center;\n    vertical-align: middle;\n    text-align: center;\n    vertical-align: middle;\n}\nbutton {\n    margin-top:2px;\n}\n\n", ""]);
+exports.push([module.i, "\ntd {\n    width: 10px;\n    padding:0 0 10px 0;\n}\nth{\n    font-weight: bold;\n}\n#cssTable td {\n    text-align: center;\n    vertical-align: middle;\n    text-align: center;\n    vertical-align: middle;\n}\nbutton {\n    margin-top:2px;\n}\n", ""]);
 
 // exports
 
@@ -42919,7 +42946,72 @@ var render = function() {
             0
           )
         ]
-      )
+      ),
+      _vm._v(" "),
+      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+        _c("ul", { staticClass: "pagination" }, [
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: [{ disabled: !_vm.pagination.prev_page_url }]
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetchQuizzes(_vm.pagination.prev_page_url)
+                    }
+                  }
+                },
+                [_vm._v("Previous")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item disabled" }, [
+            _c(
+              "a",
+              { staticClass: "page-link text-dark", attrs: { href: "#" } },
+              [
+                _vm._v(
+                  "Page " +
+                    _vm._s(_vm.pagination.current_page) +
+                    " of " +
+                    _vm._s(_vm.pagination.last_page)
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: [{ disabled: !_vm.pagination.next_page_url }]
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetchQuizzes(_vm.pagination.next_page_url)
+                    }
+                  }
+                },
+                [_vm._v("Next")]
+              )
+            ]
+          )
+        ])
+      ])
     ])
   ])
 }
