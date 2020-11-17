@@ -14,11 +14,17 @@ use stdClass;
 
 class QuizController extends Controller 
 {
-    public function index(Module $module)
+    public function index()
     {
+        //$quizzes = Quiz::with('author')->simplePaginate(1);
+        //return response()->json(['quizzes' => QuizResource::collection($quizzes)],200);
 
-        $quizzes = Quiz::with('author')->paginate(5);
-        return response()->json(['quizzes' => QuizResource::collection($quizzes)],200);
+
+        $quizzes = Quiz::paginate(10);
+        return response()->json(['message' => 'Your quiz has been submitted successfully', 
+            'quiz' => new QuizResource($quizzes)],201);
+        // Return collection of articles as a resource
+        return QuizResource::collection($quizzes);
 
     }
 

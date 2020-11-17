@@ -28,6 +28,8 @@ class QuizResource extends JsonResource
             'updated_at' => $this->updated_at,
             'module' => new ModuleResource($this->Module),
             'user' => new UserResource($this->author),
+
+            
         ];
     }
 }
