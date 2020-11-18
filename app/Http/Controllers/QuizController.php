@@ -20,7 +20,7 @@ class QuizController extends Controller
         //return response()->json(['quizzes' => QuizResource::collection($quizzes)],200);
 
 
-        $quizzes = Quiz::paginate(10);
+        return $quizzes = Quiz::paginate(10);
         return response()->json(['message' => 'Your quiz has been submitted successfully', 
             'quiz' => new QuizResource($quizzes)],201);
         // Return collection of articles as a resource
