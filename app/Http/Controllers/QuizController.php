@@ -17,8 +17,14 @@ class QuizController extends Controller
     public function index(Module $module)
     {
 
-        $quizzes = Quiz::with('author')->get();
+        $quizzes = Quiz::with(['module','author'])->paginate(2);
         return response()->json(['quizzes' => QuizResource::collection($quizzes)],200);
+        //return new QuizResource(Quiz::paginate(2));
+       // return QuizResource::collection($quizzes)->response()->getData(true);
+
+
+        //return QuestionResource::collection($questions);
+
 
     }
 
