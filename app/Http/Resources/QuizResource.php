@@ -12,8 +12,10 @@ class QuizResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
     public function toArray($request)
     {
+
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -27,7 +29,13 @@ class QuizResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'module' => new ModuleResource($this->Module),
-            'user' => new UserResource($this->author),
+            'author' => new UserResource($this->author),
         ];
+
+        
     }
+
+
+   
+    
 }

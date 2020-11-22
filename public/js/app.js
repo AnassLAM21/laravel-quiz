@@ -2338,21 +2338,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "quiz-component",
   data: function data() {
     return {
-      quizzes: []
+      quizzes: [],
+      pagination: {}
     };
   },
   created: function created() {
-    console.log(this.fetchModules());
+    this.fetchQuizzes();
   },
   methods: {
-    fetchModules: function fetchModules() {
+    fetchQuizzes: function fetchQuizzes(page_url) {
       var _this = this;
 
-      axios.get("api/v1/quizzes")["catch"](function (error) {
+      var vm = this;
+      page_url = page_url || 'api/v1/quizzes';
+      axios.get(page_url)["catch"](function (error) {
         console.log("Error");
       }).then(function (_ref) {
         var data = _ref.data;
@@ -7058,7 +7074,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntd {\n    height: 50px;\n    width: 50px;\n}\n#cssTable td {\n    text-align: center;\n    vertical-align: middle;\n    text-align: center;\n    vertical-align: middle;\n}\nbutton {\n    margin-top:3px;\n}\n\n", ""]);
+exports.push([module.i, "\ntd {\n    width: 10px;\n    padding:0 0 10px 0;\n}\nth{\n    font-weight: bold;\n}\n#cssTable td {\n    text-align: center;\n    vertical-align: middle;\n    text-align: center;\n    vertical-align: middle;\n}\nbutton {\n    margin-top:2px;\n}\n", ""]);
 
 // exports
 
@@ -42919,7 +42935,72 @@ var render = function() {
             0
           )
         ]
-      )
+      ),
+      _vm._v(" "),
+      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+        _c("ul", { staticClass: "pagination" }, [
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: [{ disabled: !_vm.pagination.prev_page_url }]
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetchQuizzes(_vm.pagination.prev_page_url)
+                    }
+                  }
+                },
+                [_vm._v("Previous")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item disabled" }, [
+            _c(
+              "a",
+              { staticClass: "page-link text-dark", attrs: { href: "#" } },
+              [
+                _vm._v(
+                  "Page " +
+                    _vm._s(_vm.pagination.current_page) +
+                    " of " +
+                    _vm._s(_vm.pagination.last_page)
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: [{ disabled: !_vm.pagination.next_page_url }]
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetchQuizzes(_vm.pagination.next_page_url)
+                    }
+                  }
+                },
+                [_vm._v("Next")]
+              )
+            ]
+          )
+        ])
+      ])
     ])
   ])
 }
@@ -42930,19 +43011,19 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("td", { staticClass: "text-center" }, [_vm._v("Title")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Title")]),
         _vm._v(" "),
-        _c("td", { staticClass: "text-center" }, [_vm._v("Publish")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Publish")]),
         _vm._v(" "),
-        _c("td", { staticClass: "text-center" }, [_vm._v("Module")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Module")]),
         _vm._v(" "),
-        _c("td", { staticClass: "text-center" }, [_vm._v("Views Count")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Views Count")]),
         _vm._v(" "),
-        _c("td", { staticClass: "text-center" }, [_vm._v("Created By")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Created By")]),
         _vm._v(" "),
-        _c("td", { staticClass: "text-center" }, [_vm._v("Created At")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Created At")]),
         _vm._v(" "),
-        _c("td", { staticClass: "text-center" }, [_vm._v("Action")])
+        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
       ])
     ])
   },

@@ -5,14 +5,14 @@
             <table id="cssTable" class="table table-bordered table-sm">
                 <thead>
                     <tr>
-                        <td class="text-center">Title</td>
+                        <th class="text-center">Title</th>
 
-                        <td class="text-center">Publish</td>
-                        <td class="text-center">Module</td>
-                        <td class="text-center">Views Count</td>
-                        <td class="text-center">Created By</td>
-                        <td class="text-center">Created At</td>
-                        <td class="text-center">Action</td>
+                        <th class="text-center">Publish</th>
+                        <th class="text-center">Module</th>
+                        <th class="text-center">Views Count</th>
+                        <th class="text-center">Created By</th>
+                        <th class="text-center">Created At</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,53 +34,71 @@
                     </tr>
                 </tbody>
             </table>
+
+
+            <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item"><a class="page-link" href="#" @click="fetchQuizzes(pagination.prev_page_url)">Previous</a></li>
+
+        <li class="page-item disabled"><a class="page-link text-dark" href="#">Page {{ pagination.current_page }} of {{ pagination.last_page }}</a></li>
+    
+        <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item"><a class="page-link" href="#" @click="fetchQuizzes(pagination.next_page_url)">Next</a></li>
+      </ul>
+    </nav>
+
+
         </div>
     </div>
 </template>
 <script>
     export default {
         name: "quiz-component",
-
         data() {
             return {
                 quizzes: [],
+                pagination: {},
+
             };
         },
-
         created() {
-            console.log(this.fetchModules());
+            this.fetchQuizzes();
         },
-
         methods: {
-            fetchModules() {
+            fetchQuizzes(page_url) {
+
+                let vm = this;
+                 page_url = page_url || 'api/v1/quizzes';
+
                 axios
-                    .get(`api/v1/quizzes`)
+                    .get(page_url)
                     .catch((error) => {
                         console.log("Error");
                     })
                     .then(({ data }) => {
                         this.quizzes = data.quizzes;
+                        
                     });
             },
+            
         },
     };
 </script>
 
 <style>
     td {
-        height: 50px;
-        width: 50px;
+        width: 10px;
+        padding:0 0 10px 0; 
     }
-
+    th{
+        font-weight: bold;
+    }
     #cssTable td {
         text-align: center;
         vertical-align: middle;
         text-align: center;
         vertical-align: middle;
     }
-
     button {
-        margin-top:3px;
+        margin-top:2px;
     }
-
 </style> 
