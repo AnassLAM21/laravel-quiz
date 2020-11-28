@@ -2351,6 +2351,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "quiz-component",
   data: function data() {
@@ -2372,8 +2373,19 @@ __webpack_require__.r(__webpack_exports__);
         console.log("Error");
       }).then(function (_ref) {
         var data = _ref.data;
-        _this.quizzes = data.quizzes;
+        _this.quizzes = data.data;
+        console.log(_this.quizzes[0].author.name);
+        vm.makePagination(data.meta, data.links);
       });
+    },
+    makePagination: function makePagination(meta, links) {
+      var pagination = {
+        current_page: meta.current_page,
+        last_page: meta.last_page,
+        next_page_url: links.next,
+        prev_page_url: links.prev
+      };
+      this.pagination = pagination;
     }
   }
 });
@@ -42921,7 +42933,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-center" }, [
-                    _vm._v(_vm._s(quiz.user.name))
+                    _vm._v(" " + _vm._s(quiz.author.name))
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-center" }, [
@@ -42937,8 +42949,8 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
-        _c("ul", { staticClass: "pagination" }, [
+      _c("div", { staticClass: "text-xs-center" }, [
+        _c("ul", { staticClass: "pagination justify-content-center" }, [
           _c(
             "li",
             {
@@ -56642,8 +56654,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\laravel-vuejs-quiz\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-vuejs-quiz\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\My projects\laravel-vuejs-quiz\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\My projects\laravel-vuejs-quiz\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),

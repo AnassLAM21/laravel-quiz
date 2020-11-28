@@ -22,7 +22,7 @@
                         <td class="text-center">{{ quiz.publish }}</td>
                         <td class="text-center">{{ quiz.module.title }}</td>
                         <td class="text-center">{{ quiz.views_count }}</td>
-                        <td class="text-center">{{ quiz.user.name }}</td>
+                        <td class="text-center"> {{ quiz.author.name }}</td>
                         <td class="text-center">{{ quiz.created_at }}</td>
 
                         <td class="text-center">
@@ -36,15 +36,16 @@
             </table>
 
 
-            <nav aria-label="Page navigation example">
-      <ul class="pagination">
+     <div class="text-xs-center" >
+      <ul class="pagination justify-content-center">
         <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item"><a class="page-link" href="#" @click="fetchQuizzes(pagination.prev_page_url)">Previous</a></li>
 
         <li class="page-item disabled"><a class="page-link text-dark" href="#">Page {{ pagination.current_page }} of {{ pagination.last_page }}</a></li>
+
     
         <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item"><a class="page-link" href="#" @click="fetchQuizzes(pagination.next_page_url)">Next</a></li>
       </ul>
-    </nav>
+     </div>
 
 
         </div>
@@ -65,7 +66,7 @@
         },
         methods: {
             fetchQuizzes(page_url) {
-
+                
                 let vm = this;
                  page_url = page_url || 'api/v1/quizzes';
 
@@ -75,10 +76,26 @@
                         console.log("Error");
                     })
                     .then(({ data }) => {
-                        this.quizzes = data.quizzes;
-                        
+
+                         this.quizzes = data.data;
+
+                         console.log(this.quizzes[0].author.name);
+                        vm.makePagination(data.meta, data.links);
                     });
             },
+
+
+            makePagination(meta, links) {
+            let pagination = {
+                current_page: meta.current_page,
+                last_page: meta.last_page,
+                next_page_url: links.next,
+                prev_page_url: links.prev
+            };
+            this.pagination = pagination;
+            },
+
+
             
         },
     };
