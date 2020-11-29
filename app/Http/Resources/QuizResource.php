@@ -15,21 +15,20 @@ class QuizResource extends JsonResource
 
     public function toArray($request)
     {
-
         return [
             'id' => $this->id,
             'title' => $this->title,
             'body' => $this->body,
-            'publish' => $this->publish,
+            'publish' => $this->when($this->publish, true,false),
             'published_at' => $this->published_at,
             'time' => $this->time,
             'views_count' => $this->views_count,
             'votes_count' => $this->votes_count,
             'user_id' => $this->user_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
             'module' => new ModuleResource($this->Module),
             'author' => new UserResource($this->author),
+            'created_at' => $this->created_at->toDateTimeString(),
+            'updated_at' => $this->updated_at->toDateTimeString(),
         ];
 
         

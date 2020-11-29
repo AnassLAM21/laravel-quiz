@@ -16,8 +16,8 @@ class QuizController extends Controller
 {
     public function index(Module $module)
     {
-
-        $quizzes = Quiz::with(['author','module'])->latest()->paginate(5);        
+        
+        $quizzes = Quiz::with(['author','module'])->latest()->paginate(10);        
         return  QuizResource::collection($quizzes);
     }
 

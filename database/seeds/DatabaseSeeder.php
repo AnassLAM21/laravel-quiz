@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         DB::table('modules')->delete();
         DB::table('user_quiz')->delete();
 
-        factory(User::class, rand(1,5))->create()->each(function($user) {
+        factory(User::class, rand(1,20))->create()->each(function($user) {
             $user->modules()->saveMany(factory(Module::class, rand(1,2))->make())
               ->each(function ($module) {
                 $module->quizzes()->saveMany(factory(Quiz::class, rand(1,3))->make())
