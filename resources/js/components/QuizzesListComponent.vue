@@ -100,21 +100,11 @@
     };
 </script>
 
-<style>
-    td {
-        width: 10px;
-        padding:0 0 10px 0; 
-    }
-    th{
-            font-weight: bold;
-    }
-    #cssTable td {
-        text-align: center;
-        vertical-align: middle;
-        text-align: center;
-        vertical-align: middle;
-    }
+<style lang="css">
     button {
-        margin-top:2px;
+        margin-top:1px;
+    }
+    #cssTable th{
+        font-weight: bold;
     }
 </style> 

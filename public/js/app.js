@@ -7086,7 +7086,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntd {\n    width: 10px;\n    padding:0 0 10px 0;\n}\nth{\n        font-weight: bold;\n}\n#cssTable td {\n    text-align: center;\n    vertical-align: middle;\n    text-align: center;\n    vertical-align: middle;\n}\nbutton {\n    margin-top:2px;\n}\n", ""]);
+exports.push([module.i, "\nbutton {\n    margin-top:1px;\n}\n#cssTable th{\n    font-weight: bold;\n}\n", ""]);
 
 // exports
 
