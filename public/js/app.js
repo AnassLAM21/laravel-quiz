@@ -2355,6 +2355,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "quiz-component",
@@ -7098,7 +7100,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nbutton {\n    margin-top:1px;\n}\n#cssTable th{   \n    font-weight: bold;\n}\n", ""]);
+exports.push([module.i, "\nbutton {\n    margin-top:1px;\n}\n#cssTable th{   \n    font-weight: bold;\n}\n#cssTable td{ \n    vertical-align: middle;\n}\n\n\n", ""]);
 
 // exports
 
@@ -64507,6 +64509,8 @@ var render = function() {
                     _vm._v(_vm._s(quiz.module.title))
                   ]),
                   _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [_vm._v("7")]),
+                  _vm._v(" "),
                   _c("td", { staticClass: "text-center" }, [
                     _vm._v(_vm._s(quiz.views_count))
                   ]),
@@ -64618,6 +64622,10 @@ var staticRenderFns = [
           [_vm._v("Module")]
         ),
         _vm._v(" "),
+        _c("th", { staticClass: "text-center", staticStyle: { width: "6%" } }, [
+          _vm._v("7")
+        ]),
+        _vm._v(" "),
         _c("th", { staticClass: "text-center", staticStyle: { width: "8%" } }, [
           _vm._v("Views Count")
         ]),
@@ -64640,7 +64648,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c(
           "th",
-          { staticClass: "text-center", staticStyle: { width: "10%" } },
+          { staticClass: "text-center", staticStyle: { width: "11%" } },
           [_vm._v("Action")]
         )
       ])

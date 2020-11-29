@@ -9,11 +9,12 @@
                     <tr>
                         <th class="text-center" style="width:20%;">Title</th>
                         <th class="text-center" style="width:20%;">Module</th>
+                         <th class="text-center" style="width:6%;">7</th>
                         <th class="text-center" style="width:8%;">Views Count</th>
                         <th class="text-center" style="width:5%;">Published</th>
                         <th class="text-center" style="width:15%;">Created By</th>
                         <th class="text-center" style="width:15%;">Created At</th>
-                        <th class="text-center" style="width:10%;">Action</th>
+                        <th class="text-center" style="width:11%;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,6 +23,7 @@
 
                        
                         <td class="text-center">{{ quiz.module.title }}</td>
+                        <td class="text-center">7</td>
                         <td class="text-center">{{ quiz.views_count }}</td>
                          <td class="text-center">{{ quiz.publish }} </td>
                         <td class="text-center"> {{ quiz.author.name }}</td>
@@ -117,4 +119,11 @@
     #cssTable th{   
         font-weight: bold;
     }
+
+     #cssTable td{ 
+        vertical-align: middle;
+
+    }
+
+
 </style> 
