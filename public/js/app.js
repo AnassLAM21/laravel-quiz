@@ -7086,7 +7086,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntd {\n    width: 10px;\n    padding:0 0 10px 0;\n}\nth{\n    font-weight: bold;\n}\n#cssTable td {\n    text-align: center;\n    vertical-align: middle;\n    text-align: center;\n    vertical-align: middle;\n}\nbutton {\n    margin-top:2px;\n}\n", ""]);
+exports.push([module.i, "\ntd {\n    width: 10px;\n    padding:0 0 10px 0;\n}\nth{\n        font-weight: bold;\n}\n#cssTable td {\n    text-align: center;\n    vertical-align: middle;\n    text-align: center;\n    vertical-align: middle;\n}\nbutton {\n    margin-top:2px;\n}\n", ""]);
 
 // exports
 
@@ -43025,7 +43025,9 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { staticClass: "text-center" }, [_vm._v("Title")]),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Publish")]),
+        _c("th", { staticClass: "text-center", staticStyle: { width: "5%" } }, [
+          _vm._v("Published")
+        ]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Module")]),
         _vm._v(" "),
@@ -43035,7 +43037,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Created At")]),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
+        _c(
+          "th",
+          { staticClass: "text-center", staticStyle: { width: "11%" } },
+          [_vm._v("Action")]
+        )
       ])
     ])
   },
@@ -43046,25 +43052,37 @@ var staticRenderFns = [
     return _c("td", { staticClass: "text-center" }, [
       _c(
         "button",
-        { staticClass: "btn btn-outline-danger", attrs: { type: "button" } },
+        {
+          staticClass: "btn btn-outline-danger btn-xs",
+          attrs: { type: "button" }
+        },
         [_c("i", { staticClass: "m-r-3 fas fa-trash-alt" })]
       ),
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-outline-primary", attrs: { type: "button" } },
+        {
+          staticClass: "btn btn-outline-primary btn-xs",
+          attrs: { type: "button" }
+        },
         [_c("i", { staticClass: "m-r-3 fas fa-eye" })]
       ),
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-outline-warning", attrs: { type: "button" } },
+        {
+          staticClass: "btn btn-outline-warning btn-xs",
+          attrs: { type: "button" }
+        },
         [_c("i", { staticClass: "m-r-3 fas fa-copy" })]
       ),
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-outline-success", attrs: { type: "submit" } },
+        {
+          staticClass: "btn btn-outline-success btn-xs",
+          attrs: { type: "submit" }
+        },
         [_c("i", { staticClass: "m-r-3 fas fa-edit" })]
       )
     ])

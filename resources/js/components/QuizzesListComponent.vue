@@ -2,17 +2,18 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title m-b-0">Quizzes List </h5>
+
+
             <table id="cssTable" class="table table-bordered table-sm">
                 <thead>
                     <tr>
                         <th class="text-center">Title</th>
-
-                        <th class="text-center">Publish</th>
+                        <th class="text-center" style="width:5%;">Published</th>
                         <th class="text-center">Module</th>
                         <th class="text-center">Views Count</th>
                         <th class="text-center">Created By</th>
                         <th class="text-center">Created At</th>
-                        <th class="text-center">Action</th>
+                        <th class="text-center" style="width:11%;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,12 +25,11 @@
                         <td class="text-center">{{ quiz.views_count }}</td>
                         <td class="text-center"> {{ quiz.author.name }}</td>
                         <td class="text-center">{{ quiz.created_at }}</td>
-
                         <td class="text-center">
-                            <button type="button" class="btn btn-outline-danger"><i class="m-r-3 fas fa-trash-alt"></i></button>
-                            <button type="button" class="btn btn-outline-primary"><i class="m-r-3 fas fa-eye"></i></button>
-                            <button type="button" class="btn btn-outline-warning"><i class="m-r-3 fas fa-copy"></i></button>
-                            <button type="submit" class="btn btn-outline-success"><i class="m-r-3 fas fa-edit"></i></button>
+                            <button type="button" class="btn btn-outline-danger btn-xs"><i class="m-r-3 fas fa-trash-alt"></i></button>
+                            <button type="button" class="btn btn-outline-primary btn-xs"><i class="m-r-3 fas fa-eye"></i></button>
+                            <button type="button" class="btn btn-outline-warning btn-xs"><i class="m-r-3 fas fa-copy"></i></button>
+                            <button type="submit" class="btn btn-outline-success btn-xs"><i class="m-r-3 fas fa-edit"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -58,7 +58,6 @@
             return {
                 quizzes: [],
                 pagination: {},
-
             };
         },
         created() {
@@ -107,7 +106,7 @@
         padding:0 0 10px 0; 
     }
     th{
-        font-weight: bold;
+            font-weight: bold;
     }
     #cssTable td {
         text-align: center;

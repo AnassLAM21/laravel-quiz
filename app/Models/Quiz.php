@@ -9,7 +9,17 @@ use Illuminate\Database\Eloquent\Model;
 class Quiz extends Model
 {
 
+
+
     protected $fillable = ['title','body','publish','published_at','time','views_count','votes_count'];
+
+    protected $appends = ['updated_at','updated_at'];
+
+
+
+
+  
+
 
     public function module()
     {
