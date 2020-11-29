@@ -14,7 +14,7 @@ class QuestionController extends Controller
     public function index()
     {
 
-        $questions =  Question::with('choices')->get();
+        $questions =  Question::with('choices')->paginate(5);
         return QuestionResource::collection($questions);
     }
 

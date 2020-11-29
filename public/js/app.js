@@ -2299,6 +2299,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'moment'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 //
 //
 //
@@ -2351,6 +2352,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "quiz-component",
   data: function data() {
@@ -2362,7 +2368,15 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.fetchQuizzes();
   },
+  filters: {
+    moment: function moment(date) {
+      return !(function webpackMissingModule() { var e = new Error("Cannot find module 'moment'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(date).format('DD-MM-Y  HH:mm:ss');
+    }
+  },
   methods: {
+    moment: function moment() {
+      return !(function webpackMissingModule() { var e = new Error("Cannot find module 'moment'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())();
+    },
     fetchQuizzes: function fetchQuizzes(page_url) {
       var _this = this;
 
@@ -2372,8 +2386,19 @@ __webpack_require__.r(__webpack_exports__);
         console.log("Error");
       }).then(function (_ref) {
         var data = _ref.data;
-        _this.quizzes = data.quizzes;
+        _this.quizzes = data.data;
+        console.log(_this.quizzes[0].author.name);
+        vm.makePagination(data.meta, data.links);
       });
+    },
+    makePagination: function makePagination(meta, links) {
+      var pagination = {
+        current_page: meta.current_page,
+        last_page: meta.last_page,
+        next_page_url: links.next,
+        prev_page_url: links.prev
+      };
+      this.pagination = pagination;
     }
   }
 });
@@ -7074,7 +7099,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntd {\n    width: 10px;\n    padding:0 0 10px 0;\n}\nth{\n    font-weight: bold;\n}\n#cssTable td {\n    text-align: center;\n    vertical-align: middle;\n    text-align: center;\n    vertical-align: middle;\n}\nbutton {\n    margin-top:2px;\n}\n", ""]);
+exports.push([module.i, "\nbutton {\n    margin-top:1px;\n}\n#cssTable th{   \n    font-weight: bold;\n}\n#cssTable td{ \n    vertical-align: middle;\n}\n\n\n", ""]);
 
 // exports
 
@@ -42879,7 +42904,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-body" }, [
-      _c("h5", { staticClass: "card-title m-b-0" }, [_vm._v("Quizzes List ")]),
+      _c("h4", { staticClass: "card-title m-b-0" }, [_vm._v("Quizzes List")]),
       _vm._v(" "),
       _c(
         "table",
@@ -42909,23 +42934,25 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-center" }, [
-                    _vm._v(_vm._s(quiz.publish))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-center" }, [
                     _vm._v(_vm._s(quiz.module.title))
                   ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [_vm._v("7")]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-center" }, [
                     _vm._v(_vm._s(quiz.views_count))
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-center" }, [
-                    _vm._v(_vm._s(quiz.user.name))
+                    _vm._v(_vm._s(quiz.publish) + " ")
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-center" }, [
-                    _vm._v(_vm._s(quiz.created_at))
+                    _vm._v(" " + _vm._s(quiz.author.name))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [
+                    _vm._v(_vm._s(_vm._f("moment")(quiz.created_at)))
                   ]),
                   _vm._v(" "),
                   _vm._m(1, true)
@@ -42937,8 +42964,8 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
-        _c("ul", { staticClass: "pagination" }, [
+      _c("div", { staticClass: "text-xs-center" }, [
+        _c("ul", { staticClass: "pagination justify-content-center" }, [
           _c(
             "li",
             {
@@ -43011,19 +43038,47 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("Title")]),
+        _c(
+          "th",
+          { staticClass: "text-center", staticStyle: { width: "20%" } },
+          [_vm._v("Title")]
+        ),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Publish")]),
+        _c(
+          "th",
+          { staticClass: "text-center", staticStyle: { width: "20%" } },
+          [_vm._v("Module")]
+        ),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Module")]),
+        _c("th", { staticClass: "text-center", staticStyle: { width: "6%" } }, [
+          _vm._v("7")
+        ]),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Views Count")]),
+        _c("th", { staticClass: "text-center", staticStyle: { width: "8%" } }, [
+          _vm._v("Views Count")
+        ]),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Created By")]),
+        _c("th", { staticClass: "text-center", staticStyle: { width: "5%" } }, [
+          _vm._v("Published")
+        ]),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Created At")]),
+        _c(
+          "th",
+          { staticClass: "text-center", staticStyle: { width: "15%" } },
+          [_vm._v("Created By")]
+        ),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
+        _c(
+          "th",
+          { staticClass: "text-center", staticStyle: { width: "15%" } },
+          [_vm._v("Created At")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-center", staticStyle: { width: "11%" } },
+          [_vm._v("Action")]
+        )
       ])
     ])
   },
@@ -43034,25 +43089,37 @@ var staticRenderFns = [
     return _c("td", { staticClass: "text-center" }, [
       _c(
         "button",
-        { staticClass: "btn btn-outline-danger", attrs: { type: "button" } },
+        {
+          staticClass: "btn btn-outline-danger btn-xs",
+          attrs: { type: "button" }
+        },
         [_c("i", { staticClass: "m-r-3 fas fa-trash-alt" })]
       ),
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-outline-primary", attrs: { type: "button" } },
+        {
+          staticClass: "btn btn-outline-primary btn-xs",
+          attrs: { type: "button" }
+        },
         [_c("i", { staticClass: "m-r-3 fas fa-eye" })]
       ),
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-outline-warning", attrs: { type: "button" } },
+        {
+          staticClass: "btn btn-outline-warning btn-xs",
+          attrs: { type: "button" }
+        },
         [_c("i", { staticClass: "m-r-3 fas fa-copy" })]
       ),
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-outline-success", attrs: { type: "submit" } },
+        {
+          staticClass: "btn btn-outline-success btn-xs",
+          attrs: { type: "submit" }
+        },
         [_c("i", { staticClass: "m-r-3 fas fa-edit" })]
       )
     ])

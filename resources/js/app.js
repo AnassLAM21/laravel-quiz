@@ -4,6 +4,7 @@ window.Vue = require('vue');
 
 import Vue from 'vue';
 import SimpleVueValidation from 'simple-vue-validator';
+
 Vue.use(SimpleVueValidation);
 const Validator = SimpleVueValidation.Validator;
 
