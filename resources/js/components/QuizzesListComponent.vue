@@ -1,30 +1,31 @@
 <template>
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title m-b-0">Quizzes List </h5>
+             <h4 class="card-title m-b-0">Quizzes List</h4>
 
 
             <table id="cssTable" class="table table-bordered table-sm">
                 <thead>
                     <tr>
-                        <th class="text-center">Title</th>
+                        <th class="text-center" style="width:20%;">Title</th>
+                        <th class="text-center" style="width:20%;">Module</th>
+                        <th class="text-center" style="width:8%;">Views Count</th>
                         <th class="text-center" style="width:5%;">Published</th>
-                        <th class="text-center">Module</th>
-                        <th class="text-center">Views Count</th>
-                        <th class="text-center">Created By</th>
-                        <th class="text-center">Created At</th>
-                        <th class="text-center" style="width:11%;">Action</th>
+                        <th class="text-center" style="width:15%;">Created By</th>
+                        <th class="text-center" style="width:15%;">Created At</th>
+                        <th class="text-center" style="width:10%;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(quiz,index) in quizzes" v-bind="quiz" :key="quiz.id" :index="index">
                         <td scope="row" class="text-center">{{ quiz.title }}</td>
 
-                        <td class="text-center">{{ quiz.publish }}</td>
+                       
                         <td class="text-center">{{ quiz.module.title }}</td>
                         <td class="text-center">{{ quiz.views_count }}</td>
+                         <td class="text-center">{{ quiz.publish }} </td>
                         <td class="text-center"> {{ quiz.author.name }}</td>
-                        <td class="text-center">{{ quiz.created_at }}</td>
+                        <td class="text-center">{{ quiz.created_at | moment }}</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-outline-danger btn-xs"><i class="m-r-3 fas fa-trash-alt"></i></button>
                             <button type="button" class="btn btn-outline-primary btn-xs"><i class="m-r-3 fas fa-eye"></i></button>
@@ -52,6 +53,7 @@
     </div>
 </template>
 <script>
+    import moment from 'moment';
     export default {
         name: "quiz-component",
         data() {
@@ -63,7 +65,15 @@
         created() {
             this.fetchQuizzes();
         },
+        filters: {
+            moment: function (date) {
+                return moment(date).format('DD-MM-Y  HH:mm:ss');
+            }
+        },
         methods: {
+                moment: function () {
+                return moment();
+            },
             fetchQuizzes(page_url) {
                 
                 let vm = this;
@@ -104,7 +114,7 @@
     button {
         margin-top:1px;
     }
-    #cssTable th{
+    #cssTable th{   
         font-weight: bold;
     }
 </style> 
