@@ -3,18 +3,20 @@
         <div class="card-body">
              <h4 class="card-title m-b-0">Quizzes List</h4>
 
+                <router-link :to="{ name: 'quiz' }">Quiz</router-link> |
+
 
             <table id="cssTable" class="table table-bordered table-sm">
                 <thead>
                     <tr>
-                        <th class="text-center" style="width:20%;">Title</th>
-                        <th class="text-center" style="width:20%;">Module</th>
-                         <th class="text-center" style="width:6%;">7</th>
-                        <th class="text-center" style="width:8%;">Views Count</th>
+                        <th class="text-center" style="width:15%;">Title</th>
+                        <th class="text-center" style="width:15%;">Module</th>
+                        <th class="text-center" style="width:10%;">Views Count</th>
+                        <th class="text-center" style="width:10%;">Vote Count</th>
                         <th class="text-center" style="width:5%;">Published</th>
                         <th class="text-center" style="width:15%;">Created By</th>
-                        <th class="text-center" style="width:15%;">Created At</th>
-                        <th class="text-center" style="width:11%;">Action</th>
+                        <th class="text-center" style="width:16%;">Created At</th>
+                        <th class="text-center" style="width:14%;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,8 +25,8 @@
 
                        
                         <td class="text-center">{{ quiz.module.title }}</td>
-                        <td class="text-center">7</td>
                         <td class="text-center">{{ quiz.views_count }}</td>
+                        <td class="text-center">{{ quiz.votes_count }}</td>
                          <td class="text-center">{{ quiz.publish }} </td>
                         <td class="text-center"> {{ quiz.author.name }}</td>
                         <td class="text-center">{{ quiz.created_at | moment }}</td>
@@ -57,7 +59,7 @@
 <script>
     import moment from 'moment';
     export default {
-        name: "quiz-component",
+        name: "quiz-list",
         data() {
             return {
                 quizzes: [],
@@ -113,6 +115,8 @@
 </script>
 
 <style lang="css">
+
+
     button {
         margin-top:1px;
     }
@@ -120,10 +124,10 @@
         font-weight: bold;
     }
 
-     #cssTable td{ 
+     #cssTable td,#cssTable th{ 
         vertical-align: middle;
-
     }
+
 
 
 </style> 
