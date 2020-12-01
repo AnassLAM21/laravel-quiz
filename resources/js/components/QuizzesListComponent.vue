@@ -3,7 +3,9 @@
         <div class="card-body">
              <h4 class="card-title m-b-0">Quizzes List</h4>
 
-                <router-link :to="{ name: 'quiz' }">Quiz</router-link> |
+                <router-link :to="{ name: 'quiz' }">Quiz</router-link> 
+                
+                
 
 
             <table id="cssTable" class="table table-bordered table-sm">
