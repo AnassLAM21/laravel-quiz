@@ -56,12 +56,7 @@
 
             <div class="container-fluid"> 
 
-                {{-- <question-component></question-component> --}}
-                             
-
-                <quizzes-list-component>  </quizzes-list-component>
-                <quiz-component></quiz-component>   
-                
+                <router-view></router-view>
                 
             </div>
 
