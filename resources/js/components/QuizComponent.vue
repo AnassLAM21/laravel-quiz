@@ -84,7 +84,7 @@
 </template>
 <script>
     export default {
-        name: "quiz-component",
+        name: "quiz",
 
         data() {
             return {
