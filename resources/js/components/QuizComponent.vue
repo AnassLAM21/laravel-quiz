@@ -111,7 +111,9 @@
             },
         },
         created() {
-            this.isEditing ? (this.quiz.id = 2) : null;
+            let app = this;
+            let quizId = app.$route.params.id;
+            this.isEditing ? (this.quiz.id = quizId) : null;
         },
 
         mounted() {
@@ -127,7 +129,7 @@
 
             remove() {
               
-                axios.delete(`api/v1/modules/${this.moduleId}/quizzes/${this.quiz.id}`)
+                axios.delete(`api/v1/quizzes/${this.quiz.id}`)
                 .catch((error) => {
                     console.log("Error");
                 })
@@ -162,7 +164,7 @@
 
             restoreFromCache() {
                 this.quiz = Object.assign({}, this.cachedQuiz);
-                this.moduleId = this.quiz.module_id;
+                this.moduleId = this.quiz.module.id;
             },
 
             cancel() {
@@ -192,7 +194,14 @@
                     });
             },
             update() {
-                axios.put(`api/v1/modules/${this.moduleId}/quizzes/${this.quiz.id}`, this.quiz)
+
+                const formData = new FormData(); 
+
+                for ( var key in this.quiz) {
+                    formData.append(key, this.quiz[key]); 
+                } 
+
+                axios.put(`/api/v1/modules/${this.moduleId}/quizzes/${this.quiz.id}`, this.quiz)
                     .catch((error) => {
                         console.log("Error");
                     })
@@ -208,9 +217,10 @@
                         console.log("Error");
                     })
                     .then(({ data }) => {
-                        console.log("fetch module");
+                        
                         this.modules = data.quizzes;
                         this.modules[0] != null && this.moduleId == null ? (this.moduleId = this.modules[0].id) : null;
+
                     });
             },
             fetchQuiz() {
@@ -222,7 +232,7 @@
                     .then(({ data }) => {
                         this.quiz = data.quiz;
                         this.cachedQuiz = Object.assign({}, data.quiz);
-                        this.moduleId = this.quiz.module_id;
+                        this.moduleId = this.quiz.module.id;
                     });
             },
         },

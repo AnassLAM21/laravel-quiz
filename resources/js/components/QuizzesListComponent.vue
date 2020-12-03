@@ -3,7 +3,7 @@
         <div class="card-body">
              <h4 class="card-title m-b-0">Quizzes List</h4>
 
-                <router-link :to="{ name: 'quiz' }">Quiz</router-link> 
+                
                 
                 
 
@@ -36,7 +36,11 @@
                             <button type="button" class="btn btn-outline-danger btn-xs"><i class="m-r-3 fas fa-trash-alt"></i></button>
                             <button type="button" class="btn btn-outline-primary btn-xs"><i class="m-r-3 fas fa-eye"></i></button>
                             <button type="button" class="btn btn-outline-warning btn-xs"><i class="m-r-3 fas fa-copy"></i></button>
-                            <button type="submit" class="btn btn-outline-success btn-xs"><i class="m-r-3 fas fa-edit"></i></button>
+
+                            <router-link :to="{ name: 'quiz',params: { id: quiz.id } }">
+                                <button type="button" class="btn btn-outline-success btn-xs"><i class="m-r-3 fas fa-edit"></i></button>
+                            </router-link>
+
                         </td>
                     </tr>
                 </tbody>

@@ -14,7 +14,7 @@ use stdClass;
 
 class QuizController extends Controller 
 {
-    public function index(Module $module)
+    public function index()
     {
         
         $quizzes = Quiz::with(['author','module'])->latest()->paginate(10);        
@@ -112,7 +112,7 @@ class QuizController extends Controller
         }
     }
 
-    public function destroy(Module $module,Quiz $quiz)
+    public function destroy(Quiz $quiz)
     {
         $quiz->delete();
         return response()->json(['message' => "Your quiz has been removed", 204]);

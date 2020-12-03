@@ -18,7 +18,8 @@ class ModuleResource extends JsonResource
                 'id' => $this->id,
                 'title' => $this->title,
                 'body' => $this->body,
-                'user_id' => $this->user_id,
+                'choices' => QuizResource::collection($this->quizzes),
+                'user' => new UserResource($this->user),
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at,
             ];

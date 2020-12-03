@@ -20,20 +20,16 @@ use Illuminate\Support\Facades\Auth;
 
 
 
-Route::prefix('user')->group(function () {
+// Route::prefix('user')->group(function () {
 
-    Route::post('login','api\v1\LoginController@login');
-    Route::post('register','api\v1\RegisterController@register');
+//     Route::post('login','api\v1\LoginController@login');
+//     Route::post('register','api\v1\RegisterController@register');
     
-    Route::middleware('auth:api')->group(function () {
-        Route::get('/all', 'api\v1\user\UserController@index');
-        Route::post('/logout','api\v1\LogoutController@logout');
-    
-    });
-
-
-
-});
+//     Route::middleware('auth:api')->group(function () {
+//         Route::get('/all', 'api\v1\user\UserController@index');
+//         Route::post('/logout','api\v1\LogoutController@logout');
+//     });
+// });
 
 
 // Module API
@@ -45,14 +41,14 @@ Route::delete('modules/{module}', 'ModuleController@destroy');
 
 
 // Quizzes API
- Route::resource('modules.quizzes', 'QuizController')->except(['index', 'create', 'show']);
- Route::resource('quizzes', 'QuizController')->except(['update', 'destroy','store']);
+ Route::resource('modules.quizzes', 'QuizController')->except(['index', 'create', 'show','destroy']);
+ Route::resource('quizzes', 'QuizController')->except(['update','store']);
 
-// Question API
-Route::resource('questions', 'QuestionController');
-Route::resource('quizzes.questions', 'QuestionController')->except(['index', 'create', 'show']);
+// // Question API
+// Route::resource('questions', 'QuestionController');
+// Route::resource('quizzes.questions', 'QuestionController')->except(['index', 'create', 'show']);
 
-// Choice API
-Route::resource('questions.choices', 'ChoiceController');
+// // Choice API
+// Route::resource('questions.choices', 'ChoiceController');
 
-Route::post('files', 'FileController@upload');
+// Route::post('files', 'FileController@upload');

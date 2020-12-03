@@ -23,8 +23,17 @@ const Quiz = require('./components/QuizComponent.vue').default;
 const QuizList = require('./components/QuizzesListComponent.vue').default;
 
 const routes = [
-    { path: '/',name:'quiz-list', component: QuizList },
-    { path: '/quiz', name:'quiz',component: Quiz },
+    { 
+      path: '/',
+      name: 'quiz-list', 
+      component: QuizList 
+    },
+    { 
+      path: '/quiz/:id', 
+      name: 'quiz',
+      component: Quiz,
+      params: true
+    },
   ];
   
 
