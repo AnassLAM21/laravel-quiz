@@ -2059,9 +2059,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (_ref2) {
         var data = _ref2.data;
         console.log("the quiz has been deleted");
+        console.log(_this2.pagination);
 
-        _this2.$router.push('/'); //this.fetchQuizzes();
-
+        _this2.fetchQuizzes('api/v1/quizzes?page=' + _this2.pagination.current_page + '');
       });
     }
   }

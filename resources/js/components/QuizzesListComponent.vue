@@ -123,11 +123,8 @@
                 })
                 .then(({ data }) => {
                     console.log("the quiz has been deleted");
-
-                    this.$router.push('/');
-
-
-                    //this.fetchQuizzes();
+                    console.log(this.pagination);
+                    this.fetchQuizzes('api/v1/quizzes?page='+ this.pagination.current_page+'');
                 });
 
             }           
