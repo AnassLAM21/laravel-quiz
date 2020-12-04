@@ -1,13 +1,9 @@
 require('./bootstrap');
-
 window.Vue = require('vue');
-
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
-
 import SimpleVueValidation from 'simple-vue-validator';
-
 Vue.use(SimpleVueValidation);
 const Validator = SimpleVueValidation.Validator;
 

@@ -33,7 +33,7 @@
                         <td class="text-center"> {{ quiz.author.name }}</td>
                         <td class="text-center">{{ quiz.created_at | moment }}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-outline-danger btn-xs"><i class="m-r-3 fas fa-trash-alt"></i></button>
+                            <button type="button" class="btn btn-outline-danger btn-xs" @click="removedQuiz(quiz.id)"><i class="m-r-3 fas fa-trash-alt"></i></button>
                             <button type="button" class="btn btn-outline-primary btn-xs"><i class="m-r-3 fas fa-eye"></i></button>
                             <button type="button" class="btn btn-outline-warning btn-xs"><i class="m-r-3 fas fa-copy"></i></button>
 
@@ -114,8 +114,23 @@
             this.pagination = pagination;
             },
 
+            removedQuiz(id){
+                const index = this.quizzes.findIndex((item) => item.id == id);
+                this.quizzes.splice(index, 1);
+                 axios.delete(`api/v1/quizzes/${id}`)
+                .catch((error) => {
+                    console.log("Error");
+                })
+                .then(({ data }) => {
+                    console.log("the quiz has been deleted");
 
-            
+                    this.$router.push('/');
+
+
+                    //this.fetchQuizzes();
+                });
+
+            }           
         },
     };
 </script>

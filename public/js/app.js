@@ -1844,6 +1844,8 @@ __webpack_require__.r(__webpack_exports__);
           views_count: null,
           votes_count: null
         };
+
+        _this2.$router.push('/');
       });
     },
     selectFile: function selectFile(event) {
@@ -2044,6 +2046,23 @@ __webpack_require__.r(__webpack_exports__);
         prev_page_url: links.prev
       };
       this.pagination = pagination;
+    },
+    removedQuiz: function removedQuiz(id) {
+      var _this2 = this;
+
+      var index = this.quizzes.findIndex(function (item) {
+        return item.id == id;
+      });
+      this.quizzes.splice(index, 1);
+      axios["delete"]("api/v1/quizzes/".concat(id))["catch"](function (error) {
+        console.log("Error");
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        console.log("the quiz has been deleted");
+
+        _this2.$router.push('/'); //this.fetchQuizzes();
+
+      });
     }
   }
 });
@@ -62973,11 +62992,23 @@ var render = function() {
                     "td",
                     { staticClass: "text-center" },
                     [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-outline-danger btn-xs",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.removedQuiz(quiz.id)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "m-r-3 fas fa-trash-alt" })]
+                      ),
+                      _vm._v(" "),
                       _vm._m(1, true),
                       _vm._v(" "),
                       _vm._m(2, true),
-                      _vm._v(" "),
-                      _vm._m(3, true),
                       _vm._v(" "),
                       _c(
                         "router-link",
@@ -63129,19 +63160,6 @@ var staticRenderFns = [
         )
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-outline-danger btn-xs",
-        attrs: { type: "button" }
-      },
-      [_c("i", { staticClass: "m-r-3 fas fa-trash-alt" })]
-    )
   },
   function() {
     var _vm = this
@@ -79697,8 +79715,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\quiz-application\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\laravel-vuejs-quiz\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-vuejs-quiz\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),

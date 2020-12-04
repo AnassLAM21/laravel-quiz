@@ -147,6 +147,8 @@
                     views_count: null,
                     votes_count: null,
                 }
+
+                this.$router.push('/');
                 });
 
             },
