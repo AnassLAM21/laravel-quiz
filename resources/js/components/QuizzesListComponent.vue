@@ -109,17 +109,66 @@
             },
 
             removedQuiz(id){
-                const index = this.quizzes.findIndex((item) => item.id == id);
+               
+
+
+
+
+
+
+
+
+
+
+
+
+
+this.$toast.question('Are you sure about that?', "Confirm", {
+            timeout: 20000,
+            close: false,
+            overlay: true,
+            displayMode: 'once',
+            zindex: 999,
+            title: 'Hey',            
+            position: 'center',
+            buttons: [
+                ['<button><b>YES</b></button>', (instance, toast) => {
+                    
+
+
+                 const index = this.quizzes.findIndex((item) => item.id == id);
                 this.quizzes.splice(index, 1);
                  axios.delete(`api/v1/quizzes/${id}`)
                 .catch((error) => {
-                    console.log("Error");
+                    this.$toast.error(err.response.data.message, "Error", { timeout: 3000 });                
                 })
                 .then(({ data }) => {
-                    console.log("the quiz has been deleted");
-                    console.log(this.pagination);
+
+                    this.$toast.success(data.message, "Success", { timeout: 2000 });
                     // this.fetchQuizzes('api/v1/quizzes?page='+ this.pagination.current_page+'');
                 });
+
+                    
+
+
+                    instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                }, true],
+                ['<button>NO</button>', function (instance, toast) {
+                    instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                }],
+            ]            
+            });        
+
+
+
+
+
+
+
+
+
+
+
 
             }           
         },

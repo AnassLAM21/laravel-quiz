@@ -29,6 +29,7 @@
         "moment": "^2.29.1",
         "simple-vue-validator": "^0.16.0",
         "vue-datetime": "^1.0.0-beta.14",
+        "vue-izitoast": "^1.2.1",
         "vue-router": "^3.4.9",
         "vuejs-paginate": "^2.1.0",
         "weekstart": "^1.0.1"

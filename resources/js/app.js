@@ -1,7 +1,11 @@
 require('./bootstrap');
 window.Vue = require('vue');
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+
+import VueIziToast from 'vue-izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+Vue.use(VueIziToast);
 
 import SimpleVueValidation from 'simple-vue-validator';
 Vue.use(SimpleVueValidation);

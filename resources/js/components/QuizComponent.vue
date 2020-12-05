@@ -189,10 +189,10 @@
                 console.log(this.quiz);
                 axios.post(`/api/v1/modules/${this.moduleId}/quizzes`, formData)
                     .catch((error) => {
-                        console.log("Error");
+                        this.$toast.error(err.response.data.message, "Error", { timeout: 3000 }); 
                     })
                     .then(({ data }) => {
-                        console.log("the quiz has been created");
+                        this.$toast.success(data.message, "Success", { timeout: 2000 });
                     });
             },
             update() {
@@ -205,10 +205,10 @@
 
                 axios.put(`/api/v1/modules/${this.moduleId}/quizzes/${this.quiz.id}`, this.quiz)
                     .catch((error) => {
-                        console.log("Error");
+                        this.$toast.error(err.response.data.message, "Error", { timeout: 3000 });
                     })
                     .then(({ data }) => {
-                        console.log("the quiz has been updated");
+                        this.$toast.success(data.message, "Success", { timeout: 2000 });
                         this.cachedQuiz = Object.assign({}, this.quiz);
                     });
             },
