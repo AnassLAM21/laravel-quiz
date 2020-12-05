@@ -3,11 +3,6 @@
         <div class="card-body">
              <h4 class="card-title m-b-0">Quizzes List</h4>
 
-                
-                
-                
-
-
             <table id="cssTable" class="table table-bordered table-sm">
                 <thead>
                     <tr>
@@ -50,10 +45,9 @@
      <div class="text-xs-center" >
       <ul class="pagination justify-content-center">
         <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item"><a class="page-link" href="#" @click="fetchQuizzes(pagination.prev_page_url)">Previous</a></li>
+        
+        <li class="page-item" v-for="index in pagination.last_page" :key="index" ><a class="page-link" href="#"  @click="fetchQuizzes('api/v1/quizzes?page='+ index +'')"> {{ index }}  </a></li>
 
-        <li class="page-item disabled"><a class="page-link text-dark" href="#">Page {{ pagination.current_page }} of {{ pagination.last_page }}</a></li>
-
-    
         <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item"><a class="page-link" href="#" @click="fetchQuizzes(pagination.next_page_url)">Next</a></li>
       </ul>
      </div>
@@ -124,7 +118,7 @@
                 .then(({ data }) => {
                     console.log("the quiz has been deleted");
                     console.log(this.pagination);
-                    this.fetchQuizzes('api/v1/quizzes?page='+ this.pagination.current_page+'');
+                    // this.fetchQuizzes('api/v1/quizzes?page='+ this.pagination.current_page+'');
                 });
 
             }           

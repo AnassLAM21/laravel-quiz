@@ -1997,12 +1997,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "quiz-list",
@@ -2059,9 +2053,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (_ref2) {
         var data = _ref2.data;
         console.log("the quiz has been deleted");
-        console.log(_this2.pagination);
-
-        _this2.fetchQuizzes('api/v1/quizzes?page=' + _this2.pagination.current_page + '');
+        console.log(_this2.pagination); // this.fetchQuizzes('api/v1/quizzes?page='+ this.pagination.current_page+'');
       });
     }
   }
@@ -63040,68 +63032,78 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "text-xs-center" }, [
-        _c("ul", { staticClass: "pagination justify-content-center" }, [
-          _c(
-            "li",
-            {
-              staticClass: "page-item",
-              class: [{ disabled: !_vm.pagination.prev_page_url }]
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      return _vm.fetchQuizzes(_vm.pagination.prev_page_url)
-                    }
-                  }
-                },
-                [_vm._v("Previous")]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("li", { staticClass: "page-item disabled" }, [
+        _c(
+          "ul",
+          { staticClass: "pagination justify-content-center" },
+          [
             _c(
-              "a",
-              { staticClass: "page-link text-dark", attrs: { href: "#" } },
+              "li",
+              {
+                staticClass: "page-item",
+                class: [{ disabled: !_vm.pagination.prev_page_url }]
+              },
               [
-                _vm._v(
-                  "Page " +
-                    _vm._s(_vm.pagination.current_page) +
-                    " of " +
-                    _vm._s(_vm.pagination.last_page)
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.fetchQuizzes(_vm.pagination.prev_page_url)
+                      }
+                    }
+                  },
+                  [_vm._v("Previous")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.pagination.last_page, function(index) {
+              return _c("li", { key: index, staticClass: "page-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.fetchQuizzes(
+                          "api/v1/quizzes?page=" + index + ""
+                        )
+                      }
+                    }
+                  },
+                  [_vm._v(" " + _vm._s(index) + "  ")]
+                )
+              ])
+            }),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "page-item",
+                class: [{ disabled: !_vm.pagination.next_page_url }]
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.fetchQuizzes(_vm.pagination.next_page_url)
+                      }
+                    }
+                  },
+                  [_vm._v("Next")]
                 )
               ]
             )
-          ]),
-          _vm._v(" "),
-          _c(
-            "li",
-            {
-              staticClass: "page-item",
-              class: [{ disabled: !_vm.pagination.next_page_url }]
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      return _vm.fetchQuizzes(_vm.pagination.next_page_url)
-                    }
-                  }
-                },
-                [_vm._v("Next")]
-              )
-            ]
-          )
-        ])
+          ],
+          2
+        )
       ])
     ])
   ])

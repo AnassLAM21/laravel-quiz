@@ -14,7 +14,7 @@ class QuestionController extends Controller
     public function index()
     {
 
-        $questions =  Question::with('choices')->orderBy('id', 'asc')->paginate(5);
+        $questions =  Question::with('choices')->orderBy('id', 'asc')->paginate(10);
         return QuestionResource::collection($questions);
     }
 
