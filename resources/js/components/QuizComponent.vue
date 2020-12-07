@@ -128,29 +128,38 @@
         methods: {
 
             remove() {
-              
-                axios.delete(`api/v1/quizzes/${this.quiz.id}`)
+
+
+                this.$toast.question('Are you sure about that?', "Confirm", {
+            timeout: 20000,
+            close: false,
+            overlay: true,
+            displayMode: 'once',
+            zindex: 999,
+            title: 'Hey',            
+            position: 'center',
+            buttons: [
+                ['<button><b>YES</b></button>', (instance, toast) => {
+                 axios.delete(`api/v1/quizzes/${this.quiz.id}`)
                 .catch((error) => {
-                    console.log("Error");
+                    this.$toast.error(err.response.data.message, "Error", { timeout: 3000 });                
                 })
                 .then(({ data }) => {
-                    console.log("the quiz has been deleted");
-                    this.isEditing = false;
-                    this.quiz = {
-                    id: null,
-                    title: "",
-                    body: "",
-                    file : null,
-                    publish: true,
-                    publish_published_at : null,
-                    time : null,
-                    views_count: null,
-                    votes_count: null,
-                }
-
-                this.$router.push('/');
+                    this.$router.push('/');
+                    //this.$toast.success(data.message, "Success", { timeout: 2000 });
+                    // this.fetchQuizzes('api/v1/quizzes?page='+ this.pagination.current_page+'');
                 });
-
+                instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                }, true],
+                ['<button>NO</button>', function (instance, toast) {
+                    instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                }],
+            ]            
+            });   
+                
+                
+                
+                
             },
 
             selectFile(event) {

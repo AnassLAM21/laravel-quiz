@@ -1827,25 +1827,34 @@ __webpack_require__.r(__webpack_exports__);
     remove: function remove() {
       var _this2 = this;
 
-      axios["delete"]("api/v1/quizzes/".concat(this.quiz.id))["catch"](function (error) {
-        console.log("Error");
-      }).then(function (_ref) {
-        var data = _ref.data;
-        console.log("the quiz has been deleted");
-        _this2.isEditing = false;
-        _this2.quiz = {
-          id: null,
-          title: "",
-          body: "",
-          file: null,
-          publish: true,
-          publish_published_at: null,
-          time: null,
-          views_count: null,
-          votes_count: null
-        };
+      this.$toast.question('Are you sure about that?', "Confirm", {
+        timeout: 20000,
+        close: false,
+        overlay: true,
+        displayMode: 'once',
+        zindex: 999,
+        title: 'Hey',
+        position: 'center',
+        buttons: [['<button><b>YES</b></button>', function (instance, toast) {
+          axios["delete"]("api/v1/quizzes/".concat(_this2.quiz.id))["catch"](function (error) {
+            _this2.$toast.error(err.response.data.message, "Error", {
+              timeout: 3000
+            });
+          }).then(function (_ref) {
+            var data = _ref.data;
 
-        _this2.$router.push('/');
+            _this2.$router.push('/'); //this.$toast.success(data.message, "Success", { timeout: 2000 });
+            // this.fetchQuizzes('api/v1/quizzes?page='+ this.pagination.current_page+'');
+
+          });
+          instance.hide({
+            transitionOut: 'fadeOut'
+          }, toast, 'button');
+        }, true], ['<button>NO</button>', function (instance, toast) {
+          instance.hide({
+            transitionOut: 'fadeOut'
+          }, toast, 'button');
+        }]]
       });
     },
     selectFile: function selectFile(event) {

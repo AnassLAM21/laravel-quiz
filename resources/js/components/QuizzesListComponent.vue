@@ -133,10 +133,7 @@ this.$toast.question('Are you sure about that?', "Confirm", {
             position: 'center',
             buttons: [
                 ['<button><b>YES</b></button>', (instance, toast) => {
-                    
-
-
-                 const index = this.quizzes.findIndex((item) => item.id == id);
+                const index = this.quizzes.findIndex((item) => item.id == id);
                 this.quizzes.splice(index, 1);
                  axios.delete(`api/v1/quizzes/${id}`)
                 .catch((error) => {
@@ -147,11 +144,7 @@ this.$toast.question('Are you sure about that?', "Confirm", {
                     this.$toast.success(data.message, "Success", { timeout: 2000 });
                     // this.fetchQuizzes('api/v1/quizzes?page='+ this.pagination.current_page+'');
                 });
-
-                    
-
-
-                    instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
                 }, true],
                 ['<button>NO</button>', function (instance, toast) {
                     instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
