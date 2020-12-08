@@ -16,6 +16,11 @@ class QuizController extends Controller
 {
     public function index()
     { 
+
+        //'title','body'
+        $module = new Module();
+        $module->title= "Tilte";
+        $module->body= "body";
         $quizzes = Quiz::with(['author','module'])->orderBy('title', 'asc')->paginate(10);        
         return  QuizResource::collection($quizzes);
     }
