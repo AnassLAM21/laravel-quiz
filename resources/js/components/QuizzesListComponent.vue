@@ -3,6 +3,11 @@
         <div class="card-body">
              <h4 class="card-title m-b-0">Quizzes List</h4>
 
+             <router-link :to="{ name: 'quiz' }">
+                 <button type="button" class="btn btn-outline-success btn-xs"><i class="m-r-3 fas fa-edit"></i></button>
+             </router-link>
+
+
             <table id="cssTable" class="table table-bordered table-sm">
                 <thead>
                     <tr>
