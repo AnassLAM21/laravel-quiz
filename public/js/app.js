@@ -1810,7 +1810,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var app = this;
     var quizId = app.$route.params.id;
-    this.isEditing ? this.quiz.id = quizId : null;
+    this.isEditing = false; //? (this.quiz.id = quizId) : null;
   },
   mounted: function mounted() {
     var _this = this;
