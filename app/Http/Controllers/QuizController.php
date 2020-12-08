@@ -17,10 +17,7 @@ class QuizController extends Controller
     public function index()
     { 
 
-        //'title','body'
-        $module = new Module();
-        $module->title= "Tilte";
-        $module->body= "body";
+    
         $quizzes = Quiz::with(['author','module'])->orderBy('title', 'asc')->paginate(10);        
         return  QuizResource::collection($quizzes);
     }
@@ -30,9 +27,13 @@ class QuizController extends Controller
         return response()->json(['quiz' => new QuizResource($quiz)],200);
     }
 
-    public function store(Module $module,Request $request)
+    public function store(Module $module=null,Request $request)
     {
 
+            //'title','body'
+            $module = new Module();
+            $module->title= "Tilte";
+            $module->body= "body";
         
         if ($request->hasFile('file')) {
             $image = $request->file('file');
