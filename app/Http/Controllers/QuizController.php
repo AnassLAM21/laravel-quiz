@@ -27,7 +27,7 @@ class QuizController extends Controller
         return response()->json(['quiz' => new QuizResource($quiz)],200);
     }
 
-    public function store(Module $module=null,Request $request)
+    public function store(Request $request)
     {
 
             //'title','body'
