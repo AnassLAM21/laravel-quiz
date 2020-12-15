@@ -1810,7 +1810,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var app = this;
     var quizId = app.$route.params.id;
-    this.isEditing = false; //? (this.quiz.id = quizId) : null;
+    this.isEditing ? this.quiz.id = quizId : null;
   },
   mounted: function mounted() {
     var _this = this;
@@ -1961,6 +1961,50 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -63038,205 +63082,284 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
-    _c(
-      "div",
-      { staticClass: "card-body" },
-      [
-        _c("h4", { staticClass: "card-title m-b-0" }, [_vm._v("Quizzes List")]),
-        _vm._v(" "),
-        _c("router-link", { attrs: { to: { name: "quiz" } } }, [
+    _c("div", { staticClass: "card-body" }, [
+      _c("h4", { staticClass: "card-title m-b-0" }, [_vm._v("Quizzes List")]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "table",
+        {
+          staticClass: "table table-bordered table-sm",
+          attrs: { id: "cssTable" }
+        },
+        [
+          _vm._m(1),
+          _vm._v(" "),
           _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-success btn-xs",
-              attrs: { type: "button" }
-            },
-            [_c("i", { staticClass: "m-r-3 fas fa-edit" })]
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "table",
-          {
-            staticClass: "table table-bordered table-sm",
-            attrs: { id: "cssTable" }
-          },
-          [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.quizzes, function(quiz, index) {
-                return _c(
+            "tbody",
+            _vm._l(_vm.quizzes, function(quiz, index) {
+              return _c(
+                "tr",
+                _vm._b(
+                  { key: quiz.id, attrs: { index: index } },
                   "tr",
-                  _vm._b(
-                    { key: quiz.id, attrs: { index: index } },
-                    "tr",
-                    quiz,
-                    false
+                  quiz,
+                  false
+                ),
+                [
+                  _c(
+                    "td",
+                    { staticClass: "text-center", attrs: { scope: "row" } },
+                    [_vm._v(_vm._s(quiz.title))]
                   ),
-                  [
-                    _c(
-                      "td",
-                      { staticClass: "text-center", attrs: { scope: "row" } },
-                      [_vm._v(_vm._s(quiz.title))]
-                    ),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [
-                      _vm._v(_vm._s(quiz.module.title))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [
-                      _vm._v(_vm._s(quiz.views_count))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [
-                      _vm._v(_vm._s(quiz.votes_count))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [
-                      _vm._v(_vm._s(quiz.publish) + " ")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [
-                      _vm._v(" " + _vm._s(quiz.author.name))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [
-                      _vm._v(_vm._s(_vm._f("moment")(quiz.created_at)))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "text-center" },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-outline-danger btn-xs",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                return _vm.removedQuiz(quiz.id)
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "m-r-3 fas fa-trash-alt" })]
-                        ),
-                        _vm._v(" "),
-                        _vm._m(1, true),
-                        _vm._v(" "),
-                        _vm._m(2, true),
-                        _vm._v(" "),
-                        _c(
-                          "router-link",
-                          {
-                            attrs: {
-                              to: { name: "quiz", params: { id: quiz.id } }
-                            }
-                          },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-outline-success btn-xs",
-                                attrs: { type: "button" }
-                              },
-                              [_c("i", { staticClass: "m-r-3 fas fa-edit" })]
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  ]
-                )
-              }),
-              0
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "text-xs-center" }, [
-          _c(
-            "ul",
-            { staticClass: "pagination justify-content-center" },
-            [
-              _c(
-                "li",
-                {
-                  staticClass: "page-item",
-                  class: [{ disabled: !_vm.pagination.prev_page_url }]
-                },
-                [
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [
+                    _vm._v(_vm._s(quiz.module.title))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [
+                    _vm._v(_vm._s(quiz.views_count))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [
+                    _vm._v(_vm._s(quiz.votes_count))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [
+                    _vm._v(_vm._s(quiz.publish) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [
+                    _vm._v(" " + _vm._s(quiz.author.name))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [
+                    _vm._v(_vm._s(_vm._f("moment")(quiz.created_at)))
+                  ]),
+                  _vm._v(" "),
                   _c(
-                    "a",
-                    {
-                      staticClass: "page-link",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          return _vm.fetchQuizzes(_vm.pagination.prev_page_url)
-                        }
-                      }
-                    },
-                    [_vm._v("Previous")]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _vm._l(_vm.pagination.last_page, function(index) {
-                return _c("li", { key: index, staticClass: "page-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "page-link",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          return _vm.fetchQuizzes(
-                            "api/v1/quizzes?page=" + index + ""
+                    "td",
+                    { staticClass: "text-center" },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-outline-danger btn-xs",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.removedQuiz(quiz.id)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "m-r-3 fas fa-trash-alt" })]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(2, true),
+                      _vm._v(" "),
+                      _vm._m(3, true),
+                      _vm._v(" "),
+                      _c(
+                        "router-link",
+                        {
+                          attrs: {
+                            to: { name: "quiz", params: { id: quiz.id } }
+                          }
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-success btn-xs",
+                              attrs: { type: "button" }
+                            },
+                            [_c("i", { staticClass: "m-r-3 fas fa-edit" })]
                           )
-                        }
-                      }
-                    },
-                    [_vm._v(" " + _vm._s(index) + "  ")]
-                  )
-                ])
-              }),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  staticClass: "page-item",
-                  class: [{ disabled: !_vm.pagination.next_page_url }]
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "page-link",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          return _vm.fetchQuizzes(_vm.pagination.next_page_url)
-                        }
-                      }
-                    },
-                    [_vm._v("Next")]
+                        ]
+                      )
+                    ],
+                    1
                   )
                 ]
               )
-            ],
-            2
+            }),
+            0
           )
-        ])
-      ],
-      1
-    )
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-xs-center" }, [
+        _c(
+          "ul",
+          { staticClass: "pagination justify-content-center" },
+          [
+            _c(
+              "li",
+              {
+                staticClass: "page-item",
+                class: [{ disabled: !_vm.pagination.prev_page_url }]
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.fetchQuizzes(_vm.pagination.prev_page_url)
+                      }
+                    }
+                  },
+                  [_vm._v("Previous")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.pagination.last_page, function(index) {
+              return _c("li", { key: index, staticClass: "page-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.fetchQuizzes(
+                          "api/v1/quizzes?page=" + index + ""
+                        )
+                      }
+                    }
+                  },
+                  [_vm._v(" " + _vm._s(index) + "  ")]
+                )
+              ])
+            }),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "page-item",
+                class: [{ disabled: !_vm.pagination.next_page_url }]
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.fetchQuizzes(_vm.pagination.next_page_url)
+                      }
+                    }
+                  },
+                  [_vm._v("Next")]
+                )
+              ]
+            )
+          ],
+          2
+        )
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("form", [
+        _c("div", { staticClass: "form-row" }, [
+          _c("div", { staticClass: "form-group col-md-4" }, [
+            _c("label", { attrs: { for: "inputCity" } }, [_vm._v("Search")]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", id: "inputCity" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-4" }, [
+            _c("label", { attrs: { for: "inputState" } }, [_vm._v("Module")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              { staticClass: "form-control", attrs: { id: "inputState" } },
+              [
+                _c("option", { attrs: { selected: "" } }, [
+                  _vm._v("Choose...")
+                ]),
+                _vm._v(" "),
+                _c("option", [_vm._v("...")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-4" }, [
+            _c(
+              "label",
+              {
+                staticStyle: { "justify-content": "flex-end" },
+                attrs: { for: "inputState" }
+              },
+              [_vm._v("Option")]
+            ),
+            _vm._v(" "),
+            _c("div", [
+              _c(
+                "div",
+                {
+                  staticClass: "btn-group",
+                  attrs: { role: "group", "aria-label": "Basic example" }
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button" }
+                    },
+                    [_vm._v("Import Exel")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button" }
+                    },
+                    [_vm._v("Export Exel")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button" }
+                    },
+                    [_vm._v("Delete")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button" }
+                    },
+                    [_vm._v("Print")]
+                  )
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

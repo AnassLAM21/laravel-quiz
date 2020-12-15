@@ -113,7 +113,7 @@
         created() {
             let app = this;
             let quizId = app.$route.params.id;
-            this.isEditing =false //? (this.quiz.id = quizId) : null;
+            this.isEditing ? (this.quiz.id = quizId) : null;
         },
 
         mounted() {

@@ -3,9 +3,53 @@
         <div class="card-body">
              <h4 class="card-title m-b-0">Quizzes List</h4>
 
-             <router-link :to="{ name: 'quiz' }">
-                 <button type="button" class="btn btn-outline-success btn-xs"><i class="m-r-3 fas fa-edit"></i></button>
-             </router-link>
+           
+
+
+            <div>
+
+
+                <form>
+                    <!-- <div class="form-group">
+                        <label for="inputAddress">Address</label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                    </div> -->
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                        <label for="inputCity">Search</label>
+                        <input type="text" class="form-control" id="inputCity">
+                        </div>
+                        <div class="form-group col-md-4">
+                        <label for="inputState">Module</label>
+                        <select id="inputState" class="form-control">
+                            <option selected>Choose...</option>
+                            <option>...</option>
+                        </select>
+                        </div>
+
+
+                        <div class="form-group col-md-4">
+                        <label for="inputState" style="justify-content: flex-end;">Option</label>
+                        <div>
+                         <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary">Import Exel</button>
+                        <button type="button" class="btn btn-secondary">Export Exel</button>
+                        <button type="button" class="btn btn-secondary">Delete</button>
+                        <button type="button" class="btn btn-secondary">Print</button>
+                        </div>
+                        </div>
+
+                        </div>
+                        
+
+
+                        
+                        
+                    </div>
+                    </form>
+
+
+            </div>
 
 
             <table id="cssTable" class="table table-bordered table-sm">
